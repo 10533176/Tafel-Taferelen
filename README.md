@@ -32,4 +32,4 @@ Eventuele opties wanneer er tijd over is:
 Er zijn op dit moment (voor zo ver ik heb gevonden) geen soort gelijke apps. Wel zijn er apps met elementen die ik wil gebruiken voor mijn app. Zoals datumprikker voor het kiezen van een datum en wie betaalt wat voor het afrekenen.  
 
 # Illustraties
-![ScreenShot](https://raw.github.com/10533176/TafelTaferelen/master/doc/Schermafbeelding 2017-01-10 om 11.27.37.png)
+![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Schermafbeelding 2017-01-10 om 11.27.37.png)
