@@ -14,6 +14,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         y = 6 + 6
+        
+        
         fksjhfkjhsf
         // khkjhrkjhar
         
