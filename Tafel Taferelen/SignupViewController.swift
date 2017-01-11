@@ -26,8 +26,11 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
         super.viewDidLoad()
 
         picker.delegate = self
-        ref = FIRDatabase.database().reference()
+        
         let storage = FIRStorage.storage().reference(forURL: "gs://tafel-taferelen.appspot.com")
+        
+        ref = FIRDatabase.database().reference()
+        
         userStorage = storage.child("users")
         
 
@@ -64,6 +67,7 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         if passwordField.text == confPwField.text {
             FIRAuth.auth()?.createUser(withEmail: emailField.text!, password: passwordField.text!, completion: { (user, error) in
+                
                 if let error = error {
                     print(error.localizedDescription)
                 }
@@ -77,19 +81,22 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
                     let imageRef = self.userStorage.child("\(user.uid).jpg")
                     let data = UIImageJPEGRepresentation(self.imageView.image!, 0.5)
                     
-                    let uploadTask = imageRef.put(data!, metadata: nil, completion: { (metada, err) in
+                    let uploadTask = imageRef.put(data!, metadata: nil, completion: { (metadata, err) in
                         if err != nil {
+                            print("bloebloebloe")
                             print (err!.localizedDescription)
+                            print("bloebloebloe")
                             
                         }
                         
                         imageRef.downloadURL(completion: {(url, er) in
                             if er != nil {
                                 print(er!.localizedDescription)
+                                print("hoihoi")
                             }
                             
                             if let url = url {
-                                let userInfo: [String : Any] = ["uid" :user.uid,
+                                let userInfo: [String : Any] = ["uid" : user.uid,
                                                                 "full name" : self.nameField.text!,
                                                                 "urlToImage" : url.absoluteString]
                                 self.ref.child("users").child(user.uid).setValue(userInfo)
@@ -97,6 +104,7 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
                                 let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "userVC")
                                 
                                 self.present(vc, animated: true, completion: nil)
+                                print ("loopt die doorheen")
                             }
             
                         })
