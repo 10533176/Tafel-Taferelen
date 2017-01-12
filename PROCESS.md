@@ -30,6 +30,7 @@ Code schrijven om gebruikers in te loggen
   * chatten binnen 'groep' mogelijk maken
   * wss doen met Firebase 
   * hoe krijg ik de Imassege icoontjes? 
+
 Planning voor morgen: 
 view controller voor groepen aanmaken 
 uitzoeken hoe ik chatten kan laten werken 
