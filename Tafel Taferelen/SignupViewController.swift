@@ -17,6 +17,8 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var confPwField: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nextBtn: UIButton!
+    @IBOutlet weak var headBtn: UIButton!
+    @IBOutlet weak var pictureBtn: UIButton!
     
     let picker = UIImagePickerController()
     var userStorage: FIRStorageReference!
@@ -33,7 +35,9 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         userStorage = storage.child("users")
         
-
+        self.imageView.layer.cornerRadius = self.imageView.frame.size.width / 2
+        self.imageView.clipsToBounds = true
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,6 +57,7 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            headBtn.isHidden = true
             self.imageView.image = image
             nextBtn.isHidden = false
         }
