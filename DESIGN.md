@@ -52,4 +52,4 @@ Hier kunnen alle leden van de groep komen. En wijzigingen aanbrengen in alle var
 - Mail versturen als iemand een nieuw diner inplant (OF NOTIFICATIE?)
 - voor elkaar krijgen dat als het diner voorbij is (dus de datum) Alle gegevens worden gewist.
 
-
+Schermafbeelding 2017-01-11 om 19.44.26.png
