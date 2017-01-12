@@ -11,12 +11,14 @@ Dé app voor al jouw dinner plannen!
 - Probleem waar ik nu tegen aan loop: 
   * Hoe ik een profiel foto makkelijk kan opslaan in Firebase 
   * photolibrary werkend krijgen in de app 
+
 Deze problemen morgen oplossen + Overzichtelijk schema maken voor DESIGN.md 
 
 # day 3
 - Vandaag nieuw account aanmaken gelukt met profiel foto + wordt juist opgeslagen 
 - Schema gemaakt voor DESIGN.md + toegevoegd 
   * In design wel tegen het probleem aangelopen dat ik niet goed weet hoe ik groepen kan gaan aanmaken en dat vrienden elkaar kunnen toevoegen 
+
 Planning voor morgen: 
 Alle view controllers aanmaken 
 Nadenken over opmaak van de app en waar mogelijk al mooi maken 
