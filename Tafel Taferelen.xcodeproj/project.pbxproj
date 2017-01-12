@@ -12,7 +12,7 @@
 		EF00F0721E2516E2009668FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF00F0711E2516E2009668FC /* Main.storyboard */; };
 		EF00F0741E2646F7009668FC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF00F0731E2646F7009668FC /* GoogleService-Info.plist */; };
 		EFC34A731E24F5EA00B35706 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC34A721E24F5EA00B35706 /* AppDelegate.swift */; };
-		EFC34A751E24F5EA00B35706 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC34A741E24F5EA00B35706 /* ViewController.swift */; };
+		EFC34A751E24F5EA00B35706 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC34A741E24F5EA00B35706 /* LoginViewController.swift */; };
 		EFC34A7A1E24F5EA00B35706 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFC34A791E24F5EA00B35706 /* Assets.xcassets */; };
 		EFC34A7D1E24F5EA00B35706 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFC34A7B1E24F5EA00B35706 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -26,7 +26,7 @@
 		EF00F0731E2646F7009668FC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EFC34A6F1E24F5EA00B35706 /* Tafel Taferelen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tafel Taferelen.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFC34A721E24F5EA00B35706 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EFC34A741E24F5EA00B35706 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EFC34A741E24F5EA00B35706 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EFC34A791E24F5EA00B35706 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EFC34A7C1E24F5EA00B35706 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EFC34A7E1E24F5EA00B35706 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -83,7 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				EFC34A721E24F5EA00B35706 /* AppDelegate.swift */,
-				EFC34A741E24F5EA00B35706 /* ViewController.swift */,
+				EFC34A741E24F5EA00B35706 /* LoginViewController.swift */,
 				EFC34A791E24F5EA00B35706 /* Assets.xcassets */,
 				EF00F0711E2516E2009668FC /* Main.storyboard */,
 				EFC34A7B1E24F5EA00B35706 /* LaunchScreen.storyboard */,
@@ -219,7 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF00F0701E250833009668FC /* SignupViewController.swift in Sources */,
-				EFC34A751E24F5EA00B35706 /* ViewController.swift in Sources */,
+				EFC34A751E24F5EA00B35706 /* LoginViewController.swift in Sources */,
 				EFC34A731E24F5EA00B35706 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
