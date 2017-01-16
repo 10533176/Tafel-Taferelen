@@ -64,6 +64,7 @@ Alles juist opslaan in fire base
 - naam/ pf in beeld gekregen in tableview voor nieuwe groep 
 
 Planning voor Dinsdag:
+
 Alle info vanuit 'groepen' inlezen in hoofdscherm 
 zorgen dat view voor wann groep bestaat up to date is (dus daar ook pf/ naam van alle members) 
 alert functie schrijven die gebruikbaar is voor alle views 
