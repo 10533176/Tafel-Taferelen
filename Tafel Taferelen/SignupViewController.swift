@@ -103,9 +103,14 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
                             if let url = url {
                                 let userInfo: [String : Any] = ["uid" : user.uid,
                                                                 "full name" : self.nameField.text!,
+                                                                "email" : self.emailField.text!,
                                                                 "urlToImage" : url.absoluteString]
                                 self.ref.child("users").child(user.uid).setValue(userInfo)
                                 
+                                
+                                self.ref.child("emailDB").child(user.uid).setValue(self.emailField.text!)
+                                
+
                                 let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "userVC")
                                 
                                 self.present(vc, animated: true, completion: nil)

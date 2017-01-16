@@ -20,6 +20,8 @@ class HoofdmenuViewController: UIViewController {
     @IBOutlet weak var chair6Btn: UIButton!
     @IBOutlet weak var chair7Btn: UIButton!
     
+    @IBOutlet weak var groupNameBtn: UIButton!
+    @IBOutlet weak var noGroupBtn: UIButton!
     
     var ref: FIRDatabaseReference!
     var fullName = String()
@@ -27,17 +29,16 @@ class HoofdmenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        noGroupBtn.isHidden = true
+        
         ref = FIRDatabase.database().reference()
         
         let userID = FIRAuth.auth()?.currentUser?.uid
-        print (userID ?? 0)
-        
-        
+
         ref?.child("users").child(userID!).child("urlToImage").observeSingleEvent(of: .value, with: { (snapshot) in
-            
+        
             let urlImage = snapshot.value as! String
-            print (urlImage)
-            
             
             if let url = NSURL(string: urlImage) {
                 
@@ -51,14 +52,30 @@ class HoofdmenuViewController: UIViewController {
         self.ref?.child("users").child(userID!).child("full name").observeSingleEvent(of: .value, with: { (snapshot) in
             
             self.fullName = snapshot.value as! String
-            print (self.fullName)
+            
         })
         
+        self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let groupID = snapshot.value as? String
+            
+            if groupID != nil {
+
+                self.ref?.child("groups").child(groupID!).child("name").observeSingleEvent(of: .value, with: { (snapshot) in
+                    let groupName = snapshot.value as! String
+                    self.groupNameBtn.setTitle(groupName, for: .normal)
+
+                })
+            } else {
+                self.groupNameBtn.isHidden = true
+                self.noGroupBtn.isHidden = false
+            }
+
+        })
         
         self.pfPicture.layer.cornerRadius = self.pfPicture.frame.size.width / 2
         self.pfPicture.clipsToBounds = true
 
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
