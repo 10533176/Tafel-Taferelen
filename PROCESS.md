@@ -12,6 +12,8 @@ Dé app voor al jouw dinner plannen!
   * Hoe ik een profiel foto makkelijk kan opslaan in Firebase 
   * photolibrary werkend krijgen in de app 
 
+planning voor morgen: 
+
 Deze problemen morgen oplossen + Overzichtelijk schema maken voor DESIGN.md 
 
 # day 3
@@ -20,6 +22,7 @@ Deze problemen morgen oplossen + Overzichtelijk schema maken voor DESIGN.md
   * In design wel tegen het probleem aangelopen dat ik niet goed weet hoe ik groepen kan gaan aanmaken en dat vrienden elkaar kunnen toevoegen 
 
 Planning voor morgen: 
+
 Alle view controllers aanmaken 
 Nadenken over opmaak van de app en waar mogelijk al mooi maken 
 Code schrijven om gebruikers in te loggen 
@@ -34,7 +37,37 @@ Code schrijven om gebruikers in te loggen
   * hoe krijg ik de Imassege icoontjes? 
 
 Planning voor morgen: 
+
 view controller voor groepen aanmaken 
 uitzoeken hoe ik chatten kan laten werken 
 proberen of ik proefielfoto kan laten zien binnen 'account' van gebruiker 
+
+# day 5
+- profielfoto kunnen laten zien binnen account
+- Tijdens presentatie op probleem gekomen hoe ik het voor elkaar ga krijgen dat er verschillende groepen zijn binnen gebruikers
+- Nieuw Probleem: 
+  * chatten binnen 'groep' (nog steeds) mogelijk maken
+  * wss doen met Firebase 
+  * hoe krijg ik de Imassege icoontjes? 
+
+Planning voor maandag:
+
+Datascructuur juist krijgen om groepen aan te kunnen maken 
+Groepen aan kunnen maken 
+Alles juist opslaan in fire base 
+
+# day 6
+- groepen kunnen aangemaakt worden! 
+- firebase structuur klopt 
+  * is nog wel wat omslachtig dus kijken of dit sneller/ makkelijker kan 
+- kan ook data lezen vanuit de groepen 
+- naam/ pf in beeld gekregen in tableview voor nieuwe groep 
+
+Planning voor Dinsdag:
+
+Alle info vanuit 'groepen' inlezen in hoofdscherm 
+zorgen dat view voor wann groep bestaat up to date is (dus daar ook pf/ naam van alle members) 
+alert functie schrijven die gebruikbaar is voor alle views 
+
+
 
