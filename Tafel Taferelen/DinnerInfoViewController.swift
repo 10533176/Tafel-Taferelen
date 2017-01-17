@@ -20,10 +20,69 @@ class DinnerInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let userID = FIRAuth.auth()?.currentUser?.uid
-        
+
         ref = FIRDatabase.database().reference()
+        
+        loadExistingGroupInfo()
+
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func locationChanged(_ sender: Any) {
+        let userID = FIRAuth.auth()?.currentUser?.uid
+        let newLocation = locationNextDinnerField.text
+        
+        if newLocation != "" {
+            self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                let groupID = snapshot.value as? String
+                
+                if groupID != nil {
+                    self.ref?.child("groups").child(groupID!).child("location").setValue(newLocation)
+                }
+            })
+        }
+    }
+    
+    @IBAction func chefsChanged(_ sender: Any) {
+        let userID = FIRAuth.auth()?.currentUser?.uid
+        let newDate = chefNextDinnerField.text
+        
+        if newDate != "" {
+            self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                let groupID = snapshot.value as? String
+                
+                if groupID != nil {
+                    self.ref?.child("groups").child(groupID!).child("chef").setValue(newDate)
+                }
+            })
+        }
+    }
+    
+    @IBAction func dateChanged(_ sender: Any) {
+        let userID = FIRAuth.auth()?.currentUser?.uid
+        let newChef = dateNextDinnerField.text
+        
+        if newChef != "" {
+            self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                let groupID = snapshot.value as? String
+                
+                if groupID != nil {
+                    self.ref?.child("groups").child(groupID!).child("date").setValue(newChef)
+                }
+            })
+        }
+    }
+    
+    
+    func loadExistingGroupInfo() {
+        let userID = FIRAuth.auth()?.currentUser?.uid
         
         self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -44,7 +103,7 @@ class DinnerInfoViewController: UIViewController {
                     if date != nil {
                         self.dateNextDinnerField.text = date
                     }
-
+                    
                 })
                 
                 self.ref?.child("groups").child(groupID!).child("location").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -55,7 +114,7 @@ class DinnerInfoViewController: UIViewController {
                     }
                 })
                 
-                self.ref?.child("groups").child(groupID!).child("chefs").observeSingleEvent(of: .value, with: { (snapshot) in
+                self.ref?.child("groups").child(groupID!).child("chef").observeSingleEvent(of: .value, with: { (snapshot) in
                     
                     let chef = snapshot.value as? String
                     if chef != nil {
@@ -64,16 +123,8 @@ class DinnerInfoViewController: UIViewController {
                 })
             }
         })
+
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func locationChanged(_ sender: Any) {
-        print ("CHECK")
-        print(locationNextDinnerField.text ?? 0)
-    }
 
 }

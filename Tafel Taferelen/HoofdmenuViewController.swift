@@ -19,9 +19,11 @@ class HoofdmenuViewController: UIViewController {
     @IBOutlet weak var chair5Btn: UIButton!
     @IBOutlet weak var chair6Btn: UIButton!
     @IBOutlet weak var chair7Btn: UIButton!
+    @IBOutlet weak var nextDateBtn: UIButton!
     
     @IBOutlet weak var groupNameBtn: UIButton!
     @IBOutlet weak var noGroupBtn: UIButton!
+    @IBOutlet weak var noDateBtn: UIButton!
     
     var ref: FIRDatabaseReference!
     var fullName = String()
@@ -66,6 +68,18 @@ class HoofdmenuViewController: UIViewController {
                     self.groupNameBtn.setTitle(groupName, for: .normal)
 
                 })
+                
+                self.ref?.child("groups").child(groupID!).child("date").observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    let date = snapshot.value as? String
+                    print ("date is", date ?? 0)
+                    if date != nil {
+                        self.noDateBtn.isHidden = true
+                        self.nextDateBtn.setTitle(date, for: .normal)
+                    }
+                    
+                })
+
             } else {
                 self.groupNameBtn.isHidden = true
                 self.noGroupBtn.isHidden = false
