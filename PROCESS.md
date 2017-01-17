@@ -69,5 +69,22 @@ Alle info vanuit 'groepen' inlezen in hoofdscherm
 zorgen dat view voor wann groep bestaat up to date is (dus daar ook pf/ naam van alle members) 
 alert functie schrijven die gebruikbaar is voor alle views 
 
+# day 7
+- als groepen aangemaakt zijn kunnen nieuwe gebruikers toegevoegd worden
+- op meeste plekken waar nodig is staat alert functie die werkt 
+- info over het diner kan gewijzigd worden 
+- groepinfo tabel werkt ook 
+  * probleem is dat de groepinfo tabel niet altijd goed wordt laten zien 
+   denk dat dit ligt aan firebase omdat niet alle gebruikers nu dezelfde variabele hebben (MORGEN CHECKEN) 
+  * probleem van vandaag was het kunnen bepalen of een gebruiker bestaat, en zo ja of die al in een groep zit 
+  * uiteindelijk opgelost door losse functies te maken en die omstebeurt aan te roepen 
+
+Planning voor Woensdag:
+
+Probleem met deelnemers tableview oplossen. Alles er iets mooier uit gaan laten zien 
+Beginnen met het maken van de chat. 
+
+
+
 
 
