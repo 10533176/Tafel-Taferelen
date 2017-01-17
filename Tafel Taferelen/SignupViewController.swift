@@ -75,6 +75,7 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
                 
                 if let error = error {
                     print(error.localizedDescription)
+                    self.signupErrorAlert(title: "Oops!", message: "Er ging iets mis! \(error.localizedDescription)")
                 }
                 
                 if let user = user {
@@ -90,14 +91,14 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
                         if err != nil {
                             print("bloebloebloe")
                             print (err!.localizedDescription)
-                            print("bloebloebloe")
+                            self.signupErrorAlert(title: "Oops!", message: err!.localizedDescription)
                             
                         }
                         
                         imageRef.downloadURL(completion: {(url, er) in
                             if er != nil {
                                 print(er!.localizedDescription)
-                                print("hoihoi")
+                                self.signupErrorAlert(title: "Oops!", message: er!.localizedDescription)
                             }
                             
                             if let url = url {
@@ -127,6 +128,16 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
         } else {
             print("password does not match")
         }
+    }
+    
+    func signupErrorAlert(title: String, message: String) {
+        
+        // Called upon signup error to let the user know signup didn't work.
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
 
 }
