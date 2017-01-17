@@ -41,7 +41,8 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         if newGroupMember.text != " " {
             
             self.ref?.child("emailDB").observeSingleEvent(of: .value, with: { (snapshot) in
-                
+                print("WERKT WEL")
+                print(snapshot)
                 let dictionary = snapshot.value as? NSDictionary
                 
                 if dictionary != nil {
