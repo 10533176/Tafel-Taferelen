@@ -19,6 +19,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var countMembers: UILabel!
     @IBOutlet weak var newEmailField: UITextField!
     @IBOutlet weak var addNewMemberBtn: UIButton!
+    @IBOutlet weak var LeavingGroupPressed: UIButton!
     
     var groupMembers = [String]()
     var groupPhotos = [String]()
@@ -104,6 +105,44 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
     
+
+    @IBAction func leavingGroupPressed(_ sender: Any) {
+        // delete current user from tableview
+        
+        LeavingGroupPressed.isEnabled = false
+        let currentUserID = FIRAuth.auth()?.currentUser?.uid
+        var emailArray = [String]()
+        
+        self.ref?.child("users").child(currentUserID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let groupID = snapshot.value as? String
+            
+            self.ref?.child("users").child(currentUserID!).child("email").observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                let email = snapshot.value as? String
+                
+                self.ref?.child("groups").child(groupID!).child("members").child("email").observeSingleEvent(of: .value, with: {(snapshot) in
+                    emailArray = snapshot.value as? NSArray as! [String]
+                    
+                    print ("email array is eerst: ", emailArray)
+                    emailArray.remove(at: emailArray.index(of: email!)!)
+                    print ("email array is daarna: ", emailArray)
+                    self.ref?.child("groups").child(groupID!).child("members").child("email").setValue(emailArray)
+                    self.signupErrorAlert(title: "Groep Verlaten", message: "De groep is succesvol verlaten")
+                    self.tableView.reloadData()
+                    
+                })
+            })
+        })
+        
+        
+        // delete groupID of the user
+        // delete email and userid of the group 
+        
+        
+    }
+
+    
     @IBAction func addNewMemberPressed(_ sender: Any) {
         
         if newEmailField.text != " "  {
@@ -112,6 +151,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
             self.signupErrorAlert(title: "Oops!", message: "Vul een emailadres in om iemand toe te voegen aan de groep!")
         }
     }
+    
     
     func userInGroup() {
         

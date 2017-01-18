@@ -21,6 +21,7 @@
 		EFC34A751E24F5EA00B35706 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC34A741E24F5EA00B35706 /* LoginViewController.swift */; };
 		EFC34A7A1E24F5EA00B35706 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFC34A791E24F5EA00B35706 /* Assets.xcassets */; };
 		EFC34A7D1E24F5EA00B35706 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFC34A7B1E24F5EA00B35706 /* LaunchScreen.storyboard */; };
+		EFD6954C1E2FC194001647C3 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD6954B1E2FC194001647C3 /* ChatTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		EFC34A791E24F5EA00B35706 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EFC34A7C1E24F5EA00B35706 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EFC34A7E1E24F5EA00B35706 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EFD6954B1E2FC194001647C3 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				EFC34A791E24F5EA00B35706 /* Assets.xcassets */,
 				EF00F0711E2516E2009668FC /* Main.storyboard */,
 				EF14750F1E2D29FC00B387FB /* NewGroupTableViewCell.swift */,
+				EFD6954B1E2FC194001647C3 /* ChatTableViewCell.swift */,
 				EF14750D1E2CDCE700B387FB /* NewGroupViewController.swift */,
 				EF14750B1E2CD76400B387FB /* GroupsViewController.swift */,
 				EF1475111E2E0E9C00B387FB /* GroupsTableViewCell.swift */,
@@ -243,6 +246,7 @@
 				EF1475141E2E645200B387FB /* DinnerInfoViewController.swift in Sources */,
 				EFC34A751E24F5EA00B35706 /* LoginViewController.swift in Sources */,
 				EFC34A731E24F5EA00B35706 /* AppDelegate.swift in Sources */,
+				EFD6954C1E2FC194001647C3 /* ChatTableViewCell.swift in Sources */,
 				EF14750C1E2CD76400B387FB /* GroupsViewController.swift in Sources */,
 				EF1475121E2E0E9C00B387FB /* GroupsTableViewCell.swift in Sources */,
 			);
