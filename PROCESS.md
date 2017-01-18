@@ -84,6 +84,22 @@ Planning voor Woensdag:
 Probleem met deelnemers tableview oplossen. Alles er iets mooier uit gaan laten zien 
 Beginnen met het maken van de chat. 
 
+# day 8
+- !! probleem met deelnemers tableview is nog niet opgelost 
+- Chat werkt soort van, berichten kunnen geplaatst worden en gelezen 
+ * ziet er vooral nog heel lelijk uit, dus morgen verder met dit aanpassen 
+
+ * Probleem vandaag was vooral met de chat, doordat het in de firebase database lastig was op te slaan. heb nu unieke chatID en uniek   bericht ID. Hiermee werkt het wel. alleen nog kijken hoe ik het goed kan laten zien in app zelf 
+ * nu heb ik als afzender userID, dit moet veranderd worden naar naam of naar foto (naam lijkt me makkelijker) 
+
+Planning voor Woensdag:
+
+chat goed werkend krijgen en er mooi uit laten zien. Wanneer ik tijd over heb hele database wissen en kijken of probleem met tableview voor het laten van groepen dan is opgelost. 
+
+
+
+
+
 
 
 
