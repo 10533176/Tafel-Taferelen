@@ -97,8 +97,19 @@ Planning voor Woensdag:
 chat goed werkend krijgen en er mooi uit laten zien. Wanneer ik tijd over heb hele database wissen en kijken of probleem met tableview voor het laten van groepen dan is opgelost. 
 
 
+# day 9
+- !! probleem met deelnemers tableview is nog niet opgelost 
+- uitloggen werkt 
+- gebruikers kunnen hun wachtwoord resetten 
+- tableview voor chat zie je nu wel goed 
+- MAAR PLUS PUNT: alle functie's die werken wel zo goed als (hier en daar wat bugs) 
+ PROBLEEM: vind mn app er vooral heel lelijk uitzien. Wil de chat mooier maken, iets anders dan overduidelijke tableview. En nu gaan nadenken over hoe ik het hoofdmenu er mooi wil laten uitzien. 
+ 
+Planning: 
 
-
+Morgen presenteren en proberen de app er mooier uit te gaan laten zien.
+ 
+ 
 
 
 
