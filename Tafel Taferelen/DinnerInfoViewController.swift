@@ -107,6 +107,7 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     
+    
     func loadExistingGroupInfo() {
         let userID = FIRAuth.auth()?.currentUser?.uid
         

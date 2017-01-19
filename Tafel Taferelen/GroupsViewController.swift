@@ -25,6 +25,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
     var groupPhotos = [String]()
     var groupNames = [String]()
     var newUserId = String()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

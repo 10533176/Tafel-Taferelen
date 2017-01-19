@@ -57,6 +57,7 @@ class HoofdmenuViewController: UIViewController {
             
         })
         
+        
         self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
             
             let groupID = snapshot.value as? String

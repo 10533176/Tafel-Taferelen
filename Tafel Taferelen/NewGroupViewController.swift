@@ -23,6 +23,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
     var memberNames = [String]()
     var memberProfpic = [String]()
     
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

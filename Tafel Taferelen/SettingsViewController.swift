@@ -100,8 +100,10 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
                 }
             })
         })
+        
         uploadTask.resume()
     }
+    
     
     @IBAction func loggingOUT(_ sender: Any) {
         let firebaseAuth = FIRAuth.auth()

@@ -65,6 +65,7 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
         
     }
     
+    
 
     @IBAction func nextPressed(_ sender: Any) {
         
