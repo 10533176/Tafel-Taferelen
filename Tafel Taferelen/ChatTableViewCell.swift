@@ -11,6 +11,7 @@ import UIKit
 class ChatTableViewCell: UITableViewCell {
 
     @IBOutlet weak var message: UILabel!
+    @IBOutlet weak var chatName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

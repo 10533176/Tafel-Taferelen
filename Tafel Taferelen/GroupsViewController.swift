@@ -30,6 +30,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
 
         ref = FIRDatabase.database().reference()
+
         
         let userID = FIRAuth.auth()?.currentUser?.uid
         

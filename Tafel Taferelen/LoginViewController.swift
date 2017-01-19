@@ -16,7 +16,7 @@ class LoginViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,6 +38,27 @@ class LoginViewController: UIViewController {
             }
         })
     }
+    
+    @IBAction func resettingPassword(_ sender: Any) {
+        if emailField.text != "" {
+            resetPassword(email: emailField.text!)
+        } else {
+            self.signupErrorAlert(title: "Oops!", message: "Fill in your email adress to reset your password.")
+        }
+        
+    }
+    func resetPassword(email: String) {
+        
+        FIRAuth.auth()?.sendPasswordReset(withEmail: email, completion: {(error) in
+            if error == nil {
+                self.signupErrorAlert(title: "Succeeded!", message: "An email with information on how to reset your password has been send to you.")
+            } else {
+                self.signupErrorAlert(title: "Oops!", message: (error?.localizedDescription)!)
+            }
+            
+        })
+    }
+    
     
     func signupErrorAlert(title: String, message: String) {
         

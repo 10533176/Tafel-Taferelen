@@ -17,6 +17,7 @@
 		EF1475101E2D29FC00B387FB /* NewGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF14750F1E2D29FC00B387FB /* NewGroupTableViewCell.swift */; };
 		EF1475121E2E0E9C00B387FB /* GroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1475111E2E0E9C00B387FB /* GroupsTableViewCell.swift */; };
 		EF1475141E2E645200B387FB /* DinnerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1475131E2E645200B387FB /* DinnerInfoViewController.swift */; };
+		EF806DE21E30D5D7000EE2E7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF806DE11E30D5D7000EE2E7 /* SettingsViewController.swift */; };
 		EFC34A731E24F5EA00B35706 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC34A721E24F5EA00B35706 /* AppDelegate.swift */; };
 		EFC34A751E24F5EA00B35706 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC34A741E24F5EA00B35706 /* LoginViewController.swift */; };
 		EFC34A7A1E24F5EA00B35706 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFC34A791E24F5EA00B35706 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 		EF14750F1E2D29FC00B387FB /* NewGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupTableViewCell.swift; sourceTree = "<group>"; };
 		EF1475111E2E0E9C00B387FB /* GroupsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsTableViewCell.swift; sourceTree = "<group>"; };
 		EF1475131E2E645200B387FB /* DinnerInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DinnerInfoViewController.swift; sourceTree = "<group>"; };
+		EF806DE11E30D5D7000EE2E7 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		EFC34A6F1E24F5EA00B35706 /* Tafel Taferelen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tafel Taferelen.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFC34A721E24F5EA00B35706 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFC34A741E24F5EA00B35706 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				EFC34A741E24F5EA00B35706 /* LoginViewController.swift */,
 				EFC34A791E24F5EA00B35706 /* Assets.xcassets */,
 				EF00F0711E2516E2009668FC /* Main.storyboard */,
+				EF806DE11E30D5D7000EE2E7 /* SettingsViewController.swift */,
 				EF14750F1E2D29FC00B387FB /* NewGroupTableViewCell.swift */,
 				EFD6954B1E2FC194001647C3 /* ChatTableViewCell.swift */,
 				EF14750D1E2CDCE700B387FB /* NewGroupViewController.swift */,
@@ -241,6 +244,7 @@
 			files = (
 				EF00F0761E28DF15009668FC /* HoofdmenuViewController.swift in Sources */,
 				EF14750E1E2CDCE700B387FB /* NewGroupViewController.swift in Sources */,
+				EF806DE21E30D5D7000EE2E7 /* SettingsViewController.swift in Sources */,
 				EF1475101E2D29FC00B387FB /* NewGroupTableViewCell.swift in Sources */,
 				EF00F0701E250833009668FC /* SignupViewController.swift in Sources */,
 				EF1475141E2E645200B387FB /* DinnerInfoViewController.swift in Sources */,

@@ -31,6 +31,7 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
         
         loadExistingGroupInfo()
         readChat()
+        self.tableView.reloadData()
 
     }
 
@@ -89,14 +90,19 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print (chat)
+        print ("chat array: ", chat)
+        print ("chat count = ", chat.count)
         return chat.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ChatTableViewCell
-        cell.message.text = "\(self.sender[indexPath.row]): \(self.chat[indexPath.row])"
+        if self.sender.isEmpty == false  && self.chat.isEmpty == false {
+            cell.message.text = self.chat[indexPath.row]
+            cell.chatName.text = self.sender[indexPath.row]
+
+        }
         return cell
     }
     
@@ -152,12 +158,15 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
         
         if newMessageText.text! != "" {
             newChatMes()
+            self.tableView.reloadData()
         }
 
     }
     
     func readChat() {
-        
+        self.chat = []
+        self.sender = []
+
         let userID = FIRAuth.auth()?.currentUser?.uid
         var groupID = String()
         
@@ -182,37 +191,32 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
                         let dict = snapshot.value as? NSDictionary
                             
                         if dict != nil {
-                            let userIDs = dict?.allKeys as! [String]
-                            
-                            for key in userIDs {
+                            let chatIDs = dict?.allKeys as! [String]
+
+                            for key in chatIDs {
                                 print ("userid:", key)
-
-                                self.ref?.child("groups").child(groupID).child("chat").child(self.chatID[0]).observeSingleEvent(of: .value, with: { (snapshot) in
-                                    
-                                    let dict = snapshot.value as? NSDictionary
-                                    
-                                    if dict != nil {
-                                        let mesIDArray = (dict?.allKeys as? [String])!
-                                        let mesID = mesIDArray[0]
-                                        
-                                        self.ref?.child("groups").child(groupID).child("chat").child(self.chatID[0]).child(mesID).child("message").observeSingleEvent(of: .value, with: { (snapshot) in
-                                            let mes = snapshot.value as? String
-                                            if mes != nil {
-                                                print ("mes: ", mes!)
-                                                self.chat.append(mes!)
-                                            }
-                                        })
-                                        self.ref?.child("groups").child(groupID).child("chat").child(self.chatID[0]).child(mesID).child("userid").observeSingleEvent(of: .value, with: { (snapshot) in
-                                            let user = snapshot.value as? String
-                                            if user != nil {
-                                                self.sender.append(user!)
-                                                self.tableView.reloadData()
-                                            }
-                                        })
-                                        
+                                
+                                self.ref?.child("groups").child(groupID).child("chat").child(self.chatID[0]).child(key).child("message").observeSingleEvent(of: .value, with: { (snapshot) in
+                                    let mes = snapshot.value as? String
+                                    if mes != nil {
+                                        print ("mes: ", mes!)
+                                        self.chat.insert(mes!, at: 0)
                                     }
-
                                 })
+                                self.ref?.child("groups").child(groupID).child("chat").child(self.chatID[0]).child(key).child("userid").observeSingleEvent(of: .value, with: { (snapshot) in
+                                    let userkey = snapshot.value as? String
+                                    if userkey != nil {
+                                        self.ref?.child("users").child(userkey!).child("full name").observeSingleEvent(of: .value, with: { (snapshot) in
+                                            
+                                            let username = snapshot.value as? String
+                                            if username  != nil {
+                                                self.sender.insert(username!, at: 0)
+                                                print ("username count = ", self.sender.count)
+                                            }
+                                        })
+                                    }
+                                })
+
                             }
                         }
                     })

@@ -130,6 +130,7 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
     }
     
+    
     func signupErrorAlert(title: String, message: String) {
         
         // Called upon signup error to let the user know signup didn't work.
