@@ -127,6 +127,10 @@ Vandaag gewerkt aan alle losse kleine dingen die nog niet werkte:
 Planning: 
 
 Morgen echt bedanken hoe ik het hoofdmenu wil hebben. Veel tijd besteden aan de vormgeving. Bedenken hoe ik mijn code opgeruimeder en netter krijg voor hogere score. 
+Nadenken of ik extra functionaliteit wil: 
+* datum direct in agende kunnen zetten
+* notificatie als iemand iets veranders/ toevoegt? 
+
 
 
 
