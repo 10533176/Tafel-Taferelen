@@ -108,8 +108,25 @@ chat goed werkend krijgen en er mooi uit laten zien. Wanneer ik tijd over heb he
 Planning: 
 
 Morgen presenteren en proberen de app er mooier uit te gaan laten zien.
+
+# day 10
+- probleem met deelnemers tableview is opgelost !
+vandaag gepresenteerd -> daaruit kwamen de punten 
+* nieuwe backbutton maken (vanuit navigationBar)
+* iets bedenken wat ik op mijn hoofdscherm wil hebben 
+
+# day 11
+Vandaag gewerkt aan alle losse kleine dingen die nog niet werkte: 
+- gebruikers werden niet goed in nieuwe groep gezet/ verwijderd 
+- nu kloppen alle acties omtrent gebruiker toevoegen/ verwijderen wel 
+- chat array kwam niet goed inbeeld. Is nu gefixed door tip van julian om Date() te gebruiken als key instead of auth.id 
+- keyboard laat zich nu op het juiste moment zien en verbegt zich ook wanneer dat moet 
+- wachtwoord veranderen uit de functionaliteit gehaald. had voor mij wienig toegevoegde waarde omdat het wel mogelijk is je password te resetten als je deze kwijt bent 
+- bedenken of ik wil toestaan groep naam te veranderen/ email te veranderen. 
  
- 
+Planning: 
+
+Morgen echt bedanken hoe ik het hoofdmenu wil hebben. Veel tijd besteden aan de vormgeving. Bedenken hoe ik mijn code opgeruimeder en netter krijg voor hogere score. 
 
 
 
