@@ -35,6 +35,12 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
         
         let userID = FIRAuth.auth()?.currentUser?.uid
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        tableView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
+        
         self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
             
             let groupID = snapshot.value as? String
@@ -55,8 +61,9 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                     if snapshot.value as? NSArray != nil {
                         
                         self.groupMembers = snapshot.value as? NSArray as! [String]
+                        
                         let counting = self.groupMembers.count
-                        self.countMembers.text = "Deelnemers: \(counting) van de 10"
+                        self.countMembers.text = "Members: (\(counting)) of 10"
                         
                         for keys in self.groupMembers {
                             self.ref?.child("users").child(keys).child("urlToImage").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -81,11 +88,30 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                 })
             }
         })
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+        
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -123,24 +149,26 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                 
                 let email = snapshot.value as? String
                 
+                self.ref?.child("users").child(currentUserID!).child("groupID").removeValue()
                 self.ref?.child("groups").child(groupID!).child("members").child("email").observeSingleEvent(of: .value, with: {(snapshot) in
                     emailArray = snapshot.value as? NSArray as! [String]
-                    
-                    print ("email array is eerst: ", emailArray)
+
                     emailArray.remove(at: emailArray.index(of: email!)!)
-                    print ("email array is daarna: ", emailArray)
                     self.ref?.child("groups").child(groupID!).child("members").child("email").setValue(emailArray)
-                    self.signupErrorAlert(title: "Groep Verlaten", message: "De groep is succesvol verlaten")
-                    self.tableView.reloadData()
+                    })
                     
-                })
+                self.ref?.child("groups").child(groupID!).child("members").child("userid").observeSingleEvent(of: .value, with: {(snapshot) in
+                        var useridArray = snapshot.value as? NSArray as! [String]
+                        
+                        useridArray.remove(at: useridArray.index(of: currentUserID!)!)
+                    self.ref?.child("groups").child(groupID!).child("members").child("userid").setValue(useridArray)
+
+                    })
+                
+                    self.signupErrorAlert(title: "Bye bye!", message: "You left the group successfully!")
+                    self.tableView.reloadData()
             })
         })
-        
-        
-        // delete groupID of the user
-        // delete email and userid of the group 
-        
         
     }
 
@@ -193,15 +221,29 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
     
     func newMemberAddedToGroup(userID: String) {
 
-        let currentUserID = FIRAuth.auth()?.currentUser?.uid
-
         if userID != "" {
             
+            let currentUserID = FIRAuth.auth()?.currentUser?.uid
+            self.groupMembers.append(userID)
+            let counting = self.groupMembers.count
+            self.countMembers.text = "Deelnemers: \(counting) van de 10"
+            var emailArray = [String]()
+            
             self.ref?.child("users").child(currentUserID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
+                
                 let groupID = snapshot.value as! String
+                
+                self.ref?.child("groups").child(groupID).child("members").child("email").observeSingleEvent(of: .value, with: {(snapshot) in
+                    
+                    emailArray = snapshot.value as? NSArray as! [String]
+                    emailArray.append(self.newEmailField.text!)
+                    self.ref?.child("groups").child(groupID).child("members").child("email").setValue(emailArray)
+                    
+                })
+                
                 self.ref?.child("users").child(userID).child("groupID").setValue(groupID)
-                self.ref?.child("groups").child(groupID).child("members").child("email").setValue(self.newEmailField.text!)
-                self.ref?.child("groups").child(groupID).child("members").child("userid").setValue(userID)
+                
+                self.ref?.child("groups").child(groupID).child("members").child("userid").setValue(self.groupMembers)
             })
             
             self.ref?.child("users").child(userID).child("full name").observeSingleEvent(of: .value, with: {(snapshot) in
@@ -214,10 +256,6 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                 self.groupPhotos.append(url)
                 self.tableView.reloadData()
             })
-            
-            self.groupMembers.append(userID)
-            let counting = self.groupMembers.count
-            self.countMembers.text = "Deelnemers: \(counting) van de 10"
 
         }
     }

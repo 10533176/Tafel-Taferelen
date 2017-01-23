@@ -42,7 +42,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         if newGroupMember.text != " " {
             userAllreadyinGroup()
         } else {
-            self.signupErrorAlert(title: "Oops!", message: "vul een emailadres in om iemand toe te voegen aan de groep!")
+            self.signupErrorAlert(title: "Oops!", message: "Fill in email adress to add new member to the group!")
         }
     }
     
@@ -75,7 +75,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
             saveCurrentUserAsNewMember(groupID: groupID!)
         }
         else {
-            self.signupErrorAlert(title: "Oops!", message: "Vul een groepsnaam in!")
+            self.signupErrorAlert(title: "Oops!", message: "You forgot to fill in a groupsname")
         }
     }
     
@@ -85,7 +85,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         self.ref?.child("users").child(userID!).child("email").observeSingleEvent(of: .value, with: { (snapshot) in
             
             let emailCurrentUser = snapshot.value as! String
-            
+            print ("JA EMAIL ARRAY: ", self.memberEmails)
             self.memberEmails.append(emailCurrentUser)
             self.memberIDs.append(userID!)
             
@@ -93,6 +93,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
             self.ref?.child("groups").child(groupID).child("members").child("userid").setValue(self.memberIDs)
             
             for keys in self.memberIDs {
+                print("keys: ", keys)
                 self.ref?.child("users").child(keys).child("groupID").setValue(groupID)
             }
             
@@ -125,7 +126,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
                                     self.displayNewMember()
                                 }
                                 else {
-                                    self.signupErrorAlert(title: "Oops!", message: "Deze gebruiker zit al in een andere groep")
+                                    self.signupErrorAlert(title: "Oops, user allready in group!", message: "This member has already other friends.. try if someone else will have dinner with you!")
                                 }
                             })
                         }
@@ -151,6 +152,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
                         let email = snapshot.value as! String
                             
                         if email == self.newGroupMember.text {
+                            
                             self.ref?.child("users").child(keys).child("full name").observeSingleEvent(of: .value, with: {(snapshot) in
                                 let name = snapshot.value as! String
                                 self.memberNames.append(name)

@@ -16,7 +16,6 @@ class GroupsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        
         self.groupMemberProfpic.layer.cornerRadius = self.groupMemberProfpic.frame.size.width / 2
         self.groupMemberProfpic.clipsToBounds = true
     }

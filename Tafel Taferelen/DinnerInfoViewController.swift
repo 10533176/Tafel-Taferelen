@@ -22,22 +22,33 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
     var sender = [String]()
     var chatID = [String]()
     
+    var keyboardSizeRect: CGRect?
     var ref: FIRDatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         ref = FIRDatabase.database().reference()
-        
         loadExistingGroupInfo()
         readChat()
-        self.tableView.reloadData()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            self.keyboardSizeRect = keyboardSize
+        }
+        
     }
     
     @IBAction func locationChanged(_ sender: Any) {
@@ -72,6 +83,28 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
+    @IBAction func didBeginChatting(_ sender: Any) {
+
+        if self.view.frame.origin.y == 0{
+            if let keyboardSize = keyboardSizeRect {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+        
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+    }
+    
+    @IBAction func didEndChatting(_ sender: Any) {
+        if let keyboardSize = keyboardSizeRect {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
+    }
+    
+
     @IBAction func dateChanged(_ sender: Any) {
         let userID = FIRAuth.auth()?.currentUser?.uid
         let newChef = dateNextDinnerField.text
@@ -98,7 +131,7 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ChatTableViewCell
-        if self.sender.isEmpty == false  && self.chat.isEmpty == false {
+        if self.sender.isEmpty == false  && self.chat.isEmpty == false && self.sender.count == self.chat.count {
             cell.message.text = self.chat[indexPath.row]
             cell.chatName.text = self.sender[indexPath.row]
 
@@ -154,7 +187,6 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     
-    
     @IBAction func messageSendPressed(_ sender: Any) {
         
         if newMessageText.text! != "" {
@@ -181,7 +213,7 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
                 self.ref?.child("groups").child(groupID).child("chat").observeSingleEvent(of: .value, with: { (snapshot) in
                     
                     let dict = snapshot.value as? NSDictionary
-
+                    
                     if dict != nil {
                         self.chatID = (dict?.allKeys as? [String])!
                         print("chatID", self.chatID)
@@ -197,22 +229,23 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
                             for key in chatIDs {
                                 print ("userid:", key)
                                 
-                                self.ref?.child("groups").child(groupID).child("chat").child(self.chatID[0]).child(key).child("message").observeSingleEvent(of: .value, with: { (snapshot) in
+                                self.ref?.child("groups").child(groupID).child("chat").child(self.chatID[0]).child(key).child("message").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
                                     let mes = snapshot.value as? String
                                     if mes != nil {
                                         print ("mes: ", mes!)
-                                        self.chat.insert(mes!, at: 0)
+                                        self.chat.append(mes!)
                                     }
                                 })
-                                self.ref?.child("groups").child(groupID).child("chat").child(self.chatID[0]).child(key).child("userid").observeSingleEvent(of: .value, with: { (snapshot) in
+                                self.ref?.child("groups").child(groupID).child("chat").child(self.chatID[0]).child(key).child("userid").queryOrdered(byChild: "userid").observeSingleEvent(of: .value, with: { (snapshot) in
                                     let userkey = snapshot.value as? String
                                     if userkey != nil {
                                         self.ref?.child("users").child(userkey!).child("full name").observeSingleEvent(of: .value, with: { (snapshot) in
                                             
                                             let username = snapshot.value as? String
                                             if username  != nil {
-                                                self.sender.insert(username!, at: 0)
+                                                self.sender.append(username!)
                                                 print ("username count = ", self.sender.count)
+                                                self.tableView.reloadData()
                                             }
                                         })
                                     }
@@ -246,15 +279,15 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
                         let temp = dict?.allKeys as! [String]
                         let chatID = temp[0]
                         let mesID = (self.ref?.child("groups").child(groupID).child("chat").child(chatID).childByAutoId().key)!
-                        self.ref?.child("groups").child(groupID).child("chat").child(chatID).child(mesID).child("userid").setValue(userID)
-                        self.ref?.child("groups").child(groupID).child("chat").child(chatID).child(mesID).child("message").setValue(self.newMessageText.text)
+                    self.ref?.child("groups").child(groupID).child("chat").child(chatID).child(mesID).child("userid").setValue(userID)
+                    self.ref?.child("groups").child(groupID).child("chat").child(chatID).child(mesID).child("message").setValue(self.newMessageText.text)
                         self.readChat()
   
                     } else {
                         let chatID = (self.ref?.child("groups").child(groupID).child("chat").childByAutoId().key)!
                         let mesID = (self.ref?.child("groups").child(groupID).child("chat").child(chatID).childByAutoId().key)!
-                        self.ref?.child("groups").child(groupID).child("chat").child(chatID).child(mesID).child("userid").setValue(userID)
-                        self.ref?.child("groups").child(groupID).child("chat").child(chatID).child(mesID).child("message").setValue(self.newMessageText.text)
+                    self.ref?.child("groups").child(groupID).child("chat").child(chatID).child(mesID).child("userid").setValue(userID)
+                    self.ref?.child("groups").child(groupID).child("chat").child(chatID).child(mesID).child("message").setValue(self.newMessageText.text)
                         self.readChat()
                         
                     }

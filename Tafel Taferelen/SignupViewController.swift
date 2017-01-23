@@ -127,7 +127,7 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
         })
             
         } else {
-            print("password does not match")
+            self.signupErrorAlert(title: "Oops!", message: "The passwords do not match")
         }
     }
     
