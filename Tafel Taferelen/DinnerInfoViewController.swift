@@ -191,7 +191,6 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
         
         if newMessageText.text! != "" {
             newChatMes()
-            self.tableView.reloadData()
         }
 
     }
@@ -206,55 +205,48 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
         self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
             
             let valueCheck = snapshot.value as? String
+
             if valueCheck != nil {
-                groupID = valueCheck!
-                print ("GROUPID: ", groupID)
                 
-                self.ref?.child("groups").child(groupID).child("chat").observeSingleEvent(of: .value, with: { (snapshot) in
+                groupID = valueCheck!
+                
+                self.ref?.child("groups").child(groupID).child("chat").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
                     
-                    let dict = snapshot.value as? NSDictionary
+                    let dictionary = snapshot.value as? NSDictionary
                     
-                    if dict != nil {
-                        self.chatID = (dict?.allKeys as? [String])!
-                        print("chatID", self.chatID)
-                        print("test", self.chatID[0])
-                    
-                    self.ref?.child("groups").child(groupID).child("chat").child(self.chatID[0]).observeSingleEvent(of: .value, with: { (snapshot) in
+                    if dictionary != nil {
+                        
+                        var dateStemps = dictionary?.allKeys as! [String]
+                        dateStemps = dateStemps.sorted()
+                        print ("dateStamps: ", dateStemps)
+                        
+                        for key in dateStemps {
                             
-                        let dict = snapshot.value as? NSDictionary
+                            print ("DATE ORDER: ", key)
+                            self.ref?.child("groups").child(groupID).child("chat").child(key).child("message").observeSingleEvent(of: .value, with: { (snapshot) in
+                                let singleChat = snapshot.value as? String
+                                if singleChat != nil {
+                                    self.chat.insert(singleChat!, at: 0)
+                                    print("Chat Array!!!", self.chat)
+                                }
+                              })
                             
-                        if dict != nil {
-                            let chatIDs = dict?.allKeys as! [String]
-
-                            for key in chatIDs {
-                                print ("userid:", key)
-                                
-                                self.ref?.child("groups").child(groupID).child("chat").child(self.chatID[0]).child(key).child("message").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
-                                    let mes = snapshot.value as? String
-                                    if mes != nil {
-                                        print ("mes: ", mes!)
-                                        self.chat.append(mes!)
-                                    }
-                                })
-                                self.ref?.child("groups").child(groupID).child("chat").child(self.chatID[0]).child(key).child("userid").queryOrdered(byChild: "userid").observeSingleEvent(of: .value, with: { (snapshot) in
-                                    let userkey = snapshot.value as? String
-                                    if userkey != nil {
-                                        self.ref?.child("users").child(userkey!).child("full name").observeSingleEvent(of: .value, with: { (snapshot) in
-                                            
-                                            let username = snapshot.value as? String
-                                            if username  != nil {
-                                                self.sender.append(username!)
-                                                print ("username count = ", self.sender.count)
-                                                self.tableView.reloadData()
-                                            }
-                                        })
-                                    }
-                                })
-
-                            }
+                            self.ref?.child("groups").child(groupID).child("chat").child(key).child("userid").observeSingleEvent(of: .value, with: { (snapshot) in
+                                let singleUser = snapshot.value as? String
+                                if singleUser != nil {
+                                    self.ref?.child("users").child(singleUser!).child("full name").observeSingleEvent(of: .value, with: { (snapshot) in
+                                        
+                                        let username = snapshot.value as? String
+                                        if username  != nil {
+                                            self.sender.insert(username!, at: 0)
+                                            self.tableView.reloadData()
+                                        }
+                                    })
+                                }
+                            })
                         }
-                    })
                     }
+                    
                 })
             }
         })
@@ -263,6 +255,9 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
     func newChatMes() {
         
         let userID = FIRAuth.auth()?.currentUser?.uid
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let mesID = formatter.string(from: Date())
         
         self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -271,29 +266,12 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
                 let groupID = valueCheck!
                 print ("GROUPID: ", groupID)
                 
-                self.ref?.child("groups").child(groupID).child("chat").observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    let dict = snapshot.value as? NSDictionary
-                    
-                    if dict != nil {
-                        let temp = dict?.allKeys as! [String]
-                        let chatID = temp[0]
-                        let mesID = (self.ref?.child("groups").child(groupID).child("chat").child(chatID).childByAutoId().key)!
-                    self.ref?.child("groups").child(groupID).child("chat").child(chatID).child(mesID).child("userid").setValue(userID)
-                    self.ref?.child("groups").child(groupID).child("chat").child(chatID).child(mesID).child("message").setValue(self.newMessageText.text)
-                        self.readChat()
-  
-                    } else {
-                        let chatID = (self.ref?.child("groups").child(groupID).child("chat").childByAutoId().key)!
-                        let mesID = (self.ref?.child("groups").child(groupID).child("chat").child(chatID).childByAutoId().key)!
-                    self.ref?.child("groups").child(groupID).child("chat").child(chatID).child(mesID).child("userid").setValue(userID)
-                    self.ref?.child("groups").child(groupID).child("chat").child(chatID).child(mesID).child("message").setValue(self.newMessageText.text)
-                        self.readChat()
-                        
-                    }
-                })
+                self.ref?.child("groups").child(groupID).child("chat").child(mesID).child("userid").setValue(userID)
+                self.ref?.child("groups").child(groupID).child("chat").child(mesID).child("message").setValue(self.newMessageText.text)
+                self.readChat()
             }
         })
+        
     }
 
 }

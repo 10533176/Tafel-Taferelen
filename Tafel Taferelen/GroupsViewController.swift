@@ -31,7 +31,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
 
         ref = FIRDatabase.database().reference()
-
+        self.navigationController?.navigationBar.isTranslucent = true
         
         let userID = FIRAuth.auth()?.currentUser?.uid
         
@@ -178,7 +178,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
         if newEmailField.text != " "  {
             self.userInGroup()
         } else {
-            self.signupErrorAlert(title: "Oops!", message: "Vul een emailadres in om iemand toe te voegen aan de groep!")
+            self.signupErrorAlert(title: "Oops!", message: "Fill in an emailadress to add a new member.")
         }
     }
     
@@ -209,7 +209,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                                     self.newMemberAddedToGroup(userID: keys)
                                 }
                                 else {
-                                    self.signupErrorAlert(title: "Oops!", message: "Deze gebruiker zit al in een andere groep")
+                                    self.signupErrorAlert(title: "Oops!", message: "This member is allready in another group. Try to find other friends!")
                                 }
                             })
                         }

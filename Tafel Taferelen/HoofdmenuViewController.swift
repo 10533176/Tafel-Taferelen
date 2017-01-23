@@ -28,6 +28,10 @@ class HoofdmenuViewController: UIViewController {
     var fullName = String()
     var tableSetting = [String]()
     
+    override func viewDidAppear(_ animated: Bool) {
+        viewDidLoad()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

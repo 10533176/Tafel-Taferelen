@@ -28,6 +28,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationController?.navigationBar.isTranslucent = true
         ref = FIRDatabase.database().reference()
         
     }

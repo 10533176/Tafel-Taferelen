@@ -20,6 +20,8 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.isTranslucent = true
+        
         ref = FIRDatabase.database().reference()
         let storage = FIRStorage.storage().reference(forURL: "gs://tafel-taferelen.appspot.com")
         
