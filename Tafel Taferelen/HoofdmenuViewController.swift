@@ -19,11 +19,7 @@ class HoofdmenuViewController: UIViewController {
     @IBOutlet weak var noGroupBtn: UIButton!
     @IBOutlet weak var noDateBtn: UIButton!
     
-    @IBOutlet weak var oneDinnerDate: UIImageView!
-    @IBOutlet weak var twoDinnerDate: UIImageView!
-    @IBOutlet weak var threeDinnerDate: UIImageView!
-    @IBOutlet weak var fourDinnerDate: UIImageView!
-    
+
     
     var ref: FIRDatabaseReference!
     var fullName = String()
@@ -33,8 +29,8 @@ class HoofdmenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         noGroupBtn.isHidden = true
+        
         
         ref = FIRDatabase.database().reference()
         
@@ -49,7 +45,6 @@ class HoofdmenuViewController: UIViewController {
                 
                 if let data = NSData(contentsOf: url as URL) {
                     self.pfPicture.image = UIImage(data: data as Data)
-                    self.oneDinnerDate.image = UIImage(data: data as Data)
                 }
             }
             
@@ -72,7 +67,7 @@ class HoofdmenuViewController: UIViewController {
                     let groupName = snapshot.value as! String
                     print ("GROUPSNAME: ", groupName)
                     self.groupNameBtn.setTitle(groupName, for: .normal)
-                    self.groupNameBtn.titleLabel!.font =  UIFont(name: "Helvetica Neue UltraLight", size: 29)
+                    self.groupNameBtn.titleLabel!.font =  UIFont(name: "HelveticaNeue-Thin", size: 24)
 
                 })
                 
@@ -82,7 +77,7 @@ class HoofdmenuViewController: UIViewController {
                     if date != nil {
                         self.noDateBtn.isHidden = true
                         self.nextDateBtn.setTitle(date, for: .normal)
-                        self.nextDateBtn.titleLabel!.font =  UIFont(name: "Helvetica Neue UltraLight", size: 29)
+                        self.nextDateBtn.titleLabel!.font =  UIFont(name: "HelveticaNeue-Thin", size: 24)
                     }
                     
                 })
@@ -96,8 +91,6 @@ class HoofdmenuViewController: UIViewController {
         
         self.pfPicture.layer.cornerRadius = self.pfPicture.frame.size.width / 2
         self.pfPicture.clipsToBounds = true
-        self.oneDinnerDate.layer.cornerRadius = self.oneDinnerDate.frame.size.width / 2
-        self.oneDinnerDate.clipsToBounds = true
     }
     
     override func viewDidAppear(_ animated: Bool) {

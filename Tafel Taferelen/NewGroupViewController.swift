@@ -141,7 +141,9 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
                                     self.displayNewMember()
                                 }
                                 else {
-                                    self.signupErrorAlert(title: "Oops, user allready in group!", message: "This member has already other friends.. try if someone else will have dinner with you!")
+                                    self.dismiss(animated: false, completion: nil)
+                                    self.signupErrorAlert(title: "Oops, user allready in group!", message: "This member is already having dinner with other friends.. Try if someone else will have dinner with you!")
+                                    self.newGroupMember.text = ""
                                 }
                             })
                         }
@@ -187,6 +189,8 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
                         }
                     })
                 }
+            } else {
+                self.dismiss(animated: false, completion: nil)
             }
         })
     }

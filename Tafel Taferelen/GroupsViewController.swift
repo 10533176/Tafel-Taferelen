@@ -41,6 +41,18 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
         
         tableView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
         
+        let alert = UIAlertController(title: nil, message: "Loading", preferredStyle: .alert)
+        alert.view.tintColor = UIColor.black
+        let frame = CGRect(x: 10, y: 5, width: 50, height: 50)
+        
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: frame) as UIActivityIndicatorView
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        loadingIndicator.startAnimating();
+        
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
+        
         self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
             
             let groupID = snapshot.value as? String
@@ -79,6 +91,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                                 let name = snapshot.value as? String
                                 if name != nil {
                                     self.groupNames.append(name!)
+                                    self.dismiss(animated: false, completion: nil)
                                     self.tableView.reloadData()
                                 }
                             })
@@ -152,10 +165,11 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                 self.ref?.child("users").child(currentUserID!).child("groupID").removeValue()
                 self.ref?.child("groups").child(groupID!).child("members").child("email").observeSingleEvent(of: .value, with: {(snapshot) in
                     emailArray = snapshot.value as? NSArray as! [String]
-
-                    emailArray.remove(at: emailArray.index(of: email!)!)
-                    self.ref?.child("groups").child(groupID!).child("members").child("email").setValue(emailArray)
-                    })
+                    if email != nil {
+                        emailArray.remove(at: emailArray.index(of: email!)!)
+                        self.ref?.child("groups").child(groupID!).child("members").child("email").setValue(emailArray)
+                    }
+                })
                     
                 self.ref?.child("groups").child(groupID!).child("members").child("userid").observeSingleEvent(of: .value, with: {(snapshot) in
                         var useridArray = snapshot.value as? NSArray as! [String]
@@ -222,6 +236,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                                     self.newMemberAddedToGroup(userID: keys)
                                 }
                                 else {
+                                    self.dismiss(animated: false, completion: nil)
                                     self.signupErrorAlert(title: "Oops!", message: "This member is allready in another group. Try to find other friends!")
                                 }
                             })
@@ -272,6 +287,8 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                 self.tableView.reloadData()
             })
 
+        } else {
+            self.dismiss(animated: false, completion: nil)
         }
     }
     

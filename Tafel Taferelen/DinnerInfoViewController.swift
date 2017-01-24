@@ -20,6 +20,7 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var saveDateBtn: UIButton!
+    @IBOutlet weak var coverUpImage: UIImageView!
     
     var chat = [String]()
     var sender = [String]()
@@ -32,6 +33,7 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         datePicker.isHidden = true
+        coverUpImage.isHidden = true
 
         ref = FIRDatabase.database().reference()
         loadExistingGroupInfo()
@@ -104,6 +106,7 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
     @IBAction func EdditingDateDidBegin(_ sender: Any) {
         
         dateNextDinnerField.isHidden = true
+        coverUpImage.isHidden = false
         datePicker.isHidden = false
         
 
@@ -150,6 +153,7 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
 
     @IBAction func dateChanged(_ sender: Any) {
         datePicker.isHidden = true
+        coverUpImage.isHidden = true
         dateNextDinnerField.isHidden = false
         let userID = FIRAuth.auth()?.currentUser?.uid
         let newChef = dateNextDinnerField.text
