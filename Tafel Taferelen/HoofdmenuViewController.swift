@@ -72,6 +72,7 @@ class HoofdmenuViewController: UIViewController {
                     let groupName = snapshot.value as! String
                     print ("GROUPSNAME: ", groupName)
                     self.groupNameBtn.setTitle(groupName, for: .normal)
+                    self.groupNameBtn.titleLabel!.font =  UIFont(name: "Helvetica Neue UltraLight", size: 29)
 
                 })
                 
@@ -81,6 +82,7 @@ class HoofdmenuViewController: UIViewController {
                     if date != nil {
                         self.noDateBtn.isHidden = true
                         self.nextDateBtn.setTitle(date, for: .normal)
+                        self.nextDateBtn.titleLabel!.font =  UIFont(name: "Helvetica Neue UltraLight", size: 29)
                     }
                     
                 })
