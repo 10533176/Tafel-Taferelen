@@ -153,6 +153,7 @@
 				TargetAttributes = {
 					EFC34A6E1E24F5E900B35706 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 45RHUL786T;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -368,6 +369,7 @@
 			baseConfigurationReference = 2F6DA0D61C362BAE47609EDD /* Pods-Tafel Taferelen.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 45RHUL786T;
 				INFOPLIST_FILE = "Tafel Taferelen/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.mprog.Tafel-Taferelen";
@@ -381,6 +383,7 @@
 			baseConfigurationReference = EE8D2E8208CD2D7999D987F0 /* Pods-Tafel Taferelen.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 45RHUL786T;
 				INFOPLIST_FILE = "Tafel Taferelen/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "nl.mprog.Tafel-Taferelen";

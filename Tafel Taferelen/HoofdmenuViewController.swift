@@ -28,12 +28,10 @@ class HoofdmenuViewController: UIViewController {
     var fullName = String()
     var tableSetting = [String]()
     
-    override func viewDidAppear(_ animated: Bool) {
-        viewDidLoad()
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         noGroupBtn.isHidden = true
         
@@ -71,6 +69,7 @@ class HoofdmenuViewController: UIViewController {
 
                 self.ref?.child("groups").child(groupID!).child("name").observeSingleEvent(of: .value, with: { (snapshot) in
                     let groupName = snapshot.value as! String
+                    print ("GROUPSNAME: ", groupName)
                     self.groupNameBtn.setTitle(groupName, for: .normal)
 
                 })
@@ -78,7 +77,6 @@ class HoofdmenuViewController: UIViewController {
                 self.ref?.child("groups").child(groupID!).child("date").observeSingleEvent(of: .value, with: { (snapshot) in
                     
                     let date = snapshot.value as? String
-                    print ("date is", date ?? 0)
                     if date != nil {
                         self.noDateBtn.isHidden = true
                         self.nextDateBtn.setTitle(date, for: .normal)
@@ -98,7 +96,11 @@ class HoofdmenuViewController: UIViewController {
         self.oneDinnerDate.layer.cornerRadius = self.oneDinnerDate.frame.size.width / 2
         self.oneDinnerDate.clipsToBounds = true
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        viewDidLoad()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

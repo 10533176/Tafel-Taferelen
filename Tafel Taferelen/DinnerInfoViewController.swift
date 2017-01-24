@@ -33,10 +33,25 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
         readChat()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        if #available(iOS 10.0, *) {
+            let refreshControl = UIRefreshControl()
+            let title = NSLocalizedString("PullToRefresh", comment: "refresh chat")
+            refreshControl.attributedTitle = NSAttributedString(string: title)
+            refreshControl.addTarget(self,
+                                     action: #selector(refreshOptions(sender:)),
+                                     for: .valueChanged)
+            tableView.refreshControl = refreshControl
+        }
 
     }
 
+    
+    @objc private func refreshOptions(sender: UIRefreshControl) {
+        readChat()
+        sender.endRefreshing()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -136,6 +151,13 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
             cell.chatName.text = self.sender[indexPath.row]
 
         }
+        
+        let numberOfSections = self.tableView.numberOfSections
+        let numberOfRows = self.tableView.numberOfRows(inSection: numberOfSections-1)
+        
+        let indexPath = IndexPath(row: numberOfRows-1 , section: numberOfSections-1)
+        self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+        
         return cell
     }
     
@@ -226,7 +248,7 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
                             self.ref?.child("groups").child(groupID).child("chat").child(key).child("message").observeSingleEvent(of: .value, with: { (snapshot) in
                                 let singleChat = snapshot.value as? String
                                 if singleChat != nil {
-                                    self.chat.insert(singleChat!, at: 0)
+                                    self.chat.insert(singleChat!, at: self.chat.count)
                                     print("Chat Array!!!", self.chat)
                                 }
                               })
@@ -238,7 +260,7 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
                                         
                                         let username = snapshot.value as? String
                                         if username  != nil {
-                                            self.sender.insert(username!, at: 0)
+                                            self.sender.insert(username!, at: self.sender.count)
                                             self.tableView.reloadData()
                                         }
                                     })
@@ -268,6 +290,7 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
                 
                 self.ref?.child("groups").child(groupID).child("chat").child(mesID).child("userid").setValue(userID)
                 self.ref?.child("groups").child(groupID).child("chat").child(mesID).child("message").setValue(self.newMessageText.text)
+                self.newMessageText.text = ""
                 self.readChat()
             }
         })
