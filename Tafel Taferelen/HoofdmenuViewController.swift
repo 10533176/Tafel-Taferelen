@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import EventKit
 
 class HoofdmenuViewController: UIViewController {
 
@@ -105,5 +106,4 @@ class HoofdmenuViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 }

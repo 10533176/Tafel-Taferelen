@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import EventKit
 
 class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -17,16 +18,20 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var chefNextDinnerField: UITextField!
     @IBOutlet weak var newMessageText: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var saveDateBtn: UIButton!
     
     var chat = [String]()
     var sender = [String]()
     var chatID = [String]()
+    var dinnerDate = NSDate()
     
     var keyboardSizeRect: CGRect?
     var ref: FIRDatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        datePicker.isHidden = true
 
         ref = FIRDatabase.database().reference()
         loadExistingGroupInfo()
@@ -43,9 +48,7 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
                                      for: .valueChanged)
             tableView.refreshControl = refreshControl
         }
-
     }
-
     
     @objc private func refreshOptions(sender: UIRefreshControl) {
         readChat()
@@ -98,6 +101,34 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
+    @IBAction func EdditingDateDidBegin(_ sender: Any) {
+        
+        dateNextDinnerField.isHidden = true
+        datePicker.isHidden = false
+        
+
+    }
+    
+    @IBAction func datpickerChanged(_ sender: Any) {
+        dinnerDate = datePicker.date as NSDate
+        
+        let date = dinnerDate
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM-dd HH:mm"
+        let dateDinnerStiring = formatter.string(from: date as Date)
+        dateNextDinnerField.text = dateDinnerStiring
+        
+    }
+
+    @IBAction func saveDateCalendar(_ sender: Any) {
+        signupErrorAlert(title: "Save the Date", message: "Date is saved to your calendar!")
+        print ("NS DATE TO CHANGE = ", dinnerDate)
+        addEventToCalendar(title: "Dinner with \(groupNameLabel.text!)", description: "Remember or die!", startDate: dinnerDate, endDate: dinnerDate)
+        
+    }
+
+    
     @IBAction func didBeginChatting(_ sender: Any) {
 
         if self.view.frame.origin.y == 0{
@@ -105,9 +136,6 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
                 self.view.frame.origin.y -= keyboardSize.height
             }
         }
-        
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
     }
     
@@ -121,6 +149,8 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
     
 
     @IBAction func dateChanged(_ sender: Any) {
+        datePicker.isHidden = true
+        dateNextDinnerField.isHidden = false
         let userID = FIRAuth.auth()?.currentUser?.uid
         let newChef = dateNextDinnerField.text
         
@@ -183,6 +213,10 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
                     
                     let date = snapshot.value as? String
                     if date != nil {
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "MM-dd HH:mm"
+                        let datetoNSDate = dateFormatter.date(from: date!)
+                        self.dinnerDate = datetoNSDate as NSDate!
                         self.dateNextDinnerField.text = date
                     }
                     
@@ -295,6 +329,46 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
             }
         })
         
+    }
+    
+    func addEventToCalendar(title: String, description: String?, startDate: NSDate, endDate: NSDate, completion: ((_ success: Bool, _ error: NSError?) -> Void)? = nil) {
+        let eventStore = EKEventStore()
+        print ("komt hier")
+        
+        eventStore.requestAccess(to: .event, completion: { (granted, error) in
+            if (granted) && (error == nil) {
+                print("gaat hier doorheen")
+                print("STARTDATE SAVING: ", startDate)
+                let event = EKEvent(eventStore: eventStore)
+                event.title = title
+                event.startDate = startDate as Date
+                event.endDate = endDate as Date
+                event.notes = description
+                event.calendar = eventStore.defaultCalendarForNewEvents
+                do {
+                    try eventStore.save(event, span: .thisEvent)
+                    print("gaat hier doorheen!!!!")
+                } catch let e as NSError {
+                    print ("error date opslaan: ", e)
+                    completion?(false, e)
+                    return
+                }
+                completion?(true, nil)
+            } else {
+                completion?(false, error as NSError?)
+                print ("zit hier")
+            }
+        })
+    }
+    
+    func signupErrorAlert(title: String, message: String) {
+        
+        // Called upon signup error to let the user know signup didn't work.
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
 
 }

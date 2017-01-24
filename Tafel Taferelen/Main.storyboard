@@ -842,23 +842,6 @@
                                     <action selector="locationChanged:" destination="775-ON-1wk" eventType="editingDidEnd" id="avX-YJ-8r1"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fWd-dQ-dk9">
-                                <rect key="frame" x="16" y="154" width="158" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="-">
-                                        <attributes>
-                                            <font key="NSFont" size="24" name="HelveticaNeue-UltraLight"/>
-                                            <font key="NSOriginalFont" size="24" name="HelveticaNeue-UltraLight"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="dateChanged:" destination="775-ON-1wk" eventType="editingDidEnd" id="aVi-kZ-qFd"/>
-                                </connections>
-                            </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="grN-Os-UqF">
                                 <rect key="frame" x="0.0" y="309" width="375" height="312"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -871,7 +854,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oWA-Nw-IAJ" id="ETt-RT-l6S">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fm-X0-N7B">
@@ -940,6 +923,42 @@
                                     <action selector="chefsChanged:" destination="775-ON-1wk" eventType="editingDidEnd" id="l56-bl-pRs"/>
                                 </connections>
                             </textField>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="30" translatesAutoresizingMaskIntoConstraints="NO" id="1BF-dx-GHv">
+                                <rect key="frame" x="16" y="138" width="306" height="68"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="506953791.14487398">
+                                    <!--2017-01-24 12:29:51 +0000-->
+                                </date>
+                                <connections>
+                                    <action selector="datpickerChanged:" destination="775-ON-1wk" eventType="valueChanged" id="9Uz-Uz-oaa"/>
+                                </connections>
+                            </datePicker>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fWd-dQ-dk9">
+                                <rect key="frame" x="16" y="151" width="298" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="-">
+                                        <attributes>
+                                            <font key="NSFont" size="24" name="HelveticaNeue-UltraLight"/>
+                                            <font key="NSOriginalFont" size="24" name="HelveticaNeue-UltraLight"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="EdditingDateDidBegin:" destination="775-ON-1wk" eventType="editingDidBegin" id="THk-RM-w8n"/>
+                                    <action selector="dateChanged:" destination="775-ON-1wk" eventType="editingDidEnd" id="aVi-kZ-qFd"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VNz-IX-MTM">
+                                <rect key="frame" x="330" y="157" width="33" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="Schermafbeelding 2017-01-24 om 17.41.04"/>
+                                <connections>
+                                    <action selector="saveDateCalendar:" destination="775-ON-1wk" eventType="touchUpInside" id="OyY-j6-pHl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -949,9 +968,11 @@
                     <connections>
                         <outlet property="chefNextDinnerField" destination="0Zm-l4-SJa" id="fsX-br-eLo"/>
                         <outlet property="dateNextDinnerField" destination="fWd-dQ-dk9" id="hTA-0h-Egh"/>
+                        <outlet property="datePicker" destination="1BF-dx-GHv" id="uoH-MO-xOE"/>
                         <outlet property="groupNameLabel" destination="syh-y1-knK" id="hb9-pv-C0u"/>
                         <outlet property="locationNextDinnerField" destination="4oN-4r-1eN" id="sKx-tV-pJn"/>
                         <outlet property="newMessageText" destination="szT-Ms-vBq" id="gaP-bO-htl"/>
+                        <outlet property="saveDateBtn" destination="VNz-IX-MTM" id="nZ0-Eq-T50"/>
                         <outlet property="tableView" destination="grN-Os-UqF" id="xFl-5J-vM9"/>
                     </connections>
                 </viewController>
@@ -1054,6 +1075,7 @@
         <image name="66649-crossed-knife-and-fork" width="400" height="400"/>
         <image name="Schermafbeelding 2017-01-19 om 11.48.41" width="245" height="99"/>
         <image name="Schermafbeelding 2017-01-19 om 20.02.42" width="380" height="1010"/>
+        <image name="Schermafbeelding 2017-01-24 om 17.41.04" width="176" height="177"/>
         <image name="chef" width="800" height="384"/>
         <image name="headonly" width="640" height="480"/>
     </resources>
