@@ -13,10 +13,19 @@ class FirstLaunchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if isAppAlreadyLaunchedOnce() == true {
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "logIn")
-            self.present(vc, animated: true, completion: nil)
-        }
+        let appLaunchedBefore = isAppAlreadyLaunchedOnce()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+        
+            if appLaunchedBefore == true {
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "logIn")
+                self.present(vc, animated: true, completion: nil)
+            } else {
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introPage")
+                self.present(vc, animated: true, completion: nil)
+            }
+        })
+
 
     }
     

@@ -106,6 +106,8 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
             
             self.ref?.child("groups").child(groupID).child("members").child("email").setValue(self.memberEmails)
             self.ref?.child("groups").child(groupID).child("members").child("userid").setValue(self.memberIDs)
+            let tableSetting = ["", "", "", "", "", "", "", "", "", ""]
+            self.ref?.child("groups").child(groupID).child("tableSetting").setValue(tableSetting)
             
             for keys in self.memberIDs {
                 print("keys: ", keys)
