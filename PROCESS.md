@@ -131,7 +131,22 @@ Nadenken of ik extra functionaliteit wil:
 * datum direct in agende kunnen zetten
 * notificatie als iemand iets veranders/ toevoegt? 
 
+# day 12
+-kan nu datepicker gebruiken voor selecteren datum 
+- kan datum opslaan in agenda 
+- loading wannee rnog niet geladen --> 
+  ** HIER NOG WEL VOOR CHECKEN IN ALLE VIEWS **
+- table view kunnen aanvragen als je wilt checken of er nieuwe berichten zijn 
 
+TE DOEN 
+- loading verbeteen 
+- zorgen dat niet elke afzender Lois is 
+- app mooi maken 
+- keuze maken voor hoofdmenu 
+Probleem van vandaag: 
+het toevoegen van de datum in kalender duurde ellendig lang doordat het steeds de verkeerde datum pakte 
+
+ 
 
 
 
