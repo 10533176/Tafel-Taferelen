@@ -39,6 +39,8 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
         loadExistingGroupInfo()
         readChat()
         
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
         if #available(iOS 10.0, *) {

@@ -33,13 +33,10 @@ class FirstLaunchViewController: UIViewController {
         let defaults = UserDefaults.standard
         
         if defaults.string(forKey: "isAppAlreadyLaunchedOnce") != nil{
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "logIn")
-            self.present(vc, animated: true, completion: nil)
-            print ("App already launched")
+
             return true
         }else{
             defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
-            print ("App launched first time")
             return false
         }
     }

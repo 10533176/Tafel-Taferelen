@@ -251,42 +251,46 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
 
         if userID != "" {
             
-            let currentUserID = FIRAuth.auth()?.currentUser?.uid
-            self.groupMembers.append(userID)
-            let counting = self.groupMembers.count
-            self.countMembers.text = "Deelnemers: \(counting) van de 10"
-            var emailArray = [String]()
-            
-            self.ref?.child("users").child(currentUserID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
+            if groupMembers.count < 11 {
+
+                let currentUserID = FIRAuth.auth()?.currentUser?.uid
+                self.groupMembers.append(userID)
+                let counting = self.groupMembers.count
+                self.countMembers.text = "Deelnemers: \(counting) van de 10"
+                var emailArray = [String]()
                 
-                let groupID = snapshot.value as! String
-                
-                self.ref?.child("groups").child(groupID).child("members").child("email").observeSingleEvent(of: .value, with: {(snapshot) in
+                self.ref?.child("users").child(currentUserID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
                     
-                    emailArray = snapshot.value as? NSArray as! [String]
-                    emailArray.append(self.newEmailField.text!)
-                    self.ref?.child("groups").child(groupID).child("members").child("email").setValue(emailArray)
+                    let groupID = snapshot.value as! String
                     
+                    self.ref?.child("groups").child(groupID).child("members").child("email").observeSingleEvent(of: .value, with: {(snapshot) in
+                        
+                        emailArray = snapshot.value as? NSArray as! [String]
+                        emailArray.append(self.newEmailField.text!)
+                        self.ref?.child("groups").child(groupID).child("members").child("email").setValue(emailArray)
+                        
+                    })
+                    
+                    self.ref?.child("users").child(userID).child("groupID").setValue(groupID)
+                    
+                    self.ref?.child("groups").child(groupID).child("members").child("userid").setValue(self.groupMembers)
                 })
                 
-                self.ref?.child("users").child(userID).child("groupID").setValue(groupID)
+                self.ref?.child("users").child(userID).child("full name").observeSingleEvent(of: .value, with: {(snapshot) in
+                    let name = snapshot.value as! String
+                    self.groupNames.append(name)
+                })
                 
-                self.ref?.child("groups").child(groupID).child("members").child("userid").setValue(self.groupMembers)
-            })
-            
-            self.ref?.child("users").child(userID).child("full name").observeSingleEvent(of: .value, with: {(snapshot) in
-                let name = snapshot.value as! String
-                self.groupNames.append(name)
-            })
-            
-            self.ref?.child("users").child(userID).child("urlToImage").observeSingleEvent(of: .value, with: {(snapshot) in
-                let url = snapshot.value as! String
-                self.groupPhotos.append(url)
-                self.dismiss(animated: false, completion: nil)
-                self.newEmailField.text = ""
-                self.tableView.reloadData()
-            })
-
+                self.ref?.child("users").child(userID).child("urlToImage").observeSingleEvent(of: .value, with: {(snapshot) in
+                    let url = snapshot.value as! String
+                    self.groupPhotos.append(url)
+                    self.dismiss(animated: false, completion: nil)
+                    self.newEmailField.text = ""
+                    self.tableView.reloadData()
+                })
+            } else {
+                self.signupErrorAlert(title: "Oops!", message: "Maximum of ten members in group is reached!")
+            }
         } else {
             self.dismiss(animated: false, completion: nil)
         }

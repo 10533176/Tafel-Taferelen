@@ -41,21 +41,25 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func newGroupMemberAdded(_ sender: Any) {
         
         if newGroupMember.text != " " {
-            userAllreadyinGroup()
-
-            let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
-            
-            alert.view.tintColor = UIColor.black
-            let frame = CGRect(x: 10, y: 5, width: 50, height: 50)
-            
-            let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: frame) as UIActivityIndicatorView
-            loadingIndicator.hidesWhenStopped = true
-            loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-            loadingIndicator.startAnimating();
-            
-            alert.view.addSubview(loadingIndicator)
-            present(alert, animated: true, completion: nil)
-            
+            if memberIDs.count < 11 {
+                
+                userAllreadyinGroup()
+                
+                let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+                
+                alert.view.tintColor = UIColor.black
+                let frame = CGRect(x: 10, y: 5, width: 50, height: 50)
+                
+                let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: frame) as UIActivityIndicatorView
+                loadingIndicator.hidesWhenStopped = true
+                loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+                loadingIndicator.startAnimating();
+                
+                alert.view.addSubview(loadingIndicator)
+                present(alert, animated: true, completion: nil)
+            } else {
+               self.signupErrorAlert(title: "Oops!", message: "Maximum of ten members in group is reached")
+            }
         } else {
             self.signupErrorAlert(title: "Oops!", message: "Fill in email adress to add new member to the group!")
         }
