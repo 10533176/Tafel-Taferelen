@@ -159,6 +159,10 @@ Ookal is het qua code wss niet de makkelijkste oplossing ga ik toch voor de tafe
  morgen: 
  - implementeren van code om jezelf op aanwezig te klikken aan tafel 
  
+ oude design van de app: 
+ ![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Schermafbeelding 2017-01-26 om 20.28.39.png)
+ ![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Schermafbeelding 2017-01-26 om 20.28.55.png)
+ 
  # day 14
  - Gelukt om jezelf aanwezig te klikken aan tafel. MAAR: 
   * probleem: 
