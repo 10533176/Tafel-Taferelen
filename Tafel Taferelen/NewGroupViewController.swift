@@ -31,6 +31,11 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         self.navigationController?.navigationBar.isTranslucent = true
         ref = FIRDatabase.database().reference()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        tableView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,25 +43,32 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         // Dispose of any resources that can be recreated.
     }
     
+    func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+        
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
+    }
+    
     @IBAction func newGroupMemberAdded(_ sender: Any) {
         
         if newGroupMember.text != " " {
             if memberIDs.count < 11 {
                 
+                AppDelegate.instance().showActivityIndicator()
                 userAllreadyinGroup()
                 
-                let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
-                
-                alert.view.tintColor = UIColor.black
-                let frame = CGRect(x: 10, y: 5, width: 50, height: 50)
-                
-                let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: frame) as UIActivityIndicatorView
-                loadingIndicator.hidesWhenStopped = true
-                loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-                loadingIndicator.startAnimating();
-                
-                alert.view.addSubview(loadingIndicator)
-                present(alert, animated: true, completion: nil)
             } else {
                self.signupErrorAlert(title: "Oops!", message: "Maximum of ten members in group is reached")
             }
@@ -84,6 +96,9 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell
     }
     
+    func doneLoading() {
+        AppDelegate.instance().dismissActivityIndicator()
+    }
     
     @IBAction func createNewGroupPressed(_ sender: Any) {
         
@@ -147,7 +162,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
                                     self.displayNewMember()
                                 }
                                 else {
-                                    self.dismiss(animated: false, completion: nil)
+                                    self.doneLoading()
                                     self.signupErrorAlert(title: "Oops, user allready in group!", message: "This member is already having dinner with other friends.. Try if someone else will have dinner with you!")
                                     self.newGroupMember.text = ""
                                 }
@@ -187,7 +202,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
                                 self.tableView.reloadData()
                             })
                             
-                            self.dismiss(animated: false, completion: nil)
+                            self.doneLoading()
                             self.memberEmails.append(self.newGroupMember.text!)
                             self.memberIDs.append(keys)
                             self.newGroupMember.text = ""
@@ -196,7 +211,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
                     })
                 }
             } else {
-                self.dismiss(animated: false, completion: nil)
+                self.doneLoading()
             }
         })
     }

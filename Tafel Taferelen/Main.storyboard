@@ -153,7 +153,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="PAGINA 6" translatesAutoresizingMaskIntoConstraints="NO" id="MZI-EU-4II">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="-11" y="64" width="386" height="603"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Schermafbeelding 2017-01-24 om 23.03.58" translatesAutoresizingMaskIntoConstraints="NO" id="Mib-FY-JvN">
@@ -265,12 +265,12 @@
                                     <action selector="newGroupMemberAdded:" destination="qey-EE-Hqu" eventType="touchUpInside" id="sZn-q1-0IC"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="emailadress new group member" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m3f-Ul-Hyv">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e-mail address new group member" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m3f-Ul-Hyv">
                                 <rect key="frame" x="25" y="288" width="295" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Groupsname" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vxf-XT-0Qr">
                                 <rect key="frame" x="25" y="238" width="324" height="30"/>
@@ -374,7 +374,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hdy-yn-zlA">
-                                <rect key="frame" x="271" y="64" width="62" height="62"/>
+                                <rect key="frame" x="269" y="61" width="68" height="68"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5g-k5-Dd3">
@@ -440,11 +440,11 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uh6-An-9Dz">
-                                <rect key="frame" x="133" y="278" width="44" height="44"/>
+                                <rect key="frame" x="134" y="278" width="42" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pfU-XS-rNn">
-                                <rect key="frame" x="133" y="438" width="44" height="44"/>
+                                <rect key="frame" x="136" y="439" width="42" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Px-A9-EmA">
@@ -464,15 +464,15 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VhA-YB-L5S">
-                                <rect key="frame" x="210" y="278" width="44" height="44"/>
+                                <rect key="frame" x="212" y="278" width="42" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Do7-UI-MUz">
-                                <rect key="frame" x="211" y="364" width="44" height="44"/>
+                                <rect key="frame" x="212" y="362" width="42" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2RL-yD-DXB" userLabel="Image Seat3">
-                                <rect key="frame" x="133" y="364" width="44" height="44"/>
+                                <rect key="frame" x="136" y="362" width="42" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLi-Hx-dp0">
@@ -491,7 +491,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y7l-p0-L9h">
-                                <rect key="frame" x="133" y="364" width="46" height="30"/>
+                                <rect key="frame" x="132" y="364" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="seat1Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="KNa-P8-lD4"/>
@@ -499,7 +499,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dvN-ma-h4s">
-                                <rect key="frame" x="209" y="364" width="46" height="30"/>
+                                <rect key="frame" x="209" y="362" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="seat1Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="qwL-Nt-ykw"/>
@@ -564,6 +564,18 @@
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w9W-nm-Iw4">
                                 <rect key="frame" x="211" y="600" width="44" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Schermafbeelding 2017-01-26 om 10.40.28" translatesAutoresizingMaskIntoConstraints="NO" id="1zq-HD-mcj">
+                                <rect key="frame" x="35" y="26" width="97" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Schermafbeelding 2017-01-26 om 10.40.40" translatesAutoresizingMaskIntoConstraints="NO" id="cAB-5a-Uey">
+                                <rect key="frame" x="140" y="26" width="61" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Schermafbeelding 2017-01-26 om 10.40.50" translatesAutoresizingMaskIntoConstraints="NO" id="3HA-BN-f6j">
+                                <rect key="frame" x="209" y="20" width="125" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -667,12 +679,12 @@
                                     <outlet property="delegate" destination="2SO-S5-KQ2" id="5Y6-pg-ghK"/>
                                 </connections>
                             </tableView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add new member with emailadress" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZtT-Qg-ucT">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add new member with e-mail address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZtT-Qg-ucT">
                                 <rect key="frame" x="15" y="565" width="311" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T8Y-uq-3K3">
                                 <rect key="frame" x="336" y="569" width="22" height="22"/>
@@ -807,23 +819,6 @@
                                     <action selector="messageSendPressed:" destination="775-ON-1wk" eventType="touchUpInside" id="SCw-E1-UIF"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Zm-l4-SJa">
-                                <rect key="frame" x="16" y="252" width="139" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="-">
-                                        <attributes>
-                                            <font key="NSFont" size="12" name="HelveticaNeue-UltraLight"/>
-                                            <font key="NSOriginalFont" size="24" name="HelveticaNeue-UltraLight"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="chefsChanged:" destination="775-ON-1wk" eventType="editingDidEnd" id="l56-bl-pRs"/>
-                                </connections>
-                            </textField>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="30" translatesAutoresizingMaskIntoConstraints="NO" id="1BF-dx-GHv">
                                 <rect key="frame" x="16" y="132" width="314" height="51"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -873,12 +868,12 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4oN-4r-1eN">
-                                <rect key="frame" x="16" y="200" width="139" height="20"/>
+                                <rect key="frame" x="19" y="200" width="139" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
                                     <fragment content="-">
                                         <attributes>
-                                            <font key="NSFont" size="12" name="HelveticaNeue-UltraLight"/>
+                                            <font key="NSFont" size="18" name="HelveticaNeue-UltraLight"/>
                                             <font key="NSOriginalFont" size="24" name="HelveticaNeue-UltraLight"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -893,6 +888,23 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Zm-l4-SJa">
+                                <rect key="frame" x="19" y="251" width="139" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="-">
+                                        <attributes>
+                                            <font key="NSFont" size="18" name="HelveticaNeue-UltraLight"/>
+                                            <font key="NSOriginalFont" size="24" name="HelveticaNeue-UltraLight"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="chefsChanged:" destination="775-ON-1wk" eventType="editingDidEnd" id="l56-bl-pRs"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -972,7 +984,7 @@
             <objects>
                 <navigationController storyboardIdentifier="logIn" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KWm-Xx-Af0" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Ae3-9W-VD2">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ae3-9W-VD2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1128,6 +1140,9 @@
         <image name="PAGINA 9 NEW GROUP" width="907" height="1610"/>
         <image name="PAGINA10" width="907" height="1610"/>
         <image name="Schermafbeelding 2017-01-24 om 23.03.58" width="321" height="96"/>
+        <image name="Schermafbeelding 2017-01-26 om 10.40.28" width="242" height="75"/>
+        <image name="Schermafbeelding 2017-01-26 om 10.40.40" width="145" height="61"/>
+        <image name="Schermafbeelding 2017-01-26 om 10.40.50" width="277" height="71"/>
         <image name="headonly" width="640" height="480"/>
         <image name="logo" width="907" height="1610"/>
         <image name="pagina 1" width="907" height="1610"/>
@@ -1137,7 +1152,7 @@
         <image name="pagina 5- startpagina" width="907" height="1610"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="fxd-p7-vNQ"/>
         <segue reference="jr8-3y-w7w"/>
-        <segue reference="p6O-GL-Bj7"/>
     </inferredMetricsTieBreakers>
 </document>

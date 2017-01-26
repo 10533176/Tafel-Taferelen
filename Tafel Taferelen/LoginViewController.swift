@@ -16,22 +16,13 @@ class LoginViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-     FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-          if user != nil {
-             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "userVC")
-              self.present(vc, animated: true, completion: nil)
-            } else {
-              // No User is signed in. Show user the login screen
-           }
-       }
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     @IBAction func loginPressed(_ sender: Any) {
         
         guard emailField.text != "", pwField.text != "" else {return}

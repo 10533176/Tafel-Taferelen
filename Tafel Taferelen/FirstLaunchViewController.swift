@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class FirstLaunchViewController: UIViewController {
 
@@ -15,18 +16,24 @@ class FirstLaunchViewController: UIViewController {
         
         let appLaunchedBefore = isAppAlreadyLaunchedOnce()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
         
             if appLaunchedBefore == true {
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "logIn")
-                self.present(vc, animated: true, completion: nil)
+                FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+                    if user != nil {
+                        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "userVC")
+                        self.present(vc, animated: true, completion: nil)
+                    } else {
+                        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "logIn")
+                        self.present(vc, animated: true, completion: nil)
+                    }
+                }
+
             } else {
                 let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introPage")
                 self.present(vc, animated: true, completion: nil)
             }
         })
-
-
     }
     
     func isAppAlreadyLaunchedOnce()->Bool{

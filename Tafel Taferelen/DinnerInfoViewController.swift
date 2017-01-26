@@ -38,9 +38,7 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
         ref = FIRDatabase.database().reference()
         loadExistingGroupInfo()
         readChat()
-        
-        
-        
+    
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
         if #available(iOS 10.0, *) {
@@ -120,7 +118,8 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
         let date = dinnerDate
         
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM-dd HH:mm"
+        formatter.dateStyle = DateFormatter.Style.short
+        formatter.timeStyle = .short
         let dateDinnerStiring = formatter.string(from: date as Date)
         dateNextDinnerField.text = dateDinnerStiring
         
@@ -129,9 +128,15 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
     @IBAction func saveDateCalendar(_ sender: Any) {
         signupErrorAlert(title: "Save the Date", message: "Date is saved to your calendar!")
         print ("NS DATE TO CHANGE = ", dinnerDate)
-        addEventToCalendar(title: "Dinner with \(groupNameLabel.text!)", description: "Remember or die!", startDate: dinnerDate, endDate: dinnerDate)
+        let gregorian = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+        var components = gregorian.components([.year, .month, .day, .hour], from: dinnerDate as Date)
+        components.hour = components.hour! + 4
+        
+        let endDate = gregorian.date(from: components)!
+        addEventToCalendar(title: "Dinner with \(groupNameLabel.text!)", description: "Remember or die!", startDate: dinnerDate, endDate: endDate as NSDate)
         
     }
+    
 
     
     @IBAction func didBeginChatting(_ sender: Any) {
@@ -219,8 +224,10 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
                     
                     let date = snapshot.value as? String
                     if date != nil {
+                        
                         let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "MM-dd HH:mm"
+                        dateFormatter.dateStyle = DateFormatter.Style.short
+                        dateFormatter.timeStyle = .short
                         let datetoNSDate = dateFormatter.date(from: date!)
                         self.dinnerDate = datetoNSDate as NSDate!
                         self.dateNextDinnerField.text = date

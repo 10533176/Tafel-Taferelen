@@ -41,17 +41,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
         
         tableView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
         
-        let alert = UIAlertController(title: nil, message: "Loading", preferredStyle: .alert)
-        alert.view.tintColor = UIColor.black
-        let frame = CGRect(x: 10, y: 5, width: 50, height: 50)
-        
-        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: frame) as UIActivityIndicatorView
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-        loadingIndicator.startAnimating();
-        
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
+        AppDelegate.instance().showActivityIndicator()
         
         self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -91,7 +81,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                                 let name = snapshot.value as? String
                                 if name != nil {
                                     self.groupNames.append(name!)
-                                    self.dismiss(animated: false, completion: nil)
+                                    self.doneLoading()
                                     self.tableView.reloadData()
                                 }
                             })
@@ -103,6 +93,10 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
         })
 
     }
+    
+    func doneLoading() {
+        AppDelegate.instance().dismissActivityIndicator()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -112,7 +106,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
     func keyboardWillShow(notification: NSNotification) {
         
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0{
+            if self.view.frame.origin.y == 0 {
                 self.view.frame.origin.y -= keyboardSize.height
             }
         }
@@ -181,6 +175,8 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                 
                     self.signupErrorAlert(title: "Bye bye!", message: "You left the group successfully!")
                     self.tableView.reloadData()
+                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "userVC")
+                    self.present(vc, animated: true, completion: nil)
             })
         })
         
@@ -236,7 +232,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                                     self.newMemberAddedToGroup(userID: keys)
                                 }
                                 else {
-                                    self.dismiss(animated: false, completion: nil)
+                                    self.doneLoading()
                                     self.signupErrorAlert(title: "Oops!", message: "This member is allready in another group. Try to find other friends!")
                                 }
                             })
@@ -284,7 +280,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                 self.ref?.child("users").child(userID).child("urlToImage").observeSingleEvent(of: .value, with: {(snapshot) in
                     let url = snapshot.value as! String
                     self.groupPhotos.append(url)
-                    self.dismiss(animated: false, completion: nil)
+                    self.doneLoading()
                     self.newEmailField.text = ""
                     self.tableView.reloadData()
                 })
@@ -292,7 +288,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                 self.signupErrorAlert(title: "Oops!", message: "Maximum of ten members in group is reached!")
             }
         } else {
-            self.dismiss(animated: false, completion: nil)
+            self.doneLoading()
         }
     }
     

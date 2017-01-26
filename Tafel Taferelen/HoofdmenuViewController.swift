@@ -30,9 +30,6 @@ class HoofdmenuViewController: UIViewController {
     @IBOutlet weak var imageSeat9: UIImageView!
     @IBOutlet weak var imageSeat10: UIImageView!
 
-    
-
-    
     var ref: FIRDatabaseReference!
     var fullName = String()
     var tableSetting = [String]()
@@ -44,24 +41,10 @@ class HoofdmenuViewController: UIViewController {
         super.viewDidLoad()
         
         noGroupBtn.isHidden = true
-        
-        
+
         ref = FIRDatabase.database().reference()
         
         let userID = FIRAuth.auth()?.currentUser?.uid
-        
-        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
-        
-        alert.view.tintColor = UIColor.black
-        let frame = CGRect(x: 10, y: 5, width: 50, height: 50)
-        
-        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: frame) as UIActivityIndicatorView
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-        loadingIndicator.startAnimating();
-        
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
         
         ref?.child("users").child(userID!).child("urlToImage").observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -97,30 +80,32 @@ class HoofdmenuViewController: UIViewController {
                     let groupName = snapshot.value as! String
                     print ("GROUPSNAME: ", groupName)
                     self.groupNameBtn.setTitle(groupName, for: .normal)
-                    self.groupNameBtn.titleLabel!.font =  UIFont(name: "HelveticaNeue-Thin", size: 16)
+                    self.groupNameBtn.titleLabel!.font =  UIFont(name: "HelveticaNeue-Regular", size: 22)
+                    self.groupNameBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
+                    self.groupNameBtn.contentHorizontalAlignment = .left
+
 
                 })
                 
                 self.ref?.child("groups").child(groupID!).child("date").observeSingleEvent(of: .value, with: { (snapshot) in
-                    
+            
                     let date = snapshot.value as? String
                     if date != nil {
                         self.noDateBtn.isHidden = true
                         self.nextDateBtn.setTitle(date, for: .normal)
-                        self.nextDateBtn.titleLabel!.font =  UIFont(name: "HelveticaNeue-Thin", size: 16)
+                        self.nextDateBtn.titleLabel!.font =  UIFont(name: "HelveticaNeue-Regular", size: 16)
+                        self.nextDateBtn.setTitleColor(UIColor.black, for: UIControlState.normal)
                     }
                 })
                     
                 self.ref?.child("groups").child(groupID!).child("tableSetting").observeSingleEvent(of: .value, with: { (snapshot) in
                         
                     let table = snapshot.value as? [String]
-                    print ("TABLE:  ", table ?? 0)
                     if table != nil {
                         self.tableSetting = table!
                         self.filInTable()
                     }
                 })
-
             } else {
                 self.groupNameBtn.isHidden = true
                 self.noGroupBtn.isHidden = false
@@ -130,6 +115,7 @@ class HoofdmenuViewController: UIViewController {
         
         self.pfPicture.layer.cornerRadius = self.pfPicture.frame.size.width / 2
         self.pfPicture.clipsToBounds = true
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -139,6 +125,10 @@ class HoofdmenuViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func doneLoading() {
+        AppDelegate.instance().dismissActivityIndicator()
     }
     
     @IBAction func seat1Pressed(_ sender: Any) {
@@ -176,45 +166,47 @@ class HoofdmenuViewController: UIViewController {
     func saveSeat(seat: Int) {
         
         let userID = FIRAuth.auth()?.currentUser?.uid
-        
-        if self.tableSetting[seat] == "" {
-            
-            if self.tableSetting.contains(self.pfURL) {
-                self.signupErrorAlert(title: "Oops!", message: "You allready have a seat at the table!")
-                return
+        if tableSetting.isEmpty == false {
+            if self.tableSetting[seat] == "" {
+                
+                if self.tableSetting.contains(self.pfURL) {
+                    self.signupErrorAlert(title: "Oops!", message: "You allready have a seat at the table!")
+                    return
+                }
+                
+                self.tableSetting[seat] = self.pfURL
+                
+                self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    let groupID = snapshot.value as? String
+                    
+                    if groupID != nil {
+                        print ("table setting changed: ", self.tableSetting)
+                        self.ref?.child("groups").child(groupID!).child("tableSetting").setValue(self.tableSetting)
+                        self.displayOwnPicture(seat: seat)
+                    }
+                })
+                
+            } else if self.tableSetting[seat] == self.pfURL {
+                print ("pakt die deze ooit?", self.tableSetting[seat])
+                print ("pakt die deze ooit?", self.tableSetting[seat])
+                self.tableSetting[seat] = ""
+                
+                self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    let groupID = snapshot.value as? String
+                    
+                    if groupID != nil {
+                        self.ref?.child("groups").child(groupID!).child("tableSetting").setValue(self.tableSetting)
+                        self.emptyOwnPicture(seat: seat)
+                        
+                    }
+                })
+            } else if self.tableSetting[seat] != "" && self.tableSetting[seat] != self.pfURL && self.tableSetting.contains(self.pfURL) == false{
+                //self.signupErrorAlert(title: "Oops!", message: "Pick an empty seat.")
             }
-            
-            self.tableSetting[seat] = self.pfURL
-                
-            self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                let groupID = snapshot.value as? String
-                    
-                if groupID != nil {
-                    print ("table setting changed: ", self.tableSetting)
-                    self.ref?.child("groups").child(groupID!).child("tableSetting").setValue(self.tableSetting)
-                    self.displayOwnPicture(seat: seat)
-                }
-            })
-                
-        } else if self.tableSetting[seat] == self.pfURL {
-            print ("pakt die deze ooit?", self.tableSetting[seat])
-            print ("pakt die deze ooit?", self.tableSetting[seat])
-            self.tableSetting[seat] = ""
-                
-            self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                let groupID = snapshot.value as? String
-                    
-                if groupID != nil {
-                    self.ref?.child("groups").child(groupID!).child("tableSetting").setValue(self.tableSetting)
-                    self.emptyOwnPicture(seat: seat)
-                    
-                }
-            })
-        } else if self.tableSetting[seat] != "" && self.tableSetting[seat] != self.pfURL && self.tableSetting.contains(self.pfURL) == false{
-            //self.signupErrorAlert(title: "Oops!", message: "Pick an empty seat.")
         }
+
     }
     
     func displayOwnPicture(seat: Int) {
@@ -316,8 +308,11 @@ class HoofdmenuViewController: UIViewController {
     func filInTable() {
         
         for key in tableSetting {
+            print ("drie hier")
             if key != "" {
+                print ("twee hier")
                 if let url = NSURL(string: key) {
+                    print("hier")
                     
                     if let data = NSData(contentsOf: url as URL) {
                         
@@ -375,7 +370,6 @@ class HoofdmenuViewController: UIViewController {
                 }
             }
         }
-        self.dismiss(animated: false, completion: nil)
     }
     
     func signupErrorAlert(title: String, message: String) {
