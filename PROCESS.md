@@ -144,8 +144,45 @@ TE DOEN
 - app mooi maken 
 - keuze maken voor hoofdmenu 
 Probleem van vandaag: 
-het toevoegen van de datum in kalender duurde ellendig lang doordat het steeds de verkeerde datum pakte 
+het toevoegen van de datum in kalender duurde ellendig lang doordat het steeds de verkeerde datum pakte, pakte automatisch de datum van vandaag. of als die degekozen datum ging opslaan was het niet in het juiste formaat. met date.formatter uiteindelijk dit probleem kunnen oplossen. 
 
+ # day 13
+ - App nieuw design gemaakt
+had eerst foto's van internet gehaald en daarmee logo's en pagina's mee proberen te maken. Maar door lage resoluties zag het er vooral goedkoop uit. 
+Daarom uiteindelijk met illustrator eigen design gemaakt met eigen logo. 
+- bedacht hoe ik mijn hoofdmenu wil. 
+Ookal is het qua code wss niet de makkelijkste oplossing ga ik toch voor de tafel waaraan je jezelf aanwezig kan klikken. Dit wil ik morgen gaan implementeren 
+- loading is in alle views verbeterd (geen alert meer, maar in appdelegate nu code waarmee hele view even op freeze wortd gezet) code thanks to ayanna. 
+ * wel iets vreemds:* probeerde dit ook in het hoofdmenu, alleen wanneer ik hier dezelfde functies aan roep die in alle andere veiws wel werken kreeg ik hier het probleem dat het beeld nooit van de freeze wordt afgehaald. WANN TIJD OVER: CHECKEN OF IK DIT KAN FIXEN 
+ - datum aangepast naar nederlandse versie
+ 
+ morgen: 
+ - implementeren van code om jezelf op aanwezig te klikken aan tafel 
+ 
+ # day 14
+ - Gelukt om jezelf aanwezig te klikken aan tafel. MAAR: 
+  * probleem: 
+  heb heel lang over nagedacht hoe ik dit moets doen. kon uiteindelijk niks anders verzinnen dan dat ik voor elk boord een aparte image view nodig zou hebben 
+  om de code enigzins te beperken en om het mogelijk te maken te laten zien heb ik daarom gekozen voor een maximum van een groep van 10. 
+  nu heb ik wel lelijke code doordat ik 10 imageviews heb. 
+  ook heb ik 10 buttons aangemaakt voor elk bord dat kan worden aangeklikt. Oftewel LELIJKE CODE. zie zelf op dit moment niet hoe ik dit mooier zou kunnen krijgen 
+  bij tijd over vragen aan julian/ martijn 
+  
+  ANDER PROBLEEM: 
+  alhoewel je nu mensen aan tafel kan zetten update die nog niet goed wanneer je profiel foto wordt veranderd of wanneer je groep verlaat 
+  oplossing morgen maken!! 
+  idee: 
+  leave group: 
+  readin tableSetting --> make an array of tableSetting. --> loop door array heen, if value == pf huidige user, tableSetting[at that point] = "" 
+  set new value to tableSetting 
+  
+  change profile pic:
+  before saving 
+  readin tableSetting --> make an array of tableSetting. --> loop door array heen, if value == pf huidige user, tableSetting[at that point] = "" EN DAN PAS OPLOSSEN!!
+  
+  als ik hier tijd voor heb dit morgen doen anders van het weekend 
+  
+ 
  
 
 
