@@ -155,6 +155,8 @@ Ookal is het qua code wss niet de makkelijkste oplossing ga ik toch voor de tafe
 - loading is in alle views verbeterd (geen alert meer, maar in appdelegate nu code waarmee hele view even op freeze wortd gezet) code thanks to ayanna. 
  * wel iets vreemds:* probeerde dit ook in het hoofdmenu, alleen wanneer ik hier dezelfde functies aan roep die in alle andere veiws wel werken kreeg ik hier het probleem dat het beeld nooit van de freeze wordt afgehaald. WANN TIJD OVER: CHECKEN OF IK DIT KAN FIXEN 
  - datum aangepast naar nederlandse versie
+ en gekozen om app in het engels te doen, vind het nederlands er lelijk uit zien. Dus ook andere naam bedacht dan TafelTaferelen
+ 
  
  morgen: 
  - implementeren van code om jezelf op aanwezig te klikken aan tafel 
