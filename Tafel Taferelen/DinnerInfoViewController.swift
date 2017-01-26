@@ -278,7 +278,6 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
             if valueCheck != nil {
                 
                 groupID = valueCheck!
-                
                 self.ref?.child("groups").child(groupID).child("chat").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
                     
                     let dictionary = snapshot.value as? NSDictionary
@@ -287,16 +286,13 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
                         
                         var dateStemps = dictionary?.allKeys as! [String]
                         dateStemps = dateStemps.sorted()
-                        print ("dateStamps: ", dateStemps)
                         
                         for key in dateStemps {
                             
-                            print ("DATE ORDER: ", key)
                             self.ref?.child("groups").child(groupID).child("chat").child(key).child("message").observeSingleEvent(of: .value, with: { (snapshot) in
                                 let singleChat = snapshot.value as? String
                                 if singleChat != nil {
                                     self.chat.insert(singleChat!, at: self.chat.count)
-                                    print("Chat Array!!!", self.chat)
                                 }
                               })
                             
@@ -317,6 +313,8 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
                     }
                     
                 })
+            } else {
+                self.noGroupErrorAlert(title: "Oops", message: "Join or create a dinner group to pick a date for the dinner!")
             }
         })
     }
@@ -346,12 +344,9 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
     
     func addEventToCalendar(title: String, description: String?, startDate: NSDate, endDate: NSDate, completion: ((_ success: Bool, _ error: NSError?) -> Void)? = nil) {
         let eventStore = EKEventStore()
-        print ("komt hier")
         
         eventStore.requestAccess(to: .event, completion: { (granted, error) in
             if (granted) && (error == nil) {
-                print("gaat hier doorheen")
-                print("STARTDATE SAVING: ", startDate)
                 let event = EKEvent(eventStore: eventStore)
                 event.title = title
                 event.startDate = startDate as Date
@@ -360,16 +355,13 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
                 event.calendar = eventStore.defaultCalendarForNewEvents
                 do {
                     try eventStore.save(event, span: .thisEvent)
-                    print("gaat hier doorheen!!!!")
                 } catch let e as NSError {
-                    print ("error date opslaan: ", e)
                     completion?(false, e)
                     return
                 }
                 completion?(true, nil)
             } else {
                 completion?(false, error as NSError?)
-                print ("zit hier")
             }
         })
     }
@@ -380,6 +372,19 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func noGroupErrorAlert(title: String, message: String) {
+        
+        // Called upon when user is not in a group
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let action = UIAlertAction(title: "Ok", style: .default, handler: { action in
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "userVC")
+            self.present(vc, animated: true, completion: nil)
+        })
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }

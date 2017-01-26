@@ -22,6 +22,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
     var memberIDs = [String]()
     var memberNames = [String]()
     var memberProfpic = [String]()
+    var groupEmails = [String]()
     
     
 
@@ -107,6 +108,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         if groupsName.text != "" {
             self.ref?.child("groups").child(groupID!).child("name").setValue(groupsName.text)
             saveCurrentUserAsNewMember(groupID: groupID!)
+            self.noGroupErrorAlert(title: "Yaay!", message: "welcome to the culb \(groupsName.text!)")
         }
         else {
             self.signupErrorAlert(title: "Oops!", message: "You forgot to fill in a groupsname")
@@ -151,6 +153,15 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
                         
                         let email = snapshot.value as! String
                         
+                        self.groupEmails.append(email)
+                        
+                        if self.groupEmails.count == tempKeys.count {
+                            if self.groupEmails.contains(self.newGroupMember.text!) == false {
+                                self.doneLoading()
+                                self.signupErrorAlert(title: "Oops!", message: "We do not have any users with this e-mail address")
+                                
+                            }
+                        }
                         if email == self.newGroupMember.text {
                             
                             self.ref?.child("users").child(keys).child("groupID").observeSingleEvent(of: .value, with: {(snapshot) in
@@ -222,6 +233,19 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func noGroupErrorAlert(title: String, message: String) {
+        
+        // Called upon signup error to let the user know signup didn't work.
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let action = UIAlertAction(title: "Ok", style: .default, handler: { action in
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "userVC")
+            self.present(vc, animated: true, completion: nil)
+        })
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }

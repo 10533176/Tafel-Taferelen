@@ -32,7 +32,7 @@ class LoginViewController: UIViewController {
                 self.signupErrorAlert(title: "Oops!", message: error.localizedDescription)
             }
             
-            if let user = user {
+            if user != nil {
                 let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "userVC")
                 self.present(vc, animated: true, completion: nil)
             }

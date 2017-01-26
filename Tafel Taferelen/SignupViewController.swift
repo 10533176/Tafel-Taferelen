@@ -30,7 +30,6 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
 
         picker.delegate = self
         
-        self.initializeCloseKeyboardTap()
         
         let storage = FIRStorage.storage().reference(forURL: "gs://tafel-taferelen.appspot.com")
         
@@ -46,31 +45,6 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func initializeCloseKeyboardTap() {
-        
-        NotificationCenter.default.addObserver(self, selector: Selector(("onKeyboardOpen:")), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: Selector(("onKeyboardClose:")), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: Selector(("handleOnTapAnywhereButKeyboard:")))
-        tapRecognizer.delegate = self //delegate event notifications to this class
-        self.view.addGestureRecognizer(tapRecognizer)
-        
-    }
-    
-    
-    func onKeyboardClose(notification: NSNotification) {
-        print ("keyboardClosed")
-    }
-    
-    func onKeyboardOpen(notification: NSNotification) {
-        print ("keyboardOpen")
-    }
-    
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        self.view.endEditing(true)
-        return false
     }
     
     @IBAction func selectImagePressed(_ sender: Any) {
@@ -104,7 +78,7 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
                 
                 if let error = error {
                     print(error.localizedDescription)
-                    self.signupErrorAlert(title: "Oops!", message: "Er ging iets mis! \(error.localizedDescription)")
+                    self.signupErrorAlert(title: "Oops!", message: "Something went wrong: \(error.localizedDescription)")
                 }
                 
                 if let user = user {

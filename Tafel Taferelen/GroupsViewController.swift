@@ -25,6 +25,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
     var groupPhotos = [String]()
     var groupNames = [String]()
     var newUserId = String()
+    var groupEmails = [String]()
     
 
     override func viewDidLoad() {
@@ -173,10 +174,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
 
                     })
                 
-                    self.signupErrorAlert(title: "Bye bye!", message: "You left the group successfully!")
-                    self.tableView.reloadData()
-                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "userVC")
-                    self.present(vc, animated: true, completion: nil)
+                    self.noGroupErrorAlert(title: "Bye bye!", message: "You left the group successfully!")
             })
         })
         
@@ -187,19 +185,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
         
         if newEmailField.text != " "  {
             self.userInGroup()
-            let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
-            
-            alert.view.tintColor = UIColor.black
-            let frame = CGRect(x: 10, y: 5, width: 50, height: 50)
-            
-            let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: frame) as UIActivityIndicatorView
-            loadingIndicator.hidesWhenStopped = true
-            loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-            loadingIndicator.startAnimating();
-            
-            alert.view.addSubview(loadingIndicator)
-            present(alert, animated: true, completion: nil)
-            
+            AppDelegate.instance().showActivityIndicator()
         } else {
             self.signupErrorAlert(title: "Oops!", message: "Fill in an emailadress to add a new member.")
         }
@@ -221,7 +207,18 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                         
                         let email = snapshot.value as! String
                         
+                        self.groupEmails.append(email)
+                        
+                        if self.groupEmails.count == tempKeys.count {
+                            if self.groupEmails.contains(self.newEmailField.text!) == false {
+                                self.doneLoading()
+                                self.signupErrorAlert(title: "Oops!", message: "We do not have any users with this e-mail address")
+
+                            }
+                        }
+                        
                         if email == self.newEmailField.text {
+                            print ("joe")
                             
                             self.ref?.child("users").child(keys).child("groupID").observeSingleEvent(of: .value, with: {(snapshot) in
                                 
@@ -301,5 +298,17 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
-
+    
+    func noGroupErrorAlert(title: String, message: String) {
+        
+        // Called upon signup error to let the user know signup didn't work.
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let action = UIAlertAction(title: "Ok", style: .default, handler: { action in
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "userVC")
+            self.present(vc, animated: true, completion: nil)
+        })
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
 }
