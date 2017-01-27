@@ -1,6 +1,10 @@
 # Tafel Taferelen
 Dé app voor al jouw dinner plannen! 
 
+# Better Code Hub 
+
+[![BCH compliance](https://bettercodehub.com/edge/badge/10533176/TafelTaferelen)](https://bettercodehub.com)
+
 
 Heb jij je vrienden ook al weken niet gezien? Proberen jullie elke keer weer een etentje te plannen, maar mislukt dit altijd? Of is het altijd dezelfde persoon die in jullie vrienden groep alles moet plannen? Of hou jij gewoon simpelweg van eten met je vrienden en familie? Dan is Tafel Taferelen dé ontbrekende app op jouw telefoon! 
 
