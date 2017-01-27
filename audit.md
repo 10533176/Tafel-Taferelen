@@ -2,6 +2,8 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/10533176/TafelTaferelen)]
 (https://bettercodehub.com)
 
+ ![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Schermafbeelding 2017-01-27 om 14.40.46.png)
+
 To do plan for better code: 
 
 * Viewcontroller Hoofdmenu (als eerst naam  veranderen naar engels) 
