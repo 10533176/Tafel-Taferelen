@@ -45,10 +45,10 @@ class HoofdmenuViewController: UIViewController {
         ref = FIRDatabase.database().reference()
         
         let userID = FIRAuth.auth()?.currentUser?.uid
+
         
         ref?.child("users").child(userID!).child("urlToImage").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-        
+
             let urlImage = snapshot.value as? String
             
             if urlImage != nil {
@@ -66,7 +66,6 @@ class HoofdmenuViewController: UIViewController {
         self.ref?.child("users").child(userID!).child("full name").observeSingleEvent(of: .value, with: { (snapshot) in
             
             self.fullName = snapshot.value as! String
-            
         })
         
         
@@ -188,8 +187,6 @@ class HoofdmenuViewController: UIViewController {
                 })
                 
             } else if self.tableSetting[seat] == self.pfURL {
-                print ("pakt die deze ooit?", self.tableSetting[seat])
-                print ("pakt die deze ooit?", self.tableSetting[seat])
                 self.tableSetting[seat] = ""
                 
                 self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -216,7 +213,6 @@ class HoofdmenuViewController: UIViewController {
             if let data = NSData(contentsOf: url as URL) {
                 
                 if seat == 0 {
-                    print ("going to change image with url:", pfURL)
                     self.imageSeat1.image = UIImage(data: data as Data)
                     self.imageSeat1.layer.cornerRadius = self.imageSeat1.frame.size.width / 2
                     self.imageSeat1.clipsToBounds = true
@@ -308,11 +304,11 @@ class HoofdmenuViewController: UIViewController {
     func filInTable() {
         
         for key in tableSetting {
-            print ("drie hier")
+
             if key != "" {
-                print ("twee hier")
+
                 if let url = NSURL(string: key) {
-                    print("hier")
+
                     
                     if let data = NSData(contentsOf: url as URL) {
                         

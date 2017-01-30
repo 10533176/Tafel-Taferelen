@@ -148,6 +148,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
         LeavingGroupPressed.isEnabled = false
         let currentUserID = FIRAuth.auth()?.currentUser?.uid
         var emailArray = [String]()
+        self.getImageURL()
         
         self.ref?.child("users").child(currentUserID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -167,19 +168,59 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                 })
                     
                 self.ref?.child("groups").child(groupID!).child("members").child("userid").observeSingleEvent(of: .value, with: {(snapshot) in
-                        var useridArray = snapshot.value as? NSArray as! [String]
+                    var useridArray = snapshot.value as? NSArray as! [String]
                         
-                        useridArray.remove(at: useridArray.index(of: currentUserID!)!)
+                    useridArray.remove(at: useridArray.index(of: currentUserID!)!)
                     self.ref?.child("groups").child(groupID!).child("members").child("userid").setValue(useridArray)
 
-                    })
-                
-                    self.noGroupErrorAlert(title: "Bye bye!", message: "You left the group successfully!")
+                })
+                self.noGroupErrorAlert(title: "Bye bye!", message: "You left the group successfully!")
             })
         })
         
     }
 
+    func changeProfileTable(url: String) {
+        let userID = FIRAuth.auth()?.currentUser?.uid
+        
+        self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let groupID = snapshot.value as? String
+            
+            if groupID != nil {
+                
+                self.ref?.child("groups").child(groupID!).child("tableSetting").observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    var table = snapshot.value as? [String]
+                    var index = 0
+                    if table != nil {
+                        for key in table! {
+                            if key == url {
+                                table?[index] = ""
+                                self.ref?.child("groups").child(groupID!).child("tableSetting").setValue(table)
+                            }
+                            index = index + 1
+                        }
+                    }
+                })
+            }
+        })
+    }
+    
+    func getImageURL() {
+        let userID = FIRAuth.auth()?.currentUser?.uid
+        
+        self.ref?.child("users").child(userID!).child("urlToImage").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let urlImage = snapshot.value as? String
+            
+            if urlImage != nil {
+                self.changeProfileTable(url: urlImage!)
+            }
+        })
+        
+    }
+    
     
     @IBAction func addNewMemberPressed(_ sender: Any) {
         
@@ -311,4 +352,5 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
+    
 }

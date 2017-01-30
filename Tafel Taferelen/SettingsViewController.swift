@@ -98,7 +98,7 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
                 }
                 
                 if let url = url {
-                    self.ref.child("users").child(userID!).child("urlToImage").setValue(url.absoluteString)
+                    self.getImageURL(newURL: url.absoluteString)
                 }
             })
         })
@@ -106,6 +106,51 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         uploadTask.resume()
     }
     
+    func getImageURL(newURL: String) {
+        let userID = FIRAuth.auth()?.currentUser?.uid
+        
+        self.ref?.child("users").child(userID!).child("urlToImage").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let urlImage = snapshot.value as? String
+            
+            if urlImage != nil {
+                self.changeProfileTable(url: urlImage!, newURL: newURL)
+            }
+        })
+        
+    }
+    
+    func changeProfileTable(url: String, newURL: String) {
+        let userID = FIRAuth.auth()?.currentUser?.uid
+        self.ref.child("users").child(userID!).child("urlToImage").setValue(newURL)
+        
+        self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let groupID = snapshot.value as? String
+            
+            if groupID != nil {
+                
+                self.ref?.child("groups").child(groupID!).child("tableSetting").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+                    var table = snapshot.value as? [String]
+                    print ("table is now: ", table)
+                    var index = 0
+                    if table != nil {
+                        for key in table! {
+                            print ("key is", key)
+                            print ("url is", url)
+                            if key == url {
+                                table?[index] = newURL
+                                self.ref?.child("groups").child(groupID!).child("tableSetting").setValue(table)
+                                print ("new table:", table)
+                            }
+                            index = index + 1
+                        }
+                    }
+                })
+            }
+        })
+    }
     
     @IBAction func loggingOUT(_ sender: Any) {
         let firebaseAuth = FIRAuth.auth()

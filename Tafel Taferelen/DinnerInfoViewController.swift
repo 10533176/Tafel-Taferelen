@@ -225,11 +225,12 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
                     let date = snapshot.value as? String
                     if date != nil {
                         
+                        //kijken of dit hele stuk niet weg kan
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateStyle = DateFormatter.Style.short
                         dateFormatter.timeStyle = .short
                         let datetoNSDate = dateFormatter.date(from: date!)
-                        self.dinnerDate = datetoNSDate as NSDate!
+                        //self.dinnerDate = datetoNSDate
                         self.dateNextDinnerField.text = date
                     }
                     
