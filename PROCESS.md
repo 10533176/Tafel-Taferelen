@@ -191,7 +191,12 @@ Ookal is het qua code wss niet de makkelijkste oplossing ga ik toch voor de tafe
   als ik hier tijd voor heb dit morgen doen anders van het weekend 
   
  
- 
+  # day 15
+  
+  * profiel foto wordt veranderd/ verijwderd als je profiel foto veranderd/ groep verlaat. 
+  * enige punt is wel dat op een of andere manier er iets geks gebeurd met plek 0 aan de tafel. 
+  Wanneer deze leeg is en je op aanwezig klikt wordt deze gevuld met die url, maar dit gebeurd ook op de plek waar je je nieuwe plek aantikt. checken waarom die dit doet. MAAR eerst code mooier maken/ verbeteren. dan pas kleine bugs eruit halen 
+  
 
 
 
