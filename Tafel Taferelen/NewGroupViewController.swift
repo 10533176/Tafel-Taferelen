@@ -29,10 +29,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
 
         self.navigationController?.navigationBar.isTranslucent = true
         ref = FIRDatabase.database().reference()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        self.hideKeyboardWhenTappedAroung()
         
         tableView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
     }
@@ -42,29 +39,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         // Dispose of any resources that can be recreated.
     }
     
-    
-    // MARK: Function to hide and show keyboard
-    
-    func keyboardWillShow(notification: NSNotification) {
-        
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
-            }
-        }
-        
-    }
-    
-    func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y != 0{
-                self.view.frame.origin.y += keyboardSize.height
-            }
-        }
-    }
-    
     // MARK: Functions to find new member, check if he/ she is not allready in group, if not -> diplaying user information
-    
     @IBAction func newGroupMemberAdded(_ sender: Any) {
         if newGroupMember.text != " " {
             if memberIDs.count < 11 {

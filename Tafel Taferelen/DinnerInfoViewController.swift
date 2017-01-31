@@ -283,19 +283,28 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
             
             self.ref?.child("groups").child(groupID).child("chat").child(key).child("userid").observeSingleEvent(of: .value, with: { (snapshot) in
                 let singleUser = snapshot.value as? String
-                
-                if singleUser != nil {
-                    self.ref?.child("users").child(singleUser!).child("full name").observeSingleEvent(of: .value, with: { (snapshot) in
-                        
-                        let username = snapshot.value as? String
-                        if username  != nil {
-                            self.sender.insert(username!, at: self.sender.count)
-                            self.tableView.reloadData()
-                        }
-                    })
-                }
+                self.readingSenderNames(singleUser: singleUser!)
             })
         }
+    }
+    
+    func readingSenderNames(singleUser: String) {
+        self.ref?.child("users").child(singleUser).child("full name").observeSingleEvent(of: .value, with: { (snapshot) in
+                
+            let username = snapshot.value as? String
+            if username  != nil {
+                self.sender.insert(username!, at: self.sender.count)
+                
+                let numberOfSections = self.tableView.numberOfSections
+                let numberOfRows = self.tableView.numberOfRows(inSection: numberOfSections-1)
+                let indexPath = IndexPath(row: numberOfRows-1 , section: numberOfSections-1)
+
+                if numberOfRows != 0 {
+                   self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                }
+                self.tableView.reloadData()
+            }
+        })
     }
     
     // MARK: Sending new chat message
@@ -356,12 +365,6 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
             cell.chatName.text = self.sender[indexPath.row]
             
         }
-        
-        let numberOfSections = self.tableView.numberOfSections
-        let numberOfRows = self.tableView.numberOfRows(inSection: numberOfSections-1)
-        
-        let indexPath = IndexPath(row: numberOfRows-1 , section: numberOfSections-1)
-        self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
         
         return cell
     }

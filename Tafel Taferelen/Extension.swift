@@ -34,21 +34,12 @@ extension UIViewController {
     
     // MARK: getting the groupID of a user. WERKT NOG NIET, RETURNT VOORDAT DIE DE WAARDE HEEFT
     
-    func getGroupID(ref: FIRDatabaseReference!, userID: String) -> String {
-        
-        var groupID = String()
-        
-        ref?.child("users").child(userID).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            let groupIDtest = snapshot.value as? String
-            
-            if groupIDtest != nil {
-                groupID = groupIDtest!
-            } else {
-                groupID = ""
-            }
-        })
-        
-        return groupID
+    func hideKeyboardWhenTappedAroung(){
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard(){
+        view.endEditing(true)
     }
 }

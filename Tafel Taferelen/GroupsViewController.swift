@@ -263,20 +263,15 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                 self.signupErrorAlert(title: "Oops!", message: "This member is allready in another group. Try to find other friends!")
             }
         })
-
     }
     
     func newMemberAddedToGroup(newUserID: String) {
-
         if newUserID != "" {
-            
             if groupMembers.count < 11 {
-
                 self.groupMembers.append(newUserID)
                 let counting = self.groupMembers.count
                 self.countMembers.text = "Deelnemers: \(counting) van de 10"
                 self.saveUserInDB(newUserID: newUserID)
-                
             } else {
                 self.doneLoading()
                 self.signupErrorAlert(title: "Oops!", message: "Maximum of ten members in group is reached!")
@@ -289,7 +284,6 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
     func saveUserInDB(newUserID: String) {
         
         var emailArray = [String]()
-        
         self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
             
             let groupID = snapshot.value as! String
