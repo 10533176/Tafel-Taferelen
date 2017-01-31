@@ -54,7 +54,6 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     // MARK: Loading group information 
-    
     func getGroupInfo() {
         self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -77,7 +76,6 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                 self.groupName.text = groupNameValue
                 self.getGroupMembers(groupID: groupID)
             }
-            
         })
     }
     
@@ -88,7 +86,6 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                 self.groupMembers = snapshot.value as? NSArray as! [String]
                 self.readingImageName()
             }
-            
         })
     }
     
