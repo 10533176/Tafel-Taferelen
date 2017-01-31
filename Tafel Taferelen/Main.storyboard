@@ -483,87 +483,67 @@
                                 <rect key="frame" x="136" y="285" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="seat1Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="mqL-jn-6KB"/>
+                                    <action selector="clickedPlate:" destination="K8s-PV-joo" eventType="touchUpInside" id="byK-M0-JIL"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eOc-Rc-n0U">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eOc-Rc-n0U">
                                 <rect key="frame" x="209" y="285" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="seat1Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="Oms-gw-7nx"/>
-                                    <action selector="seat2Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="Ilq-6e-90J"/>
-                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y7l-p0-L9h">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y7l-p0-L9h">
                                 <rect key="frame" x="132" y="364" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="seat1Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="KNa-P8-lD4"/>
-                                    <action selector="seat3Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="Lqc-bF-ZRm"/>
+                                    <action selector="clickedPlate:" destination="K8s-PV-joo" eventType="touchUpInside" id="wvE-uu-pUl"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dvN-ma-h4s">
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dvN-ma-h4s">
                                 <rect key="frame" x="209" y="362" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="seat1Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="qwL-Nt-ykw"/>
-                                    <action selector="seat4Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="wnP-b2-zTK"/>
+                                    <action selector="clickedPlate:" destination="K8s-PV-joo" eventType="touchUpInside" id="xck-pJ-WGg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TDg-Hk-mcR">
+                            <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TDg-Hk-mcR">
                                 <rect key="frame" x="133" y="445" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="seat1Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="zx8-G2-jVf"/>
-                                    <action selector="seat5Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="1Km-lh-Jjy"/>
+                                    <action selector="clickedPlate:" destination="K8s-PV-joo" eventType="touchUpInside" id="j8N-zu-rKi"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jUj-Ob-wbx">
+                            <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jUj-Ob-wbx">
                                 <rect key="frame" x="209" y="445" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="seat1Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="fsN-Ug-dj3"/>
-                                    <action selector="seat6Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="kRf-Vg-T4E"/>
+                                    <action selector="clickedPlate:" destination="K8s-PV-joo" eventType="touchUpInside" id="5fu-XC-JW8"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fky-eF-lzp">
+                            <button opaque="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fky-eF-lzp">
                                 <rect key="frame" x="133" y="526" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="seat1Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="L7M-pW-30d"/>
-                                    <action selector="seat7Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="n2m-uF-utV"/>
+                                    <action selector="clickedPlate:" destination="K8s-PV-joo" eventType="touchUpInside" id="X7D-V3-JdX"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qqq-ep-7f4">
+                            <button opaque="NO" tag="7" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qqq-ep-7f4">
                                 <rect key="frame" x="209" y="526" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="seat1Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="XjB-iJ-erv"/>
-                                    <action selector="seat8Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="EjA-fV-2to"/>
+                                    <action selector="clickedPlate:" destination="K8s-PV-joo" eventType="touchUpInside" id="pee-i2-OZT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8MG-qh-ihi">
+                            <button opaque="NO" tag="8" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8MG-qh-ihi">
                                 <rect key="frame" x="133" y="607" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="seat1Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="NRh-uM-8D5"/>
-                                    <action selector="seat9Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="PRG-jN-Jg9"/>
+                                    <action selector="clickedPlate:" destination="K8s-PV-joo" eventType="touchUpInside" id="ZIk-BI-Oo6"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jlK-dc-EB9">
+                            <button opaque="NO" tag="9" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jlK-dc-EB9">
                                 <rect key="frame" x="209" y="607" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="seat10Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="ycm-XN-f4U"/>
-                                    <action selector="seat1Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="Hrv-iR-Li6"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9JZ-XX-gBh">
-                                <rect key="frame" x="214" y="285" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="seat1Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="OFP-KR-tBI"/>
-                                    <action selector="seat2Pressed:" destination="K8s-PV-joo" eventType="touchUpInside" id="XFe-MD-aTQ"/>
+                                    <action selector="clickedPlate:" destination="K8s-PV-joo" eventType="touchUpInside" id="EIE-hW-Fqp"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w9W-nm-Iw4">
@@ -588,20 +568,20 @@
                     <navigationItem key="navigationItem" id="i47-qy-2ig"/>
                     <connections>
                         <outlet property="groupNameBtn" destination="A3f-Cz-77e" id="4Am-Fj-BZK"/>
-                        <outlet property="imageSeat1" destination="Uh6-An-9Dz" id="I3X-ZB-z3J"/>
-                        <outlet property="imageSeat10" destination="w9W-nm-Iw4" id="n5n-wJ-omr"/>
-                        <outlet property="imageSeat2" destination="VhA-YB-L5S" id="obH-YE-29m"/>
-                        <outlet property="imageSeat3" destination="2RL-yD-DXB" id="GmB-f2-vst"/>
-                        <outlet property="imageSeat4" destination="Do7-UI-MUz" id="Tgl-9y-ZHP"/>
-                        <outlet property="imageSeat5" destination="pfU-XS-rNn" id="yEh-Sf-dgq"/>
-                        <outlet property="imageSeat6" destination="4Px-A9-EmA" id="nEU-CM-PdY"/>
-                        <outlet property="imageSeat7" destination="z9k-Fe-f1t" id="Y2d-Ij-cex"/>
-                        <outlet property="imageSeat8" destination="Yqd-uu-C2G" id="j1v-CO-QEe"/>
-                        <outlet property="imageSeat9" destination="Lnw-uS-UF9" id="4tt-LD-MCT"/>
                         <outlet property="nextDateBtn" destination="MBr-07-nZa" id="fOE-Ca-0WS"/>
                         <outlet property="noDateBtn" destination="EMZ-Nt-yFs" id="cRo-b6-OD7"/>
                         <outlet property="noGroupBtn" destination="oaM-HD-rud" id="AIh-ad-65Z"/>
                         <outlet property="pfPicture" destination="hdy-yn-zlA" id="dMg-yO-NJb"/>
+                        <outletCollection property="plates" destination="Uh6-An-9Dz" collectionClass="NSMutableArray" id="jBu-Np-MHO"/>
+                        <outletCollection property="plates" destination="VhA-YB-L5S" collectionClass="NSMutableArray" id="MhM-VT-kCb"/>
+                        <outletCollection property="plates" destination="2RL-yD-DXB" collectionClass="NSMutableArray" id="JrH-aE-cQL"/>
+                        <outletCollection property="plates" destination="Do7-UI-MUz" collectionClass="NSMutableArray" id="tiD-a0-C9T"/>
+                        <outletCollection property="plates" destination="pfU-XS-rNn" collectionClass="NSMutableArray" id="anf-kY-aDW"/>
+                        <outletCollection property="plates" destination="4Px-A9-EmA" collectionClass="NSMutableArray" id="Mv8-G7-wMR"/>
+                        <outletCollection property="plates" destination="z9k-Fe-f1t" collectionClass="NSMutableArray" id="0vU-sK-ibi"/>
+                        <outletCollection property="plates" destination="Yqd-uu-C2G" collectionClass="NSMutableArray" id="4Ed-S9-SbF"/>
+                        <outletCollection property="plates" destination="Lnw-uS-UF9" collectionClass="NSMutableArray" id="mTT-wl-5VR"/>
+                        <outletCollection property="plates" destination="w9W-nm-Iw4" collectionClass="NSMutableArray" id="KrM-OU-qRn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GNv-C1-dPb" userLabel="First Responder" sceneMemberID="firstResponder"/>
