@@ -38,7 +38,7 @@ class HoofdmenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableSetting = [""]
         noGroupBtn.isHidden = true
 
         ref = FIRDatabase.database().reference()
@@ -94,7 +94,6 @@ class HoofdmenuViewController: UIViewController {
                 self.groupNameBtn.isHidden = true
                 self.noGroupBtn.isHidden = false
             }
-            
         })
     }
 
@@ -172,25 +171,9 @@ class HoofdmenuViewController: UIViewController {
         
         let userID = FIRAuth.auth()?.currentUser?.uid
         if tableSetting.isEmpty == false {
+            
             if self.tableSetting[seat] == "" {
-                
-                if self.tableSetting.contains(self.pfURL) {
-                    self.signupErrorAlert(title: "Oops!", message: "You allready have a seat at the table!")
-                    return
-                }
-                
-                self.tableSetting[seat] = self.pfURL
-                
-                self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    let groupID = snapshot.value as? String
-                    
-                    if groupID != nil {
-                        print ("table setting changed: ", self.tableSetting)
-                        self.ref?.child("groups").child(groupID!).child("tableSetting").setValue(self.tableSetting)
-                        self.displayOwnPicture(seat: seat)
-                    }
-                })
+                self.seatClickedEmpty(seat: seat)
                 
             } else if self.tableSetting[seat] == self.pfURL {
                 self.tableSetting[seat] = ""
@@ -202,14 +185,33 @@ class HoofdmenuViewController: UIViewController {
                     if groupID != nil {
                         self.ref?.child("groups").child(groupID!).child("tableSetting").setValue(self.tableSetting)
                         self.emptyOwnPicture(seat: seat)
-                        
                     }
                 })
-            } else if self.tableSetting[seat] != "" && self.tableSetting[seat] != self.pfURL && self.tableSetting.contains(self.pfURL) == false{
+            } else if self.tableSetting[seat] != "" && self.tableSetting[seat] != self.pfURL {
                 //self.signupErrorAlert(title: "Oops!", message: "Pick an empty seat.")
             }
         }
 
+    }
+    
+    func seatClickedEmpty(seat: Int) {
+        
+        if self.tableSetting.contains(self.pfURL) {
+            
+            self.signupErrorAlert(title: "Oops!", message: "You allready have a seat at the table!")
+        } else {
+            self.tableSetting[seat] = self.pfURL
+            
+            self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                let groupID = snapshot.value as? String
+                
+                if groupID != nil {
+                    self.ref?.child("groups").child(groupID!).child("tableSetting").setValue(self.tableSetting)
+                    self.filInTable()
+                }
+            })
+        }
     }
     
     func displayOwnPicture(seat: Int) {

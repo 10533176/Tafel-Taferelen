@@ -100,11 +100,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
                         self.groupEmails.append(email)
 
                         if self.groupEmails.count == tempKeys.count {
-                            if self.groupEmails.contains(self.newGroupMember.text!) == false {
-                                self.doneLoading()
-                                self.signupErrorAlert(title: "Oops!", message: "We do not have any users with this e-mail address")
-                                
-                            }
+                            self.newUserNotFound()
                         }
                         if email == self.newGroupMember.text {
                             self.newUserFound(newUserID: keys)
@@ -113,6 +109,13 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             }
         })
+    }
+    
+    func newUserNotFound() {
+        if self.groupEmails.contains(newGroupMember.text!) == false {
+            self.doneLoading()
+            self.signupErrorAlert(title: "Oops!", message: "We do not have any users with this e-mail address")
+        }
     }
     
     func newUserFound(newUserID: String) {
