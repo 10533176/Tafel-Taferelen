@@ -19,6 +19,7 @@
 		EF1475141E2E645200B387FB /* DinnerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1475131E2E645200B387FB /* DinnerInfoViewController.swift */; };
 		EF806DE21E30D5D7000EE2E7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF806DE11E30D5D7000EE2E7 /* SettingsViewController.swift */; };
 		EF9C69891E361B5800A7A288 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF9C69881E361B5800A7A288 /* Main.storyboard */; };
+		EFAE3B891E409844007ECDF0 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAE3B881E409844007ECDF0 /* Extension.swift */; };
 		EFC34A731E24F5EA00B35706 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC34A721E24F5EA00B35706 /* AppDelegate.swift */; };
 		EFC34A751E24F5EA00B35706 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC34A741E24F5EA00B35706 /* LoginViewController.swift */; };
 		EFC34A7A1E24F5EA00B35706 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFC34A791E24F5EA00B35706 /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 		EF1475131E2E645200B387FB /* DinnerInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DinnerInfoViewController.swift; sourceTree = "<group>"; };
 		EF806DE11E30D5D7000EE2E7 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		EF9C69881E361B5800A7A288 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		EFAE3B881E409844007ECDF0 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		EFC34A6F1E24F5EA00B35706 /* Tafel Taferelen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tafel Taferelen.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFC34A721E24F5EA00B35706 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFC34A741E24F5EA00B35706 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				EF14750B1E2CD76400B387FB /* GroupsViewController.swift */,
 				EF1475111E2E0E9C00B387FB /* GroupsTableViewCell.swift */,
 				EF00F0751E28DF15009668FC /* HoofdmenuViewController.swift */,
+				EFAE3B881E409844007ECDF0 /* Extension.swift */,
 				EF1475131E2E645200B387FB /* DinnerInfoViewController.swift */,
 				EFC34A7B1E24F5EA00B35706 /* LaunchScreen.storyboard */,
 				EFC34A7E1E24F5EA00B35706 /* Info.plist */,
@@ -252,6 +255,7 @@
 				EF1475101E2D29FC00B387FB /* NewGroupTableViewCell.swift in Sources */,
 				EF0B79631E37E3E5007A8CCD /* FirstLaunchViewController.swift in Sources */,
 				EF00F0701E250833009668FC /* SignupViewController.swift in Sources */,
+				EFAE3B891E409844007ECDF0 /* Extension.swift in Sources */,
 				EF1475141E2E645200B387FB /* DinnerInfoViewController.swift in Sources */,
 				EFC34A751E24F5EA00B35706 /* LoginViewController.swift in Sources */,
 				EFC34A731E24F5EA00B35706 /* AppDelegate.swift in Sources */,

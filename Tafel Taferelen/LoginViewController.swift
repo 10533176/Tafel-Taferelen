@@ -59,16 +59,5 @@ class LoginViewController: UIViewController {
         })
     }
     
-    
-    func signupErrorAlert(title: String, message: String) {
-        
-        // Called upon signup error to let the user know signup didn't work.
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
-    }
-
 }
 

@@ -19,16 +19,7 @@ class FirstLaunchViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
         
             if appLaunchedBefore == true {
-                FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-                    if user != nil {
-                        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "userVC")
-                        self.present(vc, animated: true, completion: nil)
-                    } else {
-                        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "logIn")
-                        self.present(vc, animated: true, completion: nil)
-                    }
-                }
-
+                self.userAllreadyLoggedIn()
             } else {
                 let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introPage")
                 self.present(vc, animated: true, completion: nil)
@@ -40,13 +31,26 @@ class FirstLaunchViewController: UIViewController {
         let defaults = UserDefaults.standard
         
         if defaults.string(forKey: "isAppAlreadyLaunchedOnce") != nil{
-
             return true
         }else{
             defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
             return false
         }
     }
+    
+    func userAllreadyLoggedIn() {
+        
+        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+            if user != nil {
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "userVC")
+                self.present(vc, animated: true, completion: nil)
+            } else {
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "logIn")
+                self.present(vc, animated: true, completion: nil)
+            }
+        }
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

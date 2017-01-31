@@ -30,7 +30,6 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
 
         picker.delegate = self
         
-        
         let storage = FIRStorage.storage().reference(forURL: "gs://tafel-taferelen.appspot.com")
         
         ref = FIRDatabase.database().reference()
@@ -51,7 +50,6 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         picker.allowsEditing = true
         picker.sourceType = .photoLibrary
-        
         present(picker, animated: true, completion: nil)
         
     }
@@ -66,8 +64,6 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.dismiss(animated: true, completion: nil)
         
     }
-    
-    
 
     @IBAction func nextPressed(_ sender: Any) {
         
@@ -82,49 +78,7 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
                 }
                 
                 if let user = user {
-                    
-                    let changeRequest = FIRAuth.auth()!.currentUser!.profileChangeRequest()
-                    changeRequest.displayName = self.nameField.text!
-                    changeRequest.commitChanges(completion: nil)
-                    
-                    let imageRef = self.userStorage.child("\(user.uid).jpg")
-                    let data = UIImageJPEGRepresentation(self.imageView.image!, 0.5)
-                    
-                    let uploadTask = imageRef.put(data!, metadata: nil, completion: { (metadata, err) in
-                        if err != nil {
-                            print("bloebloebloe")
-                            print (err!.localizedDescription)
-                            self.signupErrorAlert(title: "Oops!", message: err!.localizedDescription)
-                            
-                        }
-                        
-                        imageRef.downloadURL(completion: {(url, er) in
-                            if er != nil {
-                                print(er!.localizedDescription)
-                                self.signupErrorAlert(title: "Oops!", message: er!.localizedDescription)
-                            }
-                            
-                            if let url = url {
-                                let userInfo: [String : Any] = ["uid" : user.uid,
-                                                                "full name" : self.nameField.text!,
-                                                                "email" : self.emailField.text!,
-                                                                "urlToImage" : url.absoluteString]
-                                self.ref.child("users").child(user.uid).setValue(userInfo)
-                                
-                                
-                                self.ref.child("emailDB").child(user.uid).setValue(self.emailField.text!)
-                                
-
-                                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "userVC")
-                                
-                                self.present(vc, animated: true, completion: nil)
-                                print ("loopt die doorheen")
-                            }
-            
-                        })
-                    })
-                    
-                    uploadTask.resume()
+                    self.saveUserInDB(userID: user.uid)
             }
         })
             
@@ -133,15 +87,48 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
     }
     
-    
-    func signupErrorAlert(title: String, message: String) {
+    func saveUserInDB(userID: String) {
         
-        // Called upon signup error to let the user know signup didn't work.
+        let changeRequest = FIRAuth.auth()!.currentUser!.profileChangeRequest()
+        changeRequest.displayName = self.nameField.text!
+        changeRequest.commitChanges(completion: nil)
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
+        let imageRef = self.userStorage.child("\(userID).jpg")
+        let data = UIImageJPEGRepresentation(self.imageView.image!, 0.5)
+        
+        let uploadTask = imageRef.put(data!, metadata: nil, completion: { (metadata, err) in
+            if err != nil {
+                self.signupErrorAlert(title: "Oops!", message: err!.localizedDescription)
+                
+            }
+            
+            imageRef.downloadURL(completion: {(url, er) in
+                if er != nil {
+                    self.signupErrorAlert(title: "Oops!", message: er!.localizedDescription)
+                }
+                
+                if let url = url {
+                    let userInfo: [String : Any] = ["uid" : userID,
+                                                    "full name" : self.nameField.text!,
+                                                    "email" : self.emailField.text!,
+                                                    "urlToImage" : url.absoluteString]
+                    self.ref.child("users").child(userID).setValue(userInfo)
+                    
+                    
+                    self.ref.child("emailDB").child(userID).setValue(self.emailField.text!)
+                    
+                    
+                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "userVC")
+                    
+                    self.present(vc, animated: true, completion: nil)
+                    print ("loopt die doorheen")
+                }
+                
+            })
+        })
+        
+        uploadTask.resume()
+
     }
 
 }

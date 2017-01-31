@@ -137,7 +137,6 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
         
     }
     
-
     
     @IBAction func didBeginChatting(_ sender: Any) {
 
@@ -146,7 +145,6 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
                 self.view.frame.origin.y -= keyboardSize.height
             }
         }
-        
     }
     
     @IBAction func didEndChatting(_ sender: Any) {
@@ -315,7 +313,7 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
                     
                 })
             } else {
-                self.noGroupErrorAlert(title: "Oops", message: "Join or create a dinner group to pick a date for the dinner!")
+                self.signupErrorAlert(title: "Oops", message: "Join or create a dinner group to pick a date for the dinner!")
             }
         })
     }
@@ -365,29 +363,6 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
                 completion?(false, error as NSError?)
             }
         })
-    }
-    
-    func signupErrorAlert(title: String, message: String) {
-        
-        // Called upon signup error to let the user know signup didn't work.
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func noGroupErrorAlert(title: String, message: String) {
-        
-        // Called upon when user is not in a group
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let action = UIAlertAction(title: "Ok", style: .default, handler: { action in
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "userVC")
-            self.present(vc, animated: true, completion: nil)
-        })
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
     }
 
 }

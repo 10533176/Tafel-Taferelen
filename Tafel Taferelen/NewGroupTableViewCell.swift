@@ -15,9 +15,7 @@ class NewGroupTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         
-        
         super.awakeFromNib()
-        // Initialization code
         
         self.newGroupMemberProfPic.layer.cornerRadius = self.newGroupMemberProfPic.frame.size.width / 2
         self.newGroupMemberProfPic.clipsToBounds = true

@@ -14,12 +14,11 @@ class HoofdmenuViewController: UIViewController {
 
     @IBOutlet weak var pfPicture: UIImageView!
     @IBOutlet weak var nextDateBtn: UIButton!
-    
     @IBOutlet weak var groupNameBtn: UIButton!
     @IBOutlet weak var noGroupBtn: UIButton!
     @IBOutlet weak var noDateBtn: UIButton!
+    
     @IBOutlet weak var imageSeat1: UIImageView!
-    @IBOutlet weak var btnSeat1: UIButton!
     @IBOutlet weak var imageSeat2: UIImageView!
     @IBOutlet weak var imageSeat3: UIImageView!
     @IBOutlet weak var imageSeat4: UIImageView!
@@ -31,10 +30,10 @@ class HoofdmenuViewController: UIViewController {
     @IBOutlet weak var imageSeat10: UIImageView!
 
     var ref: FIRDatabaseReference!
-    var fullName = String()
     var tableSetting = [String]()
     var pfURL = String()
     var nameOfPicture = UIImageView()
+    let userID = FIRAuth.auth()?.currentUser?.uid
     
 
     override func viewDidLoad() {
@@ -44,11 +43,25 @@ class HoofdmenuViewController: UIViewController {
 
         ref = FIRDatabase.database().reference()
         
-        let userID = FIRAuth.auth()?.currentUser?.uid
-
+        loadProfilePicture()
+        getGroupInfo()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        viewDidLoad()
+    }
+    
+    // MARK: Loading the user and group info to display 
+    
+    func loadProfilePicture() {
         
         ref?.child("users").child(userID!).child("urlToImage").observeSingleEvent(of: .value, with: { (snapshot) in
-
+            
             let urlImage = snapshot.value as? String
             
             if urlImage != nil {
@@ -60,75 +73,68 @@ class HoofdmenuViewController: UIViewController {
                     }
                 }
             }
-
         })
         
-        self.ref?.child("users").child(userID!).child("full name").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            self.fullName = snapshot.value as! String
-        })
-        
+        self.pfPicture.layer.cornerRadius = self.pfPicture.frame.size.width / 2
+        self.pfPicture.clipsToBounds = true
+    }
+    
+    func getGroupInfo() {
         
         self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
             
             let groupID = snapshot.value as? String
             
             if groupID != nil {
-
-                self.ref?.child("groups").child(groupID!).child("name").observeSingleEvent(of: .value, with: { (snapshot) in
-                    let groupName = snapshot.value as! String
-                    print ("GROUPSNAME: ", groupName)
-                    self.groupNameBtn.setTitle(groupName, for: .normal)
-                    self.groupNameBtn.titleLabel!.font =  UIFont(name: "HelveticaNeue-Regular", size: 22)
-                    self.groupNameBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
-                    self.groupNameBtn.contentHorizontalAlignment = .left
-
-
-                })
+                self.getGroupName(groupID: groupID!)
+                self.getGroupDate(groupID: groupID!)
+                self.getTableSetting(groupID: groupID!)
                 
-                self.ref?.child("groups").child(groupID!).child("date").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-                    let date = snapshot.value as? String
-                    if date != nil {
-                        self.noDateBtn.isHidden = true
-                        self.nextDateBtn.setTitle(date, for: .normal)
-                        self.nextDateBtn.titleLabel!.font =  UIFont(name: "HelveticaNeue-Regular", size: 16)
-                        self.nextDateBtn.setTitleColor(UIColor.black, for: UIControlState.normal)
-                    }
-                })
-                    
-                self.ref?.child("groups").child(groupID!).child("tableSetting").observeSingleEvent(of: .value, with: { (snapshot) in
-                        
-                    let table = snapshot.value as? [String]
-                    if table != nil {
-                        self.tableSetting = table!
-                        self.filInTable()
-                    }
-                })
             } else {
                 self.groupNameBtn.isHidden = true
                 self.noGroupBtn.isHidden = false
             }
-
+            
         })
-        
-        self.pfPicture.layer.cornerRadius = self.pfPicture.frame.size.width / 2
-        self.pfPicture.clipsToBounds = true
+    }
 
+    func getGroupName(groupID: String) {
+        
+        self.ref?.child("groups").child(groupID).child("name").observeSingleEvent(of: .value, with: { (snapshot) in
+            let groupName = snapshot.value as! String
+            self.groupNameBtn.setTitle(groupName, for: .normal)
+            self.groupNameBtn.titleLabel!.font =  UIFont(name: "HelveticaNeue-Regular", size: 22)
+            self.groupNameBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
+            self.groupNameBtn.contentHorizontalAlignment = .left
+        })
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        viewDidLoad()
+    func getGroupDate(groupID: String) {
+        
+        self.ref?.child("groups").child(groupID).child("date").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let date = snapshot.value as? String
+            if date != nil {
+                self.noDateBtn.isHidden = true
+                self.nextDateBtn.setTitle(date, for: .normal)
+                self.nextDateBtn.titleLabel!.font =  UIFont(name: "HelveticaNeue-Regular", size: 16)
+                self.nextDateBtn.setTitleColor(UIColor.black, for: UIControlState.normal)
+            }
+        })
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func getTableSetting(groupID: String) {
+        
+        self.ref?.child("groups").child(groupID).child("tableSetting").observeSingleEvent(of: .value, with: { (snapshot) in
+            let table = snapshot.value as? [String]
+            if table != nil {
+                self.tableSetting = table!
+                self.filInTable()
+            }
+        })
     }
     
-    func doneLoading() {
-        AppDelegate.instance().dismissActivityIndicator()
-    }
+    // MARK: enabeling user to pick a seat at the table or remove current seat 
     
     @IBAction func seat1Pressed(_ sender: Any) {
         saveSeat(seat: 0)
@@ -304,11 +310,8 @@ class HoofdmenuViewController: UIViewController {
     func filInTable() {
         
         for key in tableSetting {
-
             if key != "" {
-
                 if let url = NSURL(string: key) {
-
                     
                     if let data = NSData(contentsOf: url as URL) {
                         
@@ -366,16 +369,6 @@ class HoofdmenuViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    func signupErrorAlert(title: String, message: String) {
-        
-        // Called upon signup error to let the user know signup didn't work.
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
     }
     
 }

@@ -24,8 +24,6 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
     var memberProfpic = [String]()
     var groupEmails = [String]()
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,6 +41,9 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    // MARK: Function to hide and show keyboard
     
     func keyboardWillShow(notification: NSNotification) {
         
@@ -62,14 +63,13 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    // MARK: Functions to create a new group 
+    
     @IBAction func newGroupMemberAdded(_ sender: Any) {
-        
         if newGroupMember.text != " " {
             if memberIDs.count < 11 {
-                
                 AppDelegate.instance().showActivityIndicator()
                 userAllreadyinGroup()
-                
             } else {
                self.signupErrorAlert(title: "Oops!", message: "Maximum of ten members in group is reached")
             }
@@ -78,68 +78,12 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return memberNames.count
-    }
-    
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! NewGroupTableViewCell
-        cell.newGroupMemberDisplay.text = self.memberNames[indexPath.row]
-        
-        if let url = NSURL(string: self.memberProfpic[indexPath.row]) {
-            
-            if let data = NSData(contentsOf: url as URL) {
-                cell.newGroupMemberProfPic.image = UIImage(data: data as Data)
-            }
-        }
-        return cell
-    }
-    
     func doneLoading() {
         AppDelegate.instance().dismissActivityIndicator()
     }
     
-    @IBAction func createNewGroupPressed(_ sender: Any) {
-        
-        let groupID = self.ref?.child("groups").childByAutoId().key
-        
-        if groupsName.text != "" {
-            self.ref?.child("groups").child(groupID!).child("name").setValue(groupsName.text)
-            saveCurrentUserAsNewMember(groupID: groupID!)
-            self.noGroupErrorAlert(title: "Yaay!", message: "welcome to the culb \(groupsName.text!)")
-        }
-        else {
-            self.signupErrorAlert(title: "Oops!", message: "You forgot to fill in a groupsname")
-        }
-    }
-    
-    func saveCurrentUserAsNewMember(groupID: String) {
-        let userID = FIRAuth.auth()?.currentUser?.uid
-        
-        self.ref?.child("users").child(userID!).child("email").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            let emailCurrentUser = snapshot.value as! String
-            print ("JA EMAIL ARRAY: ", self.memberEmails)
-            self.memberEmails.append(emailCurrentUser)
-            self.memberIDs.append(userID!)
-            
-            self.ref?.child("groups").child(groupID).child("members").child("email").setValue(self.memberEmails)
-            self.ref?.child("groups").child(groupID).child("members").child("userid").setValue(self.memberIDs)
-            let tableSetting = ["", "", "", "", "", "", "", "", "", ""]
-            self.ref?.child("groups").child(groupID).child("tableSetting").setValue(tableSetting)
-            
-            for keys in self.memberIDs {
-                print("keys: ", keys)
-                self.ref?.child("users").child(keys).child("groupID").setValue(groupID)
-            }
-            
-        })
-    }
-    
     func userAllreadyinGroup() {
-        
+        self.groupEmails = [""]
         self.ref?.child("emailDB").observeSingleEvent(of: .value, with: { (snapshot) in
             
             let dictionary = snapshot.value as? NSDictionary
@@ -154,7 +98,9 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
                         let email = snapshot.value as! String
                         
                         self.groupEmails.append(email)
-                        
+                        print ("email array is: ", self.groupEmails)
+                        print ("emailarray count: ", self.groupEmails.count)
+                        print ("firebase count : ", tempKeys.count)
                         if self.groupEmails.count == tempKeys.count {
                             if self.groupEmails.contains(self.newGroupMember.text!) == false {
                                 self.doneLoading()
@@ -188,25 +134,25 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
     func displayNewMember() {
         
         self.ref?.child("emailDB").observeSingleEvent(of: .value, with: { (snapshot) in
-                
+            
             let dictionary = snapshot.value as? NSDictionary
-                
+            
             if dictionary != nil {
                 let tempKeys = dictionary?.allKeys as! [String]
-                    
+                
                 for keys in tempKeys {
-                        
+                    
                     self.ref?.child("emailDB").child(keys).observeSingleEvent(of: .value, with: { (snapshot) in
-                            
+                        
                         let email = snapshot.value as! String
-                            
+                        
                         if email == self.newGroupMember.text {
                             
                             self.ref?.child("users").child(keys).child("full name").observeSingleEvent(of: .value, with: {(snapshot) in
                                 let name = snapshot.value as! String
                                 self.memberNames.append(name)
                             })
-                                
+                            
                             self.ref?.child("users").child(keys).child("urlToImage").observeSingleEvent(of: .value, with: {(snapshot) in
                                 let url = snapshot.value as! String
                                 self.memberProfpic.append(url)
@@ -227,27 +173,59 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         })
     }
     
-    func signupErrorAlert(title: String, message: String) {
+    @IBAction func createNewGroupPressed(_ sender: Any) {
         
-        // Called upon signup error to let the user know signup didn't work.
+        let groupID = self.ref?.child("groups").childByAutoId().key
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
+        if groupsName.text != "" {
+            self.ref?.child("groups").child(groupID!).child("name").setValue(groupsName.text)
+            saveCurrentUserAsNewMember(groupID: groupID!)
+            self.noGroupErrorAlert(title: "Yaay!", message: "welcome to the culb \(groupsName.text!)")
+        }
+        else {
+            self.signupErrorAlert(title: "Oops!", message: "You forgot to fill in a groupsname")
+        }
     }
     
-    func noGroupErrorAlert(title: String, message: String) {
+    func saveCurrentUserAsNewMember(groupID: String) {
+        let userID = FIRAuth.auth()?.currentUser?.uid
         
-        // Called upon signup error to let the user know signup didn't work.
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let action = UIAlertAction(title: "Ok", style: .default, handler: { action in
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "userVC")
-            self.present(vc, animated: true, completion: nil)
+        self.ref?.child("users").child(userID!).child("email").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let emailCurrentUser = snapshot.value as! String
+            self.memberEmails.append(emailCurrentUser)
+            self.memberIDs.append(userID!)
+            
+            self.ref?.child("groups").child(groupID).child("members").child("email").setValue(self.memberEmails)
+            self.ref?.child("groups").child(groupID).child("members").child("userid").setValue(self.memberIDs)
+            let tableSetting = ["", "", "", "", "", "", "", "", "", ""]
+            self.ref?.child("groups").child(groupID).child("tableSetting").setValue(tableSetting)
+            
+            for keys in self.memberIDs {
+                print("keys: ", keys)
+                self.ref?.child("users").child(keys).child("groupID").setValue(groupID)
+            }
+            
         })
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
+    }
+
+    // MARK: functions to show table view properly
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return memberNames.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! NewGroupTableViewCell
+        cell.newGroupMemberDisplay.text = self.memberNames[indexPath.row]
+        
+        if let url = NSURL(string: self.memberProfpic[indexPath.row]) {
+            
+            if let data = NSData(contentsOf: url as URL) {
+                cell.newGroupMemberProfPic.image = UIImage(data: data as Data)
+            }
+        }
+        return cell
     }
 
 }

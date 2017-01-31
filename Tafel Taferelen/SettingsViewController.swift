@@ -15,21 +15,24 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     var ref: FIRDatabaseReference!
     let picker = UIImagePickerController()
     var userStorage: FIRStorageReference!
-
+    let userID = FIRAuth.auth()?.currentUser?.uid
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.isTranslucent = true
-        
         ref = FIRDatabase.database().reference()
         let storage = FIRStorage.storage().reference(forURL: "gs://tafel-taferelen.appspot.com")
-        
         userStorage = storage.child("users")
-        
-        let userID = FIRAuth.auth()?.currentUser?.uid
-        
         picker.delegate = self
+        displayCurrentProfilePicture()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func displayCurrentProfilePicture() {
         
         ref?.child("users").child(userID!).child("urlToImage").observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -47,11 +50,7 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         self.imageProfPic.layer.cornerRadius = self.imageProfPic.frame.size.width / 2
         self.imageProfPic.clipsToBounds = true
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    
     @IBAction func changeProfPic(_ sender: Any) {
         
         picker.allowsEditing = true
@@ -85,15 +84,12 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         
         let uploadTask = imageRef.put(data!, metadata: nil, completion: { (metadata, err) in
             if err != nil {
-                print("bloebloebloe")
-                print (err!.localizedDescription)
                 self.signupErrorAlert(title: "Oops!", message: err!.localizedDescription)
                 
             }
             
             imageRef.downloadURL(completion: {(url, er) in
                 if er != nil {
-                    print(er!.localizedDescription)
                     self.signupErrorAlert(title: "Oops!", message: er!.localizedDescription)
                 }
                 
@@ -121,7 +117,7 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func changeProfileTable(url: String, newURL: String) {
-        let userID = FIRAuth.auth()?.currentUser?.uid
+        
         self.ref.child("users").child(userID!).child("urlToImage").setValue(newURL)
         
         self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -133,16 +129,12 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
                 self.ref?.child("groups").child(groupID!).child("tableSetting").observeSingleEvent(of: .value, with: { (snapshot) in
             
                     var table = snapshot.value as? [String]
-                    print ("table is now: ", table)
                     var index = 0
                     if table != nil {
                         for key in table! {
-                            print ("key is", key)
-                            print ("url is", url)
                             if key == url {
                                 table?[index] = newURL
                                 self.ref?.child("groups").child(groupID!).child("tableSetting").setValue(table)
-                                print ("new table:", table)
                             }
                             index = index + 1
                         }
@@ -155,9 +147,7 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBAction func loggingOUT(_ sender: Any) {
         let firebaseAuth = FIRAuth.auth()
         do {
-            
             try firebaseAuth?.signOut()
-            
             present( UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "logIn") as UIViewController, animated: true, completion: nil)
         
         } catch {
@@ -166,14 +156,4 @@ class SettingsViewController: UIViewController, UIImagePickerControllerDelegate,
         
     }
     
-
-    func signupErrorAlert(title: String, message: String) {
-        
-        // Called upon signup error to let the user know signup didn't work.
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
-    }
 }
