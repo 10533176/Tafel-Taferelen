@@ -207,7 +207,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
     @IBAction func addNewMemberPressed(_ sender: Any) {
         
         if newEmailField.text != " "  {
-            self.userInGroup()
+            self.findNewUser()
             AppDelegate.instance().showActivityIndicator()
         } else {
             self.signupErrorAlert(title: "Oops!", message: "Fill in an emailadress to add a new member.")
@@ -215,7 +215,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     
-    func userInGroup() {
+    func findNewUser() {
         
         self.groupEmails = [""]
         self.ref?.child("emailDB").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -226,7 +226,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                 let tempKeys = dictionary?.allKeys as! [String]
                 
                 for keys in tempKeys {
-                    print ("keys: ", keys)
+
                     self.ref?.child("emailDB").child(keys).observeSingleEvent(of: .value, with: { (snapshot) in
                         
                         let email = snapshot.value as! String
@@ -234,32 +234,39 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                         self.groupEmails.append(email)
                         
                         if self.groupEmails.count == tempKeys.count {
-                            if self.groupEmails.contains(self.newEmailField.text!) == false {
-                                self.doneLoading()
-                                self.signupErrorAlert(title: "Oops!", message: "We do not have any users with this e-mail address")
-
-                            }
+                            self.NewUserNotFound()
                         }
                         
                         if email == self.newEmailField.text {
-                            
-                            self.ref?.child("users").child(keys).child("groupID").observeSingleEvent(of: .value, with: {(snapshot) in
-                                
-                                let checkCurrentGroup = snapshot.value as? String
-                                
-                                if checkCurrentGroup == nil {
-                                    self.newMemberAddedToGroup(newUserID: keys)
-                                }
-                                else {
-                                    self.doneLoading()
-                                    self.signupErrorAlert(title: "Oops!", message: "This member is allready in another group. Try to find other friends!")
-                                }
-                            })
+                            self.isNewUserInGroup(newUserID: keys)
                         }
                     })
                 }
             }
         })
+    }
+    
+    func NewUserNotFound() {
+        if self.groupEmails.contains(self.newEmailField.text!) == false {
+            self.doneLoading()
+            self.signupErrorAlert(title: "Oops!", message: "We do not have any users with this e-mail address")
+        }
+    }
+    
+    func isNewUserInGroup(newUserID: String){
+        self.ref?.child("users").child(newUserID).child("groupID").observeSingleEvent(of: .value, with: {(snapshot) in
+            
+            let checkCurrentGroup = snapshot.value as? String
+            
+            if checkCurrentGroup == nil {
+                self.newMemberAddedToGroup(newUserID: newUserID)
+            }
+            else {
+                self.doneLoading()
+                self.signupErrorAlert(title: "Oops!", message: "This member is allready in another group. Try to find other friends!")
+            }
+        })
+
     }
     
     func newMemberAddedToGroup(newUserID: String) {
