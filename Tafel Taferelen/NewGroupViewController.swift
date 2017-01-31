@@ -63,13 +63,13 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    // MARK: Functions to create a new group 
+    // MARK: Functions to find new member, check if he/ she is not allready in group, if not -> diplaying user information
     
     @IBAction func newGroupMemberAdded(_ sender: Any) {
         if newGroupMember.text != " " {
             if memberIDs.count < 11 {
                 AppDelegate.instance().showActivityIndicator()
-                userAllreadyinGroup()
+                findNewUser()
             } else {
                self.signupErrorAlert(title: "Oops!", message: "Maximum of ten members in group is reached")
             }
@@ -82,7 +82,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         AppDelegate.instance().dismissActivityIndicator()
     }
     
-    func userAllreadyinGroup() {
+    func findNewUser() {
         self.groupEmails = [""]
         self.ref?.child("emailDB").observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -98,9 +98,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
                         let email = snapshot.value as! String
                         
                         self.groupEmails.append(email)
-                        print ("email array is: ", self.groupEmails)
-                        print ("emailarray count: ", self.groupEmails.count)
-                        print ("firebase count : ", tempKeys.count)
+
                         if self.groupEmails.count == tempKeys.count {
                             if self.groupEmails.contains(self.newGroupMember.text!) == false {
                                 self.doneLoading()
@@ -109,21 +107,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
                             }
                         }
                         if email == self.newGroupMember.text {
-                            
-                            self.ref?.child("users").child(keys).child("groupID").observeSingleEvent(of: .value, with: {(snapshot) in
-                                
-                                let checkCurrentGroup = snapshot.value as? String
-                                print ("de check is: ", checkCurrentGroup ?? 0)
-                                
-                                if checkCurrentGroup == nil {
-                                    self.displayNewMember()
-                                }
-                                else {
-                                    self.doneLoading()
-                                    self.signupErrorAlert(title: "Oops, user allready in group!", message: "This member is already having dinner with other friends.. Try if someone else will have dinner with you!")
-                                    self.newGroupMember.text = ""
-                                }
-                            })
+                            self.newUserFound(newUserID: keys)
                         }
                     })
                 }
@@ -131,39 +115,37 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         })
     }
     
-    func displayNewMember() {
+    func newUserFound(newUserID: String) {
+        self.ref?.child("users").child(newUserID).child("groupID").observeSingleEvent(of: .value, with: {(snapshot) in
+            
+            let checkCurrentGroup = snapshot.value as? String
+            
+            if checkCurrentGroup == nil {
+                self.findDataNewUser()
+            }
+            else {
+                self.doneLoading()
+                self.signupErrorAlert(title: "Oops, user allready in group!", message: "This member is already having dinner with other friends.. Try if someone else will have dinner with you!")
+                self.newGroupMember.text = ""
+            }
+        })
+    }
+    
+    func findDataNewUser() {
         
         self.ref?.child("emailDB").observeSingleEvent(of: .value, with: { (snapshot) in
-            
             let dictionary = snapshot.value as? NSDictionary
             
             if dictionary != nil {
                 let tempKeys = dictionary?.allKeys as! [String]
                 
                 for keys in tempKeys {
-                    
                     self.ref?.child("emailDB").child(keys).observeSingleEvent(of: .value, with: { (snapshot) in
                         
                         let email = snapshot.value as! String
                         
                         if email == self.newGroupMember.text {
-                            
-                            self.ref?.child("users").child(keys).child("full name").observeSingleEvent(of: .value, with: {(snapshot) in
-                                let name = snapshot.value as! String
-                                self.memberNames.append(name)
-                            })
-                            
-                            self.ref?.child("users").child(keys).child("urlToImage").observeSingleEvent(of: .value, with: {(snapshot) in
-                                let url = snapshot.value as! String
-                                self.memberProfpic.append(url)
-                                self.tableView.reloadData()
-                            })
-                            
-                            self.doneLoading()
-                            self.memberEmails.append(self.newGroupMember.text!)
-                            self.memberIDs.append(keys)
-                            self.newGroupMember.text = ""
-                            
+                            self.displayNewUser(newUserID: keys)
                         }
                     })
                 }
@@ -171,6 +153,25 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
                 self.doneLoading()
             }
         })
+    }
+    
+    func displayNewUser(newUserID: String) {
+        
+            self.ref?.child("users").child(newUserID).child("full name").observeSingleEvent(of: .value, with: {(snapshot) in
+                let name = snapshot.value as! String
+                self.memberNames.append(name)
+            })
+            
+            self.ref?.child("users").child(newUserID).child("urlToImage").observeSingleEvent(of: .value, with: {(snapshot) in
+                let url = snapshot.value as! String
+                self.memberProfpic.append(url)
+                self.tableView.reloadData()
+            })
+            
+            self.doneLoading()
+            self.memberEmails.append(self.newGroupMember.text!)
+            self.memberIDs.append(newUserID)
+            self.newGroupMember.text = ""
     }
     
     @IBAction func createNewGroupPressed(_ sender: Any) {
@@ -187,6 +188,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    // MARK: Saving new users to DataBase
     func saveCurrentUserAsNewMember(groupID: String) {
         let userID = FIRAuth.auth()?.currentUser?.uid
         
@@ -202,7 +204,6 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
             self.ref?.child("groups").child(groupID).child("tableSetting").setValue(tableSetting)
             
             for keys in self.memberIDs {
-                print("keys: ", keys)
                 self.ref?.child("users").child(keys).child("groupID").setValue(groupID)
             }
             

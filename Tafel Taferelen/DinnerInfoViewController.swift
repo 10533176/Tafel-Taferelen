@@ -283,6 +283,7 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
             
             self.ref?.child("groups").child(groupID).child("chat").child(key).child("userid").observeSingleEvent(of: .value, with: { (snapshot) in
                 let singleUser = snapshot.value as? String
+                
                 if singleUser != nil {
                     self.ref?.child("users").child(singleUser!).child("full name").observeSingleEvent(of: .value, with: { (snapshot) in
                         
@@ -297,6 +298,7 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
+    // MARK: Sending new chat message
     func newChatMes() {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
