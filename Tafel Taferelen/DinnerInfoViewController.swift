@@ -26,6 +26,7 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
     var sender = [String]()
     var chatID = [String]()
     var dinnerDate = NSDate()
+    let userID = FIRAuth.auth()?.currentUser?.uid
     
     var keyboardSizeRect: CGRect?
     var ref: FIRDatabaseReference!
@@ -38,9 +39,18 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
         ref = FIRDatabase.database().reference()
         loadExistingGroupInfo()
         readChat()
-    
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        refreshTableView()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: functions for reloading tableview when dragged down
+    func refreshTableView() {
         if #available(iOS 10.0, *) {
             let refreshControl = UIRefreshControl()
             let title = NSLocalizedString("PullToRefresh", comment: "refresh chat")
@@ -51,95 +61,21 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
             tableView.refreshControl = refreshControl
         }
     }
-    
     @objc private func refreshOptions(sender: UIRefreshControl) {
         readChat()
         sender.endRefreshing()
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+
+    // MARK: functions for properly hide and show keyboard
     func keyboardWillShow(notification: NSNotification) {
         
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            
             self.keyboardSizeRect = keyboardSize
         }
-        
     }
-    
-    @IBAction func locationChanged(_ sender: Any) {
-        let userID = FIRAuth.auth()?.currentUser?.uid
-        let newLocation = locationNextDinnerField.text
-        
-        if newLocation != "" {
-            self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
-                
-                let groupID = snapshot.value as? String
-                
-                if groupID != nil {
-                    self.ref?.child("groups").child(groupID!).child("location").setValue(newLocation)
-                }
-            })
-        }
-    }
-    
-    @IBAction func chefsChanged(_ sender: Any) {
-        let userID = FIRAuth.auth()?.currentUser?.uid
-        let newDate = chefNextDinnerField.text
-        
-        if newDate != "" {
-            self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
-                
-                let groupID = snapshot.value as? String
-                
-                if groupID != nil {
-                    self.ref?.child("groups").child(groupID!).child("chef").setValue(newDate)
-                }
-            })
-        }
-    }
-    
-    @IBAction func EdditingDateDidBegin(_ sender: Any) {
-        
-        dateNextDinnerField.isHidden = true
-        coverUpImage.isHidden = false
-        datePicker.isHidden = false
-        
-
-    }
-    
-    @IBAction func datpickerChanged(_ sender: Any) {
-        dinnerDate = datePicker.date as NSDate
-        
-        let date = dinnerDate
-        
-        let formatter = DateFormatter()
-        formatter.dateStyle = DateFormatter.Style.short
-        formatter.timeStyle = .short
-        let dateDinnerStiring = formatter.string(from: date as Date)
-        dateNextDinnerField.text = dateDinnerStiring
-        
-    }
-
-    @IBAction func saveDateCalendar(_ sender: Any) {
-        signupErrorAlert(title: "Save the Date", message: "Date is saved to your calendar!")
-        print ("NS DATE TO CHANGE = ", dinnerDate)
-        let gregorian = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
-        var components = gregorian.components([.year, .month, .day, .hour], from: dinnerDate as Date)
-        components.hour = components.hour! + 4
-        
-        let endDate = gregorian.date(from: components)!
-        addEventToCalendar(title: "Dinner with \(groupNameLabel.text!)", description: "Remember or die!", startDate: dinnerDate, endDate: endDate as NSDate)
-        
-    }
-    
     
     @IBAction func didBeginChatting(_ sender: Any) {
-
+        
         if self.view.frame.origin.y == 0{
             if let keyboardSize = keyboardSizeRect {
                 self.view.frame.origin.y -= keyboardSize.height
@@ -155,12 +91,61 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
-
+    // MARK: Saving new info when location or chef textfield changed
+    @IBAction func locationChanged(_ sender: Any) {
+        let newLocation = locationNextDinnerField.text
+        
+        if newLocation != "" {
+            self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                let groupID = snapshot.value as? String
+                
+                if groupID != nil {
+                    self.ref?.child("groups").child(groupID!).child("location").setValue(newLocation)
+                }
+            })
+        }
+    }
+    
+    @IBAction func chefsChanged(_ sender: Any) {
+        let newDate = chefNextDinnerField.text
+        
+        if newDate != "" {
+            self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                let groupID = snapshot.value as? String
+                
+                if groupID != nil {
+                    self.ref?.child("groups").child(groupID!).child("chef").setValue(newDate)
+                }
+            })
+        }
+    }
+    
+    // MARK: when datePicker is touched, selecting/ displaying and saving new date
+    @IBAction func EdditingDateDidBegin(_ sender: Any) {
+        dateNextDinnerField.isHidden = true
+        coverUpImage.isHidden = false
+        datePicker.isHidden = false
+    }
+    
+    @IBAction func datpickerChanged(_ sender: Any) {
+        dinnerDate = datePicker.date as NSDate
+        
+        let date = dinnerDate
+        
+        let formatter = DateFormatter()
+        formatter.dateStyle = DateFormatter.Style.short
+        formatter.timeStyle = .short
+        let dateDinnerStiring = formatter.string(from: date as Date)
+        dateNextDinnerField.text = dateDinnerStiring
+        
+    }
+    
     @IBAction func dateChanged(_ sender: Any) {
         datePicker.isHidden = true
         coverUpImage.isHidden = true
         dateNextDinnerField.isHidden = false
-        let userID = FIRAuth.auth()?.currentUser?.uid
         let newChef = dateNextDinnerField.text
         
         if newChef != "" {
@@ -174,153 +159,145 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
             })
         }
     }
-    
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print ("chat array: ", chat)
-        print ("chat count = ", chat.count)
-        return chat.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ChatTableViewCell
-        if self.sender.isEmpty == false  && self.chat.isEmpty == false && self.sender.count == self.chat.count {
-            cell.message.text = self.chat[indexPath.row]
-            cell.chatName.text = self.sender[indexPath.row]
 
-        }
+    @IBAction func saveDateCalendar(_ sender: Any) {
+        signupErrorAlert(title: "Save the Date", message: "Date is saved to your calendar!")
+        let gregorian = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+        var components = gregorian.components([.year, .month, .day, .hour], from: dinnerDate as Date)
+        components.hour = components.hour! + 4
         
-        let numberOfSections = self.tableView.numberOfSections
-        let numberOfRows = self.tableView.numberOfRows(inSection: numberOfSections-1)
+        let endDate = gregorian.date(from: components)!
+        addEventToCalendar(title: "Dinner with \(groupNameLabel.text!)", description: "©Ready, Set, Dinner", startDate: dinnerDate, endDate: endDate as NSDate)
         
-        let indexPath = IndexPath(row: numberOfRows-1 , section: numberOfSections-1)
-        self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
-        
-        return cell
     }
     
-    
-    
+    // MARK: Loading information from group
     func loadExistingGroupInfo() {
-        let userID = FIRAuth.auth()?.currentUser?.uid
         
         self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
             
             let groupID = snapshot.value as? String
-            
             if groupID != nil {
-                
-                self.ref?.child("groups").child(groupID!).child("name").observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    let groupName = snapshot.value as? String
-                    self.groupNameLabel.text = groupName
-                })
-                
-                
-                self.ref?.child("groups").child(groupID!).child("date").observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    let date = snapshot.value as? String
-                    if date != nil {
-                        
-                        //kijken of dit hele stuk niet weg kan
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateStyle = DateFormatter.Style.short
-                        dateFormatter.timeStyle = .short
-                        let datetoNSDate = dateFormatter.date(from: date!)
-                        //self.dinnerDate = datetoNSDate
-                        self.dateNextDinnerField.text = date
-                    }
-                    
-                })
-                
-                self.ref?.child("groups").child(groupID!).child("location").observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    let location = snapshot.value as? String
-                    if location != nil {
-                        self.locationNextDinnerField.text = location
-                    }
-                })
-                
-                self.ref?.child("groups").child(groupID!).child("chef").observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    let chef = snapshot.value as? String
-                    if chef != nil {
-                        self.chefNextDinnerField.text = chef
-                    }
-                })
+                self.getGroupName(groupID: groupID!)
+                self.getGroupChef(groupID: groupID!)
+                self.getGroupLocation(GroupID: groupID!)
+                self.getGroupNextDate(groupID: groupID!)
             }
         })
-
     }
     
+    func getGroupName(groupID: String)  {
+        self.ref?.child("groups").child(groupID).child("name").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let groupName = snapshot.value as? String
+            self.groupNameLabel.text = groupName
+        })
+    }
+    
+    func getGroupNextDate(groupID: String) {
+        self.ref?.child("groups").child(groupID).child("date").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let date = snapshot.value as? String
+            if date != nil {
+                self.dateNextDinnerField.text = date
+            }
+        })
+    }
+    
+    func getGroupChef(groupID: String) {
+        self.ref?.child("groups").child(groupID).child("chef").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let chef = snapshot.value as? String
+            if chef != nil {
+                self.chefNextDinnerField.text = chef
+            }
+        })
+    }
+    
+    func getGroupLocation(GroupID: String) {
+        self.ref?.child("groups").child(GroupID).child("location").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let location = snapshot.value as? String
+            if location != nil {
+                self.locationNextDinnerField.text = location
+            }
+        })
+    }
     
     @IBAction func messageSendPressed(_ sender: Any) {
         
         if newMessageText.text! != "" {
             newChatMes()
         }
-
     }
     
     func readChat() {
         self.chat = []
         self.sender = []
-
-        let userID = FIRAuth.auth()?.currentUser?.uid
-        var groupID = String()
-        
         self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
             
-            let valueCheck = snapshot.value as? String
+            let groupID = snapshot.value as? String
 
-            if valueCheck != nil {
-                
-                groupID = valueCheck!
-                self.ref?.child("groups").child(groupID).child("chat").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    let dictionary = snapshot.value as? NSDictionary
-                    
-                    if dictionary != nil {
-                        
-                        var dateStemps = dictionary?.allKeys as! [String]
-                        dateStemps = dateStemps.sorted()
-                        
-                        for key in dateStemps {
-                            
-                            self.ref?.child("groups").child(groupID).child("chat").child(key).child("message").observeSingleEvent(of: .value, with: { (snapshot) in
-                                let singleChat = snapshot.value as? String
-                                if singleChat != nil {
-                                    self.chat.insert(singleChat!, at: self.chat.count)
-                                }
-                              })
-                            
-                            self.ref?.child("groups").child(groupID).child("chat").child(key).child("userid").observeSingleEvent(of: .value, with: { (snapshot) in
-                                let singleUser = snapshot.value as? String
-                                if singleUser != nil {
-                                    self.ref?.child("users").child(singleUser!).child("full name").observeSingleEvent(of: .value, with: { (snapshot) in
-                                        
-                                        let username = snapshot.value as? String
-                                        if username  != nil {
-                                            self.sender.insert(username!, at: self.sender.count)
-                                            self.tableView.reloadData()
-                                        }
-                                    })
-                                }
-                            })
-                        }
-                    }
-                    
-                })
+            if groupID != nil {
+                self.readingchatInOrder(groupID: groupID!)
             } else {
                 self.signupErrorAlert(title: "Oops", message: "Join or create a dinner group to pick a date for the dinner!")
             }
         })
     }
     
-    func newChatMes() {
+    func readingchatInOrder(groupID: String) {
         
-        let userID = FIRAuth.auth()?.currentUser?.uid
+        self.ref?.child("groups").child(groupID).child("chat").queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let dictionary = snapshot.value as? NSDictionary
+            
+            if dictionary != nil {
+                self.readingMessages(groupID: groupID, messagesDic: dictionary!)
+                self.readingSenderIDs(groupID: groupID, messagesDic: dictionary!)
+            }
+        })
+    }
+    
+    func readingMessages(groupID: String, messagesDic: NSDictionary) {
+        
+        var dateStemps = messagesDic.allKeys as! [String]
+        dateStemps = dateStemps.sorted()
+        
+        for key in dateStemps {
+            
+            self.ref?.child("groups").child(groupID).child("chat").child(key).child("message").observeSingleEvent(of: .value, with: { (snapshot) in
+                let singleChat = snapshot.value as? String
+                if singleChat != nil {
+                    self.chat.insert(singleChat!, at: self.chat.count)
+                }
+            })
+        }
+    }
+    
+    func readingSenderIDs(groupID: String, messagesDic: NSDictionary) {
+        var dateStemps = messagesDic.allKeys as! [String]
+        dateStemps = dateStemps.sorted()
+        
+        for key in dateStemps {
+            
+            self.ref?.child("groups").child(groupID).child("chat").child(key).child("userid").observeSingleEvent(of: .value, with: { (snapshot) in
+                let singleUser = snapshot.value as? String
+                if singleUser != nil {
+                    self.ref?.child("users").child(singleUser!).child("full name").observeSingleEvent(of: .value, with: { (snapshot) in
+                        
+                        let username = snapshot.value as? String
+                        if username  != nil {
+                            self.sender.insert(username!, at: self.sender.count)
+                            self.tableView.reloadData()
+                        }
+                    })
+                }
+            })
+        }
+    }
+    
+    func newChatMes() {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let mesID = formatter.string(from: Date())
@@ -330,9 +307,8 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
             let valueCheck = snapshot.value as? String
             if valueCheck != nil {
                 let groupID = valueCheck!
-                print ("GROUPID: ", groupID)
-                
-                self.ref?.child("groups").child(groupID).child("chat").child(mesID).child("userid").setValue(userID)
+
+                self.ref?.child("groups").child(groupID).child("chat").child(mesID).child("userid").setValue(self.userID)
                 self.ref?.child("groups").child(groupID).child("chat").child(mesID).child("message").setValue(self.newMessageText.text)
                 self.newMessageText.text = ""
                 self.readChat()
@@ -364,5 +340,28 @@ class DinnerInfoViewController: UIViewController, UITableViewDataSource, UITable
             }
         })
     }
-
+    
+    // MARK: displaying chat in tableView
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return chat.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ChatTableViewCell
+        if self.sender.isEmpty == false  && self.chat.isEmpty == false && self.sender.count == self.chat.count {
+            cell.message.text = self.chat[indexPath.row]
+            cell.chatName.text = self.sender[indexPath.row]
+            
+        }
+        
+        let numberOfSections = self.tableView.numberOfSections
+        let numberOfRows = self.tableView.numberOfRows(inSection: numberOfSections-1)
+        
+        let indexPath = IndexPath(row: numberOfRows-1 , section: numberOfSections-1)
+        self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+        
+        return cell
+    }
+    
 }
