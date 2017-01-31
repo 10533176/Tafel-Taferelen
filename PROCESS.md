@@ -43,10 +43,11 @@ uitzoeken hoe ik chatten kan laten werken
 proberen of ik proefielfoto kan laten zien binnen 'account' van gebruiker 
 
 # day 5
-- profielfoto kunnen laten zien binnen account
+- profielfoto kunnen laten zien binnen account (ayanna heeft hiermee geholpen met een tutorial van youtube. LINK: ) 
 - Tijdens presentatie op probleem gekomen hoe ik het voor elkaar ga krijgen dat er verschillende groepen zijn binnen gebruikers
 - Nieuw Probleem: 
   * chatten binnen 'groep' (nog steeds) mogelijk maken
+  na daily standup tip van martijn gekregen om groupen aan te maken met unieke ID en die ook opte slaan bij de user. Proberen of het hiermee lukt! 
   * wss doen met Firebase 
   * hoe krijg ik de Imassege icoontjes? 
 
@@ -114,6 +115,10 @@ Morgen presenteren en proberen de app er mooier uit te gaan laten zien.
 vandaag gepresenteerd -> daaruit kwamen de punten 
 * nieuwe backbutton maken (vanuit navigationBar)
 * iets bedenken wat ik op mijn hoofdscherm wil hebben 
+probleem is dat ik de hele tijd twijfel.. vind het oorspronkelijke idee met ana tafel klikken nog wel steeds het leukst. Maar maak me een beetje zorgen om het implementeren van deze optie.
+wanneer ik dit doe moet ik wss 10 verschillende buttons maken en image view's en array's en wanneer iemand zijn profiel foto veranderd 
+of wanneer iemand de groep verlaat moet deze variable ook een update krijgen. 
+
 
 # day 11
 Vandaag gewerkt aan alle losse kleine dingen die nog niet werkte: 
@@ -191,7 +196,12 @@ Ookal is het qua code wss niet de makkelijkste oplossing ga ik toch voor de tafe
   als ik hier tijd voor heb dit morgen doen anders van het weekend 
   
  
- 
+  # day 15
+  
+  * profiel foto wordt veranderd/ verijwderd als je profiel foto veranderd/ groep verlaat. 
+  * enige punt is wel dat op een of andere manier er iets geks gebeurd met plek 0 aan de tafel. 
+  Wanneer deze leeg is en je op aanwezig klikt wordt deze gevuld met die url, maar dit gebeurd ook op de plek waar je je nieuwe plek aantikt. checken waarom die dit doet. MAAR eerst code mooier maken/ verbeteren. dan pas kleine bugs eruit halen 
+  
 
 
 
