@@ -12,7 +12,7 @@ Ready, set, DINNER!
 # DESIGN
 
 
-
+![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Design-Diagram.png)
 
 
 
