@@ -220,6 +220,5 @@ Ookal is het qua code wss niet de makkelijkste oplossing ga ik toch voor de tafe
  Vandaag aan het werk aan het verslag, maar nu doet mn tablesetting het niet meer, kan ik geen mensen toevoegen, worden mensen die de groep verlaten niet goed verwijderd. KIJKEN WAAROM ALLES KUT WERKT en optijd oplossen voordat alles morgen ingeleverd moet worden 
  
 
-
-
+vandaag na heel veel gezeik en heel veel proberen eindelijk big opgelost waardoor mensen weer toegevoegd kunnen worden. doordat ik twee variabele had userid en userID pakte die d verkeerde.. voortaan iets minder opelkaar lijkende variable namen gebruiken. maar t werkt iig weer. verder heb ik vandaag gewerkt aan mijn final report. Morgen laatste dingen doen. verslag afmaken: constraints toepaasen op app. in design vertellen waarom ik geen landscape in mn app wil (tafel/ chat krijg ik dan niet meer in beeld). alles doorlopen/ checken en dan inleveren. + gebruikers/ groep aanmaken om te kunnen gebruiken bij de demo van vrijdag  
 
