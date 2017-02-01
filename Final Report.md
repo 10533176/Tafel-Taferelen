@@ -28,6 +28,7 @@ maakt dit mijn app ook een stuk slomer. Doordat het constant de zelfde informati
 Alhoewel mijn app goed werkt, was het gebruikers vriendelijker geweest als die sneller was. En was mijn code ook beter en 
 overzichtelijker geweest als ik gebruik had gemaakt van objecten. 
 
+
 * verbeterd tijdens dit project 
 
 Wat ik wel heb verbeterd in de afgelopen vier weken is het schrijven van korte stukke code. In het begin had ik functies van soms wel 70 
@@ -41,11 +42,59 @@ tijd dezelfde dingen gebeuren, maar dan voor een andere imageview. Dankzij de hu
  
 # PROCESS
 Het proces van de afgelopen vier weken wat heeft geleid tot mijn eindproduct heeft verschillende fases gekend. 
-Het idee: 
+
+*Het idee: 
+
 De eerste fase was het creëren van een idee. Dit idee is tot stand gekomen omdat het mij opviel dat ik er in mijn omgeving wel altijd pogingen worden gedaan om etentjes met elkaar te plannen, 
 maar dit vervolgens maanden kan duren of überhaupt niet gebeurd. Doordat iedereen nu zelfs al te druk is om überhaupt een etentje te plannen, laat staan om daadwerkelijk met elkaar te eten. 
-Het is ondertussen algemene kennis wat te veel stress en te weinig sociale contacten met een mens kan doen. Het percentage jongeren wat lijdt aan een depressie, burn out of sociaal isolement 
-blijft groeien. Nee wees niet bang, ik heb geen ideologische fantasieën over dat deze app dat percentage gaat verlagen, maar wel dat deze app een tool is om ervoor te zorgen dat jij en je 
-vrienden elkaar iets vaker kunnen zien. 
+Het is ondertussen algemene kennis wat te veel stress en te weinig sociale contacten met een mens kan doen. Het percentage jongeren wat lijdt aan een depressie, burn out of sociaal isolement blijft groeien. 
+Nee wees niet bang, ik heb geen ideologische fantasieën over dat deze app dat percentage gaat verlagen, maar wel dat deze app een tool is om ervoor te zorgen dat jij en je vrienden elkaar iets vaker kunnen zien. 
+
+*De Features 
+
+Als oorspronkelijk plan had ik heel veel feautures bedacht die uiteindelijk niet zijn gelukt: 
+
+* datum prikken op zelfde manier als datumprikker.nl
+* kunnen chatten met je vrienden om vrijwel zelfde manier als Imasseages 
+* wanneer de datum van het diner verlopen is kunnen invoeren wie er hoe veel heeft betaald 
+* vervolgens automatisch mail sturen naar alle groepsleden met hoeveel geld ze vershculdigd zijn aan wie 
+* In meerdere groepen tegelijker tijd kunnen zitten 
+* notificaties krijgen wanneer een groepslid iets veranderd in je groeps gegevens 
+
+Alhoewel ik nog steeds denk dat al deze feautures mijn app echt tot een betere app zouden maken, weet ik ook dat dit me nooit gelukt was binnen 4 (eigenlijk 3) weken. Wie weet dat ik dit in de toekomst er nog allemaal bij ga maken. Want dan zou ik wel echt een volledige app hebben en het gebruik van 3 verschillende apps (whatsapp, datumprikker, wiebetaaltwat) beperken tot 1 overzichtelijke app die momenteel nog niet op de markt is. 
+
+De feautures die nu in de app zitten, zijn beperkt, maar werken daarom wel foutloos. En het zijn de noodzakelijke feautures om deze app werkend te krijgen. Daarom ben ik blij met de features die ik voorang heb gegeven waardoor ik nu een bugloze foed werkende app heb die nog steeds iets toevoegd aan het huidige app aanbod. 
+
+*Design 
+
+Zie verbeter punten onder kopje design. 
+Ander verbeter punt: 
+Ik check momenteel of een gebruiker wel bestaat door alle email adressen in een lijst te gooien in firebase. 
+Wanneer er een nieuwe gebruiker aan een groep wordt toegevoegd loopt die deze hele lijst door om te checken of die erin zit. 
+Voor nu werkt dit prima, maar wanneer deze app echt gebruikt zou gaan worden zou het met een grote email lijst te lang duren om op die manier te checken of de gebruiker bestaat. Voor een volgende keer zou ik dit op een andere manier aanpakken. 
+
+*Vormgeving 
+
+Alhoewel we deze app natuurlijk vooral maken voor het leren van goed code schrijven. Vond ik het ook belangrijk dat mijn app er goed uitzou zien en gebruikervriendelijk zou zijn. 
+Ik ben begonnen met een vormgeving door afbeeldingen van internet te halen en hiermee geprobeerd een eigen design te maken. 
+zie foto's hier onder: 
+
+FOTO
+
+
+
+Doordat de afbeeldingen van internet kwamen waren ze te klein voor de viewcontrollers. Hierdoor zag het er vrij goedkoop en amateuristisch uit. Omdat ik toch heel graag een app wou inleveren waar ik trots op was heb ik in illustrator een eigen design gemaakt die meer past bij het idee van de app. 
+Zie foto's hieronder voor impressie van het huidige design: 
+
+FOTO
+
+*Overall Proces 
+
+Aan het begin ging alles vrij moeizaam en duurde het lang voordat iets werkte. Toen ik de structuur van mijn data in firebase eenmaal had uitgedacht ging dit gelukkig een stuk sneller en kon ik makkelijker functies implementeren. Doordat ik zonder goed na te denken over het design snel functies ben gaan implementeren ben ik niet volleidg tevreden over mijn huidige design. Dit zou ik in de toekomst anders gaan doen. Ook zal ik dan alle features waar ik nu nog niet aan ben toegekomen willen implementeren. 
+Ik ben voor mijn app denk ik het langs bezig geweest met het juist werkend krijgen van het aanweizg klikken aan de tafel. Wel heel blij dat ik dit stuk erin heb gelaten omdat het wel echt iets extra's geeft aan mn app. 
+
+
+
+
 
 
