@@ -159,7 +159,7 @@ class NewGroupViewController: UIViewController, UITableViewDataSource, UITableVi
         if groupsName.text != "" {
             self.ref?.child("groups").child(groupID!).child("name").setValue(groupsName.text)
             saveCurrentUserAsNewMember(groupID: groupID!)
-            self.noGroupErrorAlert(title: "Yaay!", message: "welcome to the culb \(groupsName.text!)")
+            self.noGroupErrorAlert(title: "Yay!", message: "welcome to the club \(groupsName.text!)")
         }
         else {
             self.signupErrorAlert(title: "Oops!", message: "You forgot to fill in a groupsname")
