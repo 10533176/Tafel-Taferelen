@@ -15,9 +15,9 @@ Ready, set, DINNER!
 ![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Design Diagram.png)
 
 
-* Design Beslissingen * 
+*Design Beslissingen 
 
-Verbeter punten volgend project
+* Verbeter punten volgend project
 
 Voor een volgend programmeer project zal ik van te voren beter nadenken over het design. 
 Toen ik begon aan dit project was ik heel enthausiats over het idee en wou zo snel mogelijk alle functionaliteit implementeren. 
@@ -28,7 +28,7 @@ maakt dit mijn app ook een stuk slomer. Doordat het constant de zelfde informati
 Alhoewel mijn app goed werkt, was het gebruikers vriendelijker geweest als die sneller was. En was mijn code ook beter en 
 overzichtelijker geweest als ik gebruik had gemaakt van objecten. 
 
-verbeterd tijdens dit project 
+* verbeterd tijdens dit project 
 
 Wat ik wel heb verbeterd in de afgelopen vier weken is het schrijven van korte stukke code. In het begin had ik functies van soms wel 70 
 lijnen code. Met veel if en if else statements. Deze heb ik (bijna) allemaal om weten te zetten in kortere units code en met minder if/ else statements 
@@ -41,7 +41,6 @@ tijd dezelfde dingen gebeuren, maar dan voor een andere imageview. Dankzij de hu
  
 # PROCESS
 Het proces van de afgelopen vier weken wat heeft geleid tot mijn eindproduct heeft verschillende fases gekend. 
-
 Het idee: 
 De eerste fase was het creëren van een idee. Dit idee is tot stand gekomen omdat het mij opviel dat ik er in mijn omgeving wel altijd pogingen worden gedaan om etentjes met elkaar te plannen, 
 maar dit vervolgens maanden kan duren of überhaupt niet gebeurd. Doordat iedereen nu zelfs al te druk is om überhaupt een etentje te plannen, laat staan om daadwerkelijk met elkaar te eten. 
