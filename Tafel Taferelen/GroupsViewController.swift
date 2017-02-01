@@ -62,6 +62,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
             if groupID != nil {
                 self.getGroupName(groupID: groupID!)
             } else {
+                self.doneLoading()
                 self.signupErrorAlert(title: "Oops", message: "we could'n find your group, please try again later!")
             }
         })
@@ -129,14 +130,12 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
         })
     }
     
-    func deleteUserID(groupID: String) {
+    func deleteEmail(groupID: String) {
         
         var emailArray = [String]()
         self.ref?.child("users").child(userID!).child("email").observeSingleEvent(of: .value, with: { (snapshot) in
             
             let email = snapshot.value as? String
-            
-            self.ref?.child("users").child(self.userID!).child("groupID").removeValue()
             
             self.ref?.child("groups").child(groupID).child("members").child("email").observeSingleEvent(of: .value, with: {(snapshot) in
                 emailArray = snapshot.value as? NSArray as! [String]
@@ -148,12 +147,12 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
         })
     }
     
-    func deleteEmail(groupID: String) {
+    func deleteUserID(groupID: String) {
         self.ref?.child("groups").child(groupID).child("members").child("userid").observeSingleEvent(of: .value, with: {(snapshot) in
             var useridArray = snapshot.value as? NSArray as! [String]
-            
             useridArray.remove(at: useridArray.index(of: self.userID!)!)
             self.ref?.child("groups").child(groupID).child("members").child("userid").setValue(useridArray)
+            self.ref?.child("users").child(self.userID!).child("groupID").removeValue()
             
         })
     }
@@ -175,8 +174,9 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func changeProfileTable(url: String) {
+        let currentUserID = FIRAuth.auth()?.currentUser?.uid
         
-        self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
+        self.ref?.child("users").child(currentUserID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
             
             let groupID = snapshot.value as? String
             
@@ -213,7 +213,6 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     func findNewUser() {
-        
         self.groupEmails = [""]
         self.ref?.child("emailDB").observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -232,10 +231,12 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
                         
                         if self.groupEmails.count == tempKeys.count {
                             self.NewUserNotFound()
+                            print ("heeft nieuwe functie aangeroepen omdat die niet kan vinden :")
                         }
                         
                         if email == self.newEmailField.text {
                             self.isNewUserInGroup(newUserID: keys)
+                            print ("gaat nieuwe functie aanroepen dat die is gevonden met userid:", keys)
                         }
                     })
                 }
@@ -256,6 +257,7 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
             let checkCurrentGroup = snapshot.value as? String
             
             if checkCurrentGroup == nil {
+                print ("nieuwe user zit niet in groep")
                 self.newMemberAddedToGroup(newUserID: newUserID)
             }
             else {
@@ -282,22 +284,25 @@ class GroupsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func saveUserInDB(newUserID: String) {
-        
         var emailArray = [String]()
         self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
+
+            let groupID = snapshot.value as? String
             
-            let groupID = snapshot.value as! String
+            if groupID != nil {
+                print (groupID)
+
+                self.ref?.child("groups").child(groupID!).child("members").child("email").observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    emailArray = snapshot.value as? NSArray as! [String]
+                    emailArray.append(self.newEmailField.text!)
+                    self.ref?.child("groups").child(groupID!).child("members").child("email").setValue(emailArray)
+                    
+                })
+            }
             
-            self.ref?.child("groups").child(groupID).child("members").child("email").observeSingleEvent(of: .value, with: {(snapshot) in
-                
-                emailArray = snapshot.value as? NSArray as! [String]
-                emailArray.append(self.newEmailField.text!)
-                self.ref?.child("groups").child(groupID).child("members").child("email").setValue(emailArray)
-                
-            })
-            
-            self.ref?.child("users").child(self.newUserId).child("groupID").setValue(groupID)
-            self.ref?.child("groups").child(groupID).child("members").child("userid").setValue(self.groupMembers)
+            self.ref?.child("users").child(newUserID).child("groupID").setValue(groupID)
+            self.ref?.child("groups").child(groupID!).child("members").child("userid").setValue(self.groupMembers)
             self.displayNewUser(newUserID: newUserID)
         })
     }
