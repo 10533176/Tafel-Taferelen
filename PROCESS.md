@@ -215,6 +215,10 @@ Ookal is het qua code wss niet de makkelijkste oplossing ga ik toch voor de tafe
   MORGEN: Verslag schrijven, laatste code check doen. (eventueel nog kijken of ik een laad plaatje erin kan krijgen bij het hoofdmenu) 
   voorderest werkt alles! 
   
+  # Day 17 
+  
+ Vandaag aan het werk aan het verslag, maar nu doet mn tablesetting het niet meer, kan ik geen mensen toevoegen, worden mensen die de groep verlaten niet goed verwijderd. KIJKEN WAAROM ALLES KUT WERKT en optijd oplossen voordat alles morgen ingeleverd moet worden 
+ 
 
 
 
