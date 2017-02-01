@@ -27,6 +27,7 @@ class FirstLaunchViewController: UIViewController {
         })
     }
     
+    // MARK: Functions to check if app launched before, if so, checks if user allready logged in.
     func isAppAlreadyLaunchedOnce()->Bool{
         let defaults = UserDefaults.standard
         

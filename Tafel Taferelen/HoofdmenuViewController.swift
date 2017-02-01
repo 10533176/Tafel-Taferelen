@@ -50,7 +50,7 @@ class HoofdmenuViewController: UIViewController {
     }
     
     // MARK: Loading the user and group info to display 
-    private func loadProfilePicture() {
+    func loadProfilePicture() {
         
         ref?.child("users").child(userID!).child("urlToImage").observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -71,7 +71,7 @@ class HoofdmenuViewController: UIViewController {
         self.pfPicture.clipsToBounds = true
     }
     
-    private func getGroupInfo() {
+    func getGroupInfo() {
         
         self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -89,7 +89,7 @@ class HoofdmenuViewController: UIViewController {
         })
     }
 
-    private func getGroupName(groupID: String) {
+    func getGroupName(groupID: String) {
         
         self.ref?.child("groups").child(groupID).child("name").observeSingleEvent(of: .value, with: { (snapshot) in
             let groupName = snapshot.value as! String
@@ -100,7 +100,7 @@ class HoofdmenuViewController: UIViewController {
         })
     }
     
-    private func getGroupDate(groupID: String) {
+    func getGroupDate(groupID: String) {
         
         self.ref?.child("groups").child(groupID).child("date").observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -114,7 +114,7 @@ class HoofdmenuViewController: UIViewController {
         })
     }
     
-    private func getTableSetting(groupID: String) {
+    func getTableSetting(groupID: String) {
         
         self.ref?.child("groups").child(groupID).child("tableSetting").observeSingleEvent(of: .value, with: { (snapshot) in
             let table = snapshot.value as? [String]
@@ -130,12 +130,12 @@ class HoofdmenuViewController: UIViewController {
         saveSeat(seat: sender.tag)
     }
     
-    private func saveSeat(seat: Int) {
+    func saveSeat(seat: Int) {
         
         if tableSetting.isEmpty == false {
             
             if self.tableSetting[seat] == "" {
-                self.seatClickedIsOwn(seat: seat)
+                self.seatClickedEmpty(seat: seat)
                 
             } else if self.tableSetting[seat] == self.pfURL {
                 self.seatClickedIsOwn(seat: seat)
@@ -144,7 +144,7 @@ class HoofdmenuViewController: UIViewController {
 
     }
     
-    private func seatClickedEmpty(seat: Int) {
+    func seatClickedEmpty(seat: Int) {
         
         if self.tableSetting.contains(self.pfURL) {
             self.signupErrorAlert(title: "Oops!", message: "You allready have a seat at the table!")
@@ -163,7 +163,7 @@ class HoofdmenuViewController: UIViewController {
         }
     }
     
-    private func seatClickedIsOwn(seat: Int) {
+    func seatClickedIsOwn(seat: Int) {
         self.tableSetting[seat] = ""
         
         self.ref?.child("users").child(userID!).child("groupID").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -177,8 +177,7 @@ class HoofdmenuViewController: UIViewController {
         })
     }
     
-    private func filInTable() {
-        
+    func filInTable() {
         var indexTable = 0
         for key in tableSetting {
             
@@ -194,7 +193,7 @@ class HoofdmenuViewController: UIViewController {
         }
     }
     
-    private func makeImageRound(indexTable: Int, key: String, data: Data) {
+    func makeImageRound(indexTable: Int, key: String, data: Data) {
         if key == tableSetting[indexTable] {
             
             plates[indexTable].image = UIImage(data: data as Data)
