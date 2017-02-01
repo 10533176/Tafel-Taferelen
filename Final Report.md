@@ -79,9 +79,7 @@ Alhoewel we deze app natuurlijk vooral maken voor het leren van goed code schrij
 Ik ben begonnen met een vormgeving door afbeeldingen van internet te halen en hiermee geprobeerd een eigen design te maken. 
 zie foto's hier onder: 
 
-FOTO
-
-
+![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Schermafbeelding 2017-01-26 om 20.28.55.png)
 
 Doordat de afbeeldingen van internet kwamen waren ze te klein voor de viewcontrollers. Hierdoor zag het er vrij goedkoop en amateuristisch uit. Omdat ik toch heel graag een app wou inleveren waar ik trots op was heb ik in illustrator een eigen design gemaakt die meer past bij het idee van de app. 
 Zie foto's hieronder voor impressie van het huidige design: 
