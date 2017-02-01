@@ -1,5 +1,5 @@
 //
-//  HoofdmenuViewController.swift
+//  HomeScreenViewController.swift
 //  Tafel Taferelen
 //
 //  Created by Femke van Son on 13-01-17.
@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import EventKit
 
-class HoofdmenuViewController: UIViewController {
+class HomeScreenViewController: UIViewController {
 
     @IBOutlet weak var pfPicture: UIImageView!
     @IBOutlet weak var nextDateBtn: UIButton!

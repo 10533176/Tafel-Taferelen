@@ -40,7 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func dismissActivityIndicator() {
         if let _ = window {
-            print ("in appDel ook")
             container.removeFromSuperview()
         }
         

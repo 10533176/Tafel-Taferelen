@@ -10,7 +10,7 @@
 		98FC8CDCBD60BF8E0B62A7CA /* Pods_Tafel_Taferelen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 498AEE08A47DDE4D5BE7F6C6 /* Pods_Tafel_Taferelen.framework */; };
 		EF00F0701E250833009668FC /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF00F06F1E250833009668FC /* SignupViewController.swift */; };
 		EF00F0741E2646F7009668FC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF00F0731E2646F7009668FC /* GoogleService-Info.plist */; };
-		EF00F0761E28DF15009668FC /* HoofdmenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF00F0751E28DF15009668FC /* HoofdmenuViewController.swift */; };
+		EF00F0761E28DF15009668FC /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF00F0751E28DF15009668FC /* HomeScreenViewController.swift */; };
 		EF0B79631E37E3E5007A8CCD /* FirstLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0B79621E37E3E5007A8CCD /* FirstLaunchViewController.swift */; };
 		EF14750C1E2CD76400B387FB /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF14750B1E2CD76400B387FB /* GroupsViewController.swift */; };
 		EF14750E1E2CDCE700B387FB /* NewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF14750D1E2CDCE700B387FB /* NewGroupViewController.swift */; };
@@ -33,7 +33,7 @@
 		EE8D2E8208CD2D7999D987F0 /* Pods-Tafel Taferelen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tafel Taferelen.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tafel Taferelen/Pods-Tafel Taferelen.release.xcconfig"; sourceTree = "<group>"; };
 		EF00F06F1E250833009668FC /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		EF00F0731E2646F7009668FC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		EF00F0751E28DF15009668FC /* HoofdmenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoofdmenuViewController.swift; sourceTree = "<group>"; };
+		EF00F0751E28DF15009668FC /* HomeScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		EF0B79621E37E3E5007A8CCD /* FirstLaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstLaunchViewController.swift; sourceTree = "<group>"; };
 		EF14750B1E2CD76400B387FB /* GroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
 		EF14750D1E2CDCE700B387FB /* NewGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupViewController.swift; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 				EF14750D1E2CDCE700B387FB /* NewGroupViewController.swift */,
 				EF14750B1E2CD76400B387FB /* GroupsViewController.swift */,
 				EF1475111E2E0E9C00B387FB /* GroupsTableViewCell.swift */,
-				EF00F0751E28DF15009668FC /* HoofdmenuViewController.swift */,
+				EF00F0751E28DF15009668FC /* HomeScreenViewController.swift */,
 				EFAE3B881E409844007ECDF0 /* Extension.swift */,
 				EF1475131E2E645200B387FB /* DinnerInfoViewController.swift */,
 				EFC34A7B1E24F5EA00B35706 /* LaunchScreen.storyboard */,
@@ -249,7 +249,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF00F0761E28DF15009668FC /* HoofdmenuViewController.swift in Sources */,
+				EF00F0761E28DF15009668FC /* HomeScreenViewController.swift in Sources */,
 				EF14750E1E2CDCE700B387FB /* NewGroupViewController.swift in Sources */,
 				EF806DE21E30D5D7000EE2E7 /* SettingsViewController.swift in Sources */,
 				EF1475101E2D29FC00B387FB /* NewGroupTableViewCell.swift in Sources */,

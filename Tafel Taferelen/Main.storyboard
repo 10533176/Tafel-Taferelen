@@ -350,10 +350,10 @@
             </objects>
             <point key="canvasLocation" x="2567" y="252"/>
         </scene>
-        <!--Hoofdmenu View Controller-->
+        <!--Home Screen View Controller-->
         <scene sceneID="cDP-8G-bJ5">
             <objects>
-                <viewController storyboardIdentifier="topMenu" useStoryboardIdentifierAsRestorationIdentifier="YES" id="K8s-PV-joo" customClass="HoofdmenuViewController" customModule="Tafel_Taferelen" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="topMenu" useStoryboardIdentifierAsRestorationIdentifier="YES" id="K8s-PV-joo" userLabel="Home Screen View Controller" customClass="HomeScreenViewController" customModule="Tafel_Taferelen" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="unu-CZ-TBD"/>
                         <viewControllerLayoutGuide type="bottom" id="pg8-En-421"/>
