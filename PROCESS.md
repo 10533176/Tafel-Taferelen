@@ -201,6 +201,19 @@ Ookal is het qua code wss niet de makkelijkste oplossing ga ik toch voor de tafe
   * profiel foto wordt veranderd/ verijwderd als je profiel foto veranderd/ groep verlaat. 
   * enige punt is wel dat op een of andere manier er iets geks gebeurd met plek 0 aan de tafel. 
   Wanneer deze leeg is en je op aanwezig klikt wordt deze gevuld met die url, maar dit gebeurd ook op de plek waar je je nieuwe plek aantikt. checken waarom die dit doet. MAAR eerst code mooier maken/ verbeteren. dan pas kleine bugs eruit halen 
+  Begin gemaakt aan verslag 
+  
+  # day 16 
+  AAN TAFEL KLIKKEN WERKT! dankzij julian heb ik collections gebruikt, hierdoor is en mijn code 3x zo kort geworden EN is de bug met plek 0 aan de tafel opgelost (kwam door dubbele connectie aan button) DUS nu kan je eindelijk goed ana tafel klikken!
+  
+  ALLE FILES GECLEANED. door een extension te maken heb ik veel dubbele code weg kunnen halen (van ene 5 voor bettercode zit ik nu op een 8!) heb dit ook geprobeerd voor de procedures van firebase. Ben hier heel lang mee bezig geweest, maar na heel veel google werk en probeer werk erachter gekomen dat dat asynchroon heel kut loopt met (UITLEG STACKOVERFLOW WAAROM DIT NIET KAN) firebase. Dus nu als oplossing apartje functies maken om in de diepe wordtels van firebase te komen. Hierdoor wel minder mooie code, maar het werkt iniedergeval! 
+  
+ Ook gezorgd dat de chat iets gebruikervriendelijker is, je kan nu scrollen naar boven en zodra je een bericht stuurt, scrollt de tableview weer naar beneden. 
+  
+ en thanks to lois makkelijke manier gevonden (functie in extensie) om keyboard te verstoppen wanneer er ergens op het beeld wordt getikt voor de login view en sign up view. Uiteindelijk deze ook toegepast bij mijn NewGroup view. (hier giung scherm eerst omhoog) maar vond het er mooier uitzien als je dit gewoon met wegtikken kon doen omdat niet perse het hele scherm in beeld moet blijven voor deze view. 
+  
+  MORGEN: Verslag schrijven, laatste code check doen. (eventueel nog kijken of ik een laad plaatje erin kan krijgen bij het hoofdmenu) 
+  voorderest werkt alles! 
   
 
 
