@@ -1,16 +1,14 @@
 ## READY, SET, DINNER
 Dé app voor al jouw dinner plannen! 
 
-Dit is dé app om ervoor te zorgen dat jij en je vrienden/ familie door alle drukte heen elkaar nog steeds kunnen zien. 
-Niet alleen via de telefoon, maar in real life en bij zo een gelegenheid hoort natuurlijk wijn en eten. 
+Dit is dé app om ervoor te zorgen dat jij en je vrienden/ familie door alle drukte heen elkaar nog steeds kunnen zien.  
 Met 1 minuutje werk hebben jij en je vrienden een eigen omgeving gecreëerd waarin diners kunnen worden gepland, 
 menu’s worden besproken en zelfs een tafelschikking kan worden gemaakt. 
 Ready, set, DINNER! 
 
-![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/image1.png)
+![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Schermafbeelding 2017-02-02 om 11.30.43.png)
 
 # DESIGN
-
 
 ![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Design Diagram.png)
 
