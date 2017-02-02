@@ -42,7 +42,7 @@ Binnen de app is het mogelijk om een account aan te maken om vervolgens een groe
 
 [![BCH compliance](https://bettercodehub.com/edge/badge/10533176/TafelTaferelen)](https://bettercodehub.com)
 
-# Installation of the Project
+# Installeren van het project 
 
 - Download xcode 8.1
 - Create a [Firebase](https://firebase.google.com) Account and create a new project 
