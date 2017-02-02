@@ -23,6 +23,7 @@ duplicates eruit halen, en namen van functies veranderen in meer beschrijvende n
 
 
 **VERVOLG**
+
 Voor het verbeteren van mijn code ben ik eerst alle dubbele code uit mijn projetc gaan halen. Deze heb ik in een aparte file gezet genaamd extensions.swift. Daarna ben ik al mijn files doorgelopen en gekeken of alles wat er in staat nog nodig was. Alle variabele die ik uiteindelijk toch niet heb gebruikt heb ik weg gehaald etc. 
 
 Hierna heb ik mijn project weer door beteer code gehaald met het volgende resultaat: 
