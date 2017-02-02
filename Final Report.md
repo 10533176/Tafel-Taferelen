@@ -53,7 +53,7 @@ maar dit vervolgens maanden kan duren of überhaupt niet gebeurd. Doordat iedere
 Het is ondertussen algemene kennis wat te veel stress en te weinig sociale contacten met een mens kan doen. Het percentage jongeren wat lijdt aan een depressie, burn out of sociaal isolement blijft groeien. 
 Nee wees niet bang, ik heb geen ideologische fantasieën over dat deze app dat percentage gaat verlagen, maar wel dat deze app een tool is om ervoor te zorgen dat jij en je vrienden elkaar iets vaker kunnen zien. 
 
-*De Features 
+_De Features_ 
 
 Als oorspronkelijk plan had ik heel veel feautures bedacht die uiteindelijk niet zijn gelukt: 
 
@@ -68,7 +68,7 @@ Alhoewel ik nog steeds denk dat al deze feautures mijn app echt tot een betere a
 
 De feautures die nu in de app zitten, zijn beperkt, maar werken daarom wel foutloos. En het zijn de noodzakelijke feautures om deze app werkend te krijgen. Daarom ben ik blij met de features die ik voorang heb gegeven waardoor ik nu een bugloze foed werkende app heb die nog steeds iets toevoegd aan het huidige app aanbod. 
 
-*Design 
+_Design_ 
 
 Zie verbeter punten onder kopje design. 
 
@@ -77,7 +77,7 @@ Ik check momenteel of een gebruiker wel bestaat door alle email adressen in een 
 Wanneer er een nieuwe gebruiker aan een groep wordt toegevoegd loopt die deze hele lijst door om te checken of die erin zit. 
 Voor nu werkt dit prima, maar wanneer deze app echt gebruikt zou gaan worden zou het met een grote email lijst te lang duren om op die manier te checken of de gebruiker bestaat. Voor een volgende keer zou ik dit op een andere manier aanpakken. 
 
-*Vormgeving 
+_Vormgeving_ 
 
 Alhoewel we deze app natuurlijk vooral maken voor het leren van goed code schrijven. Vond ik het ook belangrijk dat mijn app er goed uitzou zien en gebruikervriendelijk zou zijn. 
 Ik ben begonnen met een vormgeving door afbeeldingen van internet te halen en hiermee geprobeerd een eigen design te maken. 
@@ -90,10 +90,11 @@ Zie foto's hieronder voor impressie van het huidige design:
 
 ![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/image1.png)
 
-*Overall Proces 
+_Overall Process_ 
 
 Aan het begin ging alles vrij moeizaam en duurde het lang voordat iets werkte. Toen ik de structuur van mijn data in firebase eenmaal had uitgedacht ging dit gelukkig een stuk sneller en kon ik makkelijker functies implementeren. Doordat ik zonder goed na te denken over het design snel functies ben gaan implementeren ben ik niet volleidg tevreden over mijn huidige design. Dit zou ik in de toekomst anders gaan doen. Ook zal ik dan alle features waar ik nu nog niet aan ben toegekomen willen implementeren. 
 Ik ben voor mijn app denk ik het langs bezig geweest met het juist werkend krijgen van het aanweizg klikken aan de tafel. Wel heel blij dat ik dit stuk erin heb gelaten omdat het wel echt iets extra's geeft aan mn app. 
+Maar uiteindelijk ben ik wel blij met het eindresultaat en vooral dat alle features die er nu inzitten ook echt goed werken! 
 
 
 
