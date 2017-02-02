@@ -206,7 +206,7 @@ Ookal is het qua code wss niet de makkelijkste oplossing ga ik toch voor de tafe
   # day 16 
   AAN TAFEL KLIKKEN WERKT! dankzij julian heb ik collections gebruikt, hierdoor is en mijn code 3x zo kort geworden EN is de bug met plek 0 aan de tafel opgelost (kwam door dubbele connectie aan button) DUS nu kan je eindelijk goed ana tafel klikken!
   
-  ALLE FILES GECLEANED. door een extension te maken heb ik veel dubbele code weg kunnen halen (van ene 5 voor bettercode zit ik nu op een 8!) heb dit ook geprobeerd voor de procedures van firebase. Ben hier heel lang mee bezig geweest, maar na heel veel google werk en probeer werk erachter gekomen dat dat asynchroon heel kut loopt met (UITLEG STACKOVERFLOW WAAROM DIT NIET KAN) firebase. Dus nu als oplossing apartje functies maken om in de diepe wordtels van firebase te komen. Hierdoor wel minder mooie code, maar het werkt iniedergeval! 
+  ALLE FILES GECLEANED. door een extension te maken heb ik veel dubbele code weg kunnen halen (van ene 5 voor bettercode zit ik nu op een 8!) heb dit ook geprobeerd voor de procedures van firebase. Ben hier heel lang mee bezig geweest, maar na heel veel google werk en probeer werk erachter gekomen dat dat asynchroon heel kut loopt met firebase. Dus nu als oplossing apartje functies maken om in de diepe wordtels van firebase te komen. Hierdoor wel minder mooie code, maar het werkt iniedergeval! 
   
  Ook gezorgd dat de chat iets gebruikervriendelijker is, je kan nu scrollen naar boven en zodra je een bericht stuurt, scrollt de tableview weer naar beneden. 
   
@@ -217,7 +217,7 @@ Ookal is het qua code wss niet de makkelijkste oplossing ga ik toch voor de tafe
   
   # Day 17 
   
- Vandaag aan het werk aan het verslag, maar nu doet mn tablesetting het niet meer, kan ik geen mensen toevoegen, worden mensen die de groep verlaten niet goed verwijderd. KIJKEN WAAROM ALLES KUT WERKT en optijd oplossen voordat alles morgen ingeleverd moet worden 
+Vandaag aan het werk aan het verslag, maar nu doet mn tablesetting het niet meer, kan ik geen mensen toevoegen, worden mensen die de groep verlaten niet goed verwijderd. KIJKEN WAAROM ALLES KUT WERKT en optijd oplossen voordat alles morgen ingeleverd moet worden 
  
 
 vandaag na heel veel gezeik en heel veel proberen eindelijk big opgelost waardoor mensen weer toegevoegd kunnen worden. doordat ik twee variabele had userid en userID pakte die d verkeerde.. voortaan iets minder opelkaar lijkende variable namen gebruiken. maar t werkt iig weer. verder heb ik vandaag gewerkt aan mijn final report. Morgen laatste dingen doen. verslag afmaken: constraints toepaasen op app. in design vertellen waarom ik geen landscape in mn app wil (tafel/ chat krijg ik dan niet meer in beeld). alles doorlopen/ checken en dan inleveren. + gebruikers/ groep aanmaken om te kunnen gebruiken bij de demo van vrijdag  
