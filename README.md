@@ -49,7 +49,6 @@ Binnen de app is het mogelijk om een account aan te maken om vervolgens een groe
 - Open project directory in terminal 
 - Enter 'pod install' in terminal 
 - Open the project workspace 
-
 - run the project on iphone 6 screen
 
 Extra -> 
@@ -69,3 +68,7 @@ for creating own firebase structure:
 
 - download and insert the 'GoogleService-Info.plist' from Firebase in the Xcode project
 
+*Inloggen*
+voor het inloggen met een huidig bestaand account om direct de functie van een groep te kunnen zien kan gebruik gemaakt worden van de volgende gegevens: 
+email: test@email.com
+Wachtwoord: 123456
