@@ -1,5 +1,5 @@
-# Tafel Taferelen
-Dé app voor al jouw dinner plannen! 
+# READY, SET, DINNER!
+Dé app voor al jouw diner plannen! 
 
 **Daily Process** 
 
@@ -222,12 +222,15 @@ Vandaag aan het werk aan het verslag, maar nu doet mn tablesetting het niet meer
 
 vandaag na heel veel gezeik en heel veel proberen eindelijk big opgelost waardoor mensen weer toegevoegd kunnen worden. doordat ik twee variabele had userid en userID pakte die d verkeerde.. voortaan iets minder opelkaar lijkende variable namen gebruiken. maar t werkt iig weer. verder heb ik vandaag gewerkt aan mijn final report. Morgen laatste dingen doen. verslag afmaken: constraints toepaasen op app. in design vertellen waarom ik geen landscape in mn app wil (tafel/ chat krijg ik dan niet meer in beeld). alles doorlopen/ checken en dan inleveren. + gebruikers/ groep aanmaken om te kunnen gebruiken bij de demo van vrijdag  
 
+# Day 28 
+
+Vandaag verslag verder afgemaakt, license + readme aangepast screenshots toegevoegd aan readme. + laatste check code en heel vaak mn app gerunt opzoek naar bugs. 
+Ook nog poging gedaan tot het toevoegen van constraints zodat de app ook op een kleiner beeld runt. De meeste labels en foto's werden zo klein waardoor je ze bijna niet meer zag. Daarom besloten de app alleen op het formaat van iphone 6/ 7 te kunnen laten runnen. Doordat ik mijn vormgeving/ logo's etc heb gemaakt in illustrator, moest ik voor een ander formaat beeldscherm daar de grootte van de labels aan passen.. Met de gedachten dat wss niemand deze app ooit op een iphone 5 gaat runnen heb ik besloten hier niet verder tijd aan te besteden, maar te zorgen dat die op de iphone 6 wel perfect runt. 
+
 
 # EXTRA
 
 **Oude readMe-file met oorspronkelijke idee en design**
-
-
 
 # Intro
 Heb jij je vrienden ook al weken niet gezien? Proberen jullie elke keer weer een etentje te plannen, maar mislukt dit altijd? Of is het altijd dezelfde persoon die in jullie vrienden groep alles moet plannen? Of hou jij gewoon simpelweg van eten met je vrienden en familie? Dan is Tafel Taferelen dé ontbrekende app op jouw telefoon! 
