@@ -69,6 +69,9 @@ for creating own firebase structure:
 - download and insert the 'GoogleService-Info.plist' from Firebase in the Xcode project
 
 *Inloggen*
+
 voor het inloggen met een huidig bestaand account om direct de functie van een groep te kunnen zien kan gebruik gemaakt worden van de volgende gegevens: 
+
 email: test@email.com
+
 Wachtwoord: 123456
