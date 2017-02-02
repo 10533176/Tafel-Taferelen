@@ -32,6 +32,12 @@ Binnen de app is het mogelijk om een account aan te maken om vervolgens een groe
 ## Copyright
 © Femke van Son. Alle rechten voorbehouden. Tenzij anders vermeld berusten alle rechten van de documenten in deze repository bij Femke van Son. Zie [LICENSE.md](https://github.com/10533176/TafelTaferelen/blob/master/LICENSE.md) voor verdere informatie.
 
+## Credits 
+- Voor het inloggen van gebruikers met FireBase en daarbij foro uploaden: [Vasil Nunev](https://www.youtube.com/watch?v=AsSZulMc7sk)
+- Voor alle code rondom het opslaan en ophalen van firebase data: [Fire Base Documentation](https://firebase.google.com/docs/reference/ios/firebasecore/api/reference/Classes)
+- Voor het opslaan van datum in de agenda: [Luca Davanzo](http://stackoverflow.com/questions/28379603/how-to-add-an-event-in-the-device-calendar-using-swift/34808632)
+- Voor het herladen van de chat berichten: Rick Bruins
+
 ## Better Code Hub 
 
 [![BCH compliance](https://bettercodehub.com/edge/badge/10533176/TafelTaferelen)](https://bettercodehub.com)
