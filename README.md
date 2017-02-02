@@ -23,7 +23,10 @@ Binnen de app is het mogelijk om een account aan te maken om vervolgens een groe
 
 ![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Schermafbeelding 2017-02-02 om 11.42.13.png)    ![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Schermafbeelding 2017-02-02 om 11.34.52.png)
 
+
 ![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Schermafbeelding 2017-02-02 om 11.30.43.png)    ![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Schermafbeelding 2017-02-02 om 11.34.34.png)
+
+
 ![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Schermafbeelding 2017-02-02 om 11.31.02.png)    ![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Schermafbeelding 2017-02-02 om 11.34.14.png)
 
 ## Copyright
