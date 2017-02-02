@@ -15,7 +15,7 @@ Ready, set, DINNER!
 ![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Design Diagram.png)
 
 
-*Design Beslissingen 
+_Design Beslissingen_ 
 
 * Verbeter punten volgend project
 
@@ -46,7 +46,7 @@ tijd dezelfde dingen gebeuren, maar dan voor een andere imageview. Dankzij de hu
 # PROCESS
 Het proces van de afgelopen vier weken wat heeft geleid tot mijn eindproduct heeft verschillende fases gekend. 
 
-*Het idee: 
+_Het idee:_ 
 
 De eerste fase was het creëren van een idee. Dit idee is tot stand gekomen omdat het mij opviel dat ik er in mijn omgeving wel altijd pogingen worden gedaan om etentjes met elkaar te plannen, 
 maar dit vervolgens maanden kan duren of überhaupt niet gebeurd. Doordat iedereen nu zelfs al te druk is om überhaupt een etentje te plannen, laat staan om daadwerkelijk met elkaar te eten. 
