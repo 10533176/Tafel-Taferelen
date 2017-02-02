@@ -66,8 +66,6 @@ for creating own firebase structure:
         ".write": true
         
       }
-      
-    }
-    
+
 - download and insert the 'GoogleService-Info.plist' from Firebase in the Xcode project
 
