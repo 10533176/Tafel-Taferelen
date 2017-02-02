@@ -45,22 +45,29 @@ Binnen de app is het mogelijk om een account aan te maken om vervolgens een groe
 # Installeren van het project 
 
 - Download xcode 8.1
-- Create a [Firebase](https://firebase.google.com) Account and create a new project 
-  * use the following settings (FireBase -> database -> rules): 
-      {
-      "rules": {
-        ".read": true,
-        ".write": true
-      }
-    }
-    
 - Download the GitHub project 
 - Open project directory in terminal 
 - Enter 'pod install' in terminal 
 - Open the project workspace 
-- download and insert the 'GoogleService-Info.plist' from Firebase in the Xcode project
+
 - run the project on iphone 6 screen
 
-
-
+Extra -> 
+for creating own firebase structure: 
+- Create a [Firebase](https://firebase.google.com) Account and create a new project 
+ use the following settings (FireBase -> database -> rules): 
+      
+      {
+      
+      "rules": {
+      
+        ".read": true,
+        
+        ".write": true
+        
+      }
+      
+    }
+    
+- download and insert the 'GoogleService-Info.plist' from Firebase in the Xcode project
 
