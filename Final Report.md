@@ -28,6 +28,9 @@ maakt dit mijn app ook een stuk slomer. Doordat het constant de zelfde informati
 Alhoewel mijn app goed werkt, was het gebruikers vriendelijker geweest als die sneller was. En was mijn code ook beter en 
 overzichtelijker geweest als ik gebruik had gemaakt van objecten. 
 
+Voor nu is het oke dat alle functies in de viewcontrollers zitten, omdat er met deze verder  niks gedaan gata worden en die nu wle goed werkt. Maar in mijn volgende app ga ik zeker gebruik maken van het MVC model zodat alle functionaliteit niet in de viewcontrollers zit, waardoor het veel makkelijker is om bij ander formaat schermen of andere dingen die veranderd moeten worden in de app aan te passen. 
+
+Ik had dit graag nog gedaan voor deze app maar helaas had ik me dit iets te laat bedacht en was het te kort dag om het allemaal te gaan veranderen. 
 
 * verbeterd tijdens dit project 
 
@@ -61,14 +64,15 @@ Als oorspronkelijk plan had ik heel veel feautures bedacht die uiteindelijk niet
 * In meerdere groepen tegelijker tijd kunnen zitten 
 * notificaties krijgen wanneer een groepslid iets veranderd in je groeps gegevens 
 
-Alhoewel ik nog steeds denk dat al deze feautures mijn app echt tot een betere app zouden maken, weet ik ook dat dit me nooit gelukt was binnen 4 (eigenlijk 3) weken. Wie weet dat ik dit in de toekomst er nog allemaal bij ga maken. Want dan zou ik wel echt een volledige app hebben en het gebruik van 3 verschillende apps (whatsapp, datumprikker, wiebetaaltwat) beperken tot 1 overzichtelijke app die momenteel nog niet op de markt is. 
+Alhoewel ik nog steeds denk dat al deze feautures mijn app echt tot een betere app zouden maken, weet ik ook dat dit me nooit gelukt was binnen 4 weken. Wie weet dat ik dit in de toekomst er nog allemaal bij ga maken. Want dan zou ik wel echt een volledige app hebben en het gebruik van 3 verschillende apps (whatsapp, datumprikker, wiebetaaltwat) beperken tot 1 overzichtelijke app die momenteel nog niet op de markt is. 
 
 De feautures die nu in de app zitten, zijn beperkt, maar werken daarom wel foutloos. En het zijn de noodzakelijke feautures om deze app werkend te krijgen. Daarom ben ik blij met de features die ik voorang heb gegeven waardoor ik nu een bugloze foed werkende app heb die nog steeds iets toevoegd aan het huidige app aanbod. 
 
 *Design 
 
 Zie verbeter punten onder kopje design. 
-Ander verbeter punt: 
+
+Extra verbeter punt: 
 Ik check momenteel of een gebruiker wel bestaat door alle email adressen in een lijst te gooien in firebase. 
 Wanneer er een nieuwe gebruiker aan een groep wordt toegevoegd loopt die deze hele lijst door om te checken of die erin zit. 
 Voor nu werkt dit prima, maar wanneer deze app echt gebruikt zou gaan worden zou het met een grote email lijst te lang duren om op die manier te checken of de gebruiker bestaat. Voor een volgende keer zou ik dit op een andere manier aanpakken. 
@@ -84,7 +88,7 @@ zie foto's hier onder:
 Doordat de afbeeldingen van internet kwamen waren ze te klein voor de viewcontrollers. Hierdoor zag het er vrij goedkoop en amateuristisch uit. Omdat ik toch heel graag een app wou inleveren waar ik trots op was heb ik in illustrator een eigen design gemaakt die meer past bij het idee van de app. 
 Zie foto's hieronder voor impressie van het huidige design: 
 
-FOTO
+![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/image1.png)
 
 *Overall Proces 
 
