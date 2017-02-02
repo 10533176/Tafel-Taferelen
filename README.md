@@ -19,6 +19,8 @@ En niet alleen maar via de telefoon. Met 1 minuutje werk hebben jij en je vriend
 
 Binnen de app is het mogelijk om een account aan te maken om vervolgens een groep te vormen met maximaal 10 vrienden. Wanneer je in een groep zit kan je een datum. locatie en chef kiezen voor jullie volgende diner. De datum kan eenvoudig worden opgeslagen in je agenda om het plannen van het diner zo makkelijk mogelijk te houden. Op het hoofdscherm kan je jezelf aanwezig klikken aan de diner tafel. De gebruiker kan ten alle tijden uit de groep stappen, nieuwe gebruikers toevoegen of andere gegevens veranderen. 
 
+(Screenshots gemaakt op iphone 6s scherm) 
+
 ![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Schermafbeelding 2017-02-02 om 11.42.13.png)![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Schermafbeelding 2017-02-02 om 11.34.52.png)
 
 ![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Schermafbeelding 2017-02-02 om 11.30.43.png)![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Schermafbeelding 2017-02-02 om 11.34.34.png)
