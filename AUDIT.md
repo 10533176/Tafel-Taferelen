@@ -27,7 +27,7 @@ Voor het verbeteren van mijn code ben ik eerst alle dubbele code uit mijn projet
 
 Hierna heb ik mijn project weer door beteer code gehaald met het volgende resultaat: 
 
-FOTO 
+ ![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Schermafbeelding 2017-01-31 om 14.09.29.png)
 
 Met als conclusie dat mijn functies nog steeds te lang zijn en simpeler moeten worden geschreven. Om dit te realiseren heb ik geprobeerd de funties die alle data ophaald uit FireBase ook in een aparte file te zetten zodat ik deze gemakkelijker in alle viewcontrollers kon aanroepen. Na dit voor een lange tijd te hebben geprobeerd kwam ik erachter dat dat ook niet de oplossing was. Dit omdat de functies al returnen voordat de waarde daadwerkelijk is opgehaald uit Firebase. Na ook nog wat te hebben geprobeerd met Completion blocks, tot de conclusie gekomen dat ik het hiermee ook niet ging redden. 
 
@@ -35,9 +35,7 @@ Daarom uiteindelijk al mijn firebase functies opgesplits in kleinere overzichtel
 
 Na met julian mijn functies te hebben aangepast voor het aanwezig klikken op tafel (zie final report voor meer uitleg) kwam de volgende score uit bettercode: 
 
-
-
-
+![ScreenShot](https://raw.github.com/10533176/Tafel-Taferelen/master/doc/Schermafbeelding 2017-02-02 om 11.07.20.png)
 
 Als laatste heb ik nog alle namen aangepast om deze meer beschrijvend en ondersteunend te maken. 
 
